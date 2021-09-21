@@ -15,6 +15,10 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '1TBfbK1ceOxuY8-vgZFRhpGbCcKJ5CD-',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
+
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -43,14 +47,42 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'products',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total' ,
+                        'GET {id}/name' => 'name',
+                        'GET set/{limit}' => 'set',
+
+                        'POST post' => 'post',
+                        'PUT put/{id_product}'=>'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                ],
+
+            ['class' => 'yii\rest\UrlRule',
+                'controller' => 'category',
+                'pluralize' => false,
+                'extraPatterns' => [
+                    'GET total' => 'total' ,
+                    'GET {id}/name' => 'name',
+                    'GET set/{limit}' => 'set',
+
+                    'POST post' => 'post',
+                    'PUT put/{id_product}'=>'put',
+                    'DELETE  delete/{id}' => 'delete'
+                ],
+                'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
             ],
-        ],
-        */
+            ],
+],
     ],
     'params' => $params,
 ];

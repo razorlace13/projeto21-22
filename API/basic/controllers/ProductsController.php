@@ -2,12 +2,16 @@
 
 namespace app\controllers;
 
+use app\models\LoginForm;
 use app\models\Products;
 use app\models\ProductsSearch;
+use yii\filters\Cors;
 use yii\rest\ActiveController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\auth\HttpBasicAuth;
+use yii\web\Response;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -15,6 +19,36 @@ use yii\filters\VerbFilter;
 class ProductsController extends ActiveController
 {
     public $modelClass = 'app\models\Products';
+    public function init()
+    {
+        parent::init();
+        \Yii::$app->user->enableSession = false;
+    }
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors ['corsFilter'] = [
+            'class' => Cors::className(),];
+
+        $behaviors ['format'] = [
+          'class' => 'yii\filters\ContentNegotiator',
+            'formats' =>[
+                'application/json' => Response::FORMAT_JSON,
+            ],
+        ];
+        $behaviors['authenticator'] = [
+            'class' => HttpBasicAuth::class,
+        ];
+        return $behaviors;
+    }
+    public function actionLogin()
+    {
+        $Productsmodel = new LoginForm();
+        if ($Productsmodel->load(\Yii::$app->request->post(),'') && $Productsmodel->login()){
+            return true;
+        }
+    }
 
     public function actionTotal(){
         $Productsmodel = new $this -> modelClass;

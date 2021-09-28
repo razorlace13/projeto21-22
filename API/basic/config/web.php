@@ -70,20 +70,20 @@ $config = [
                     'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
                 ],
 
-            ['class' => 'yii\rest\UrlRule',
-                'controller' => 'category',
-                'pluralize' => false,
-                'extraPatterns' => [
-                    'GET total' => 'total' ,
-                    'GET {id}/name' => 'name',
-                    'GET set/{limit}' => 'set',
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'category',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total' ,
+                        'GET {id}/name' => 'name',
+                        'GET set/{limit}' => 'set',
 
-                    'POST post' => 'post',
-                    'PUT put/{id_product}'=>'put',
-                    'DELETE  delete/{id}' => 'delete'
+                        'POST post' => 'post',
+                        'PUT put/{id_product}'=>'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
                 ],
-                'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
-            ],
             ],
 ],
     ],

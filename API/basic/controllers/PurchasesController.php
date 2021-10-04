@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use app\models\LoginForm;
-use app\models\Products;
-use app\models\ProductsSearch;
+use app\models\Purchases;
+use app\models\PurchasesSearch;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 use yii\web\Controller;
@@ -14,11 +14,11 @@ use yii\filters\auth\HttpBasicAuth;
 use yii\web\Response;
 
 /**
- * ProductsController implements the CRUD actions for Products model.
+ * PurchasesController implements the CRUD actions for Purchases model.
  */
-class ProductsController extends ActiveController
+class PurchasesController extends ActiveController
 {
-    public $modelClass = 'app\models\Products';
+    public $modelClass = 'app\models\Purchases';
     public function init()
     {
         parent::init();
@@ -32,7 +32,7 @@ class ProductsController extends ActiveController
             'class' => Cors::className(),];
 
         $behaviors ['format'] = [
-          'class' => 'yii\filters\ContentNegotiator',
+            'class' => 'yii\filters\ContentNegotiator',
             'formats' =>[
                 'application/json' => Response::FORMAT_JSON,
             ],
@@ -45,49 +45,47 @@ class ProductsController extends ActiveController
 
     public function actionLogin()
     {
-        $Productsmodel = new LoginForm();
-        if ($Productsmodel->load(\Yii::$app->request->post(),'') && $Productsmodel->login()){
+        $Purchasesmodel = new LoginForm();
+        if ($Purchasesmodel->load(\Yii::$app->request->post(),'') && $Purchasesmodel->login()){
             return true;
         }
     }
 
     public function actionTotal(){
-        $Productsmodel = new $this -> modelClass;
-        $recs = $Productsmodel::find() -> all();
+        $Purchasesmodel = new $this -> modelClass;
+        $recs = $Purchasesmodel::find() -> all();
         return ['total' => count($recs)];
     }
 
-    //http://localhost:8888/produto/set/3
+    //http://localhost:8888/purchases/set/3
 
     public function actionSet($limit){
-        $Productsmodel = new $this -> modelClass;
-        $rec = $Productsmodel::find() -> limit($limit) -> all();
+        $Purchasesmodel = new $this -> modelClass;
+        $rec = $Purchasesmodel::find() -> limit($limit) -> all();
         return ['limite' => $limit, 'Records' => $rec ];
     }
 
-// http://localhost:8888/produto/post
+// http://localhost:8888/purchases/post
 
     public function actionPost() {
+        //mudar
+        $id_product =\Yii::$app -> request -> post('id_product ');
+        $id_user=\Yii::$app -> request -> post('id_user');
 
-        $name=\Yii::$app -> request -> post('name');
-        $price=\Yii::$app -> request -> post('price');
-        $id_category=\Yii::$app -> request -> post('id_category');
+        $Purchasesmodel = new $this -> modelClass;
+        $Purchasesmodel -> name = $id_product ;
+        $Purchasesmodel -> price = $id_user;
 
-        $Productsmodel = new $this -> modelClass;
-        $Productsmodel -> name = $name;
-        $Productsmodel -> price = $price;
-        $Productsmodel -> id_category = $id_category;
-
-        $ret = $Productsmodel -> save(false);
+        $ret = $Purchasesmodel -> save(false);
         return ['SaveError' => $ret];
     }
 
-    //http://localhost:8888/produto/delete/id
+    //http://localhost:8888/purchases/delete/id
 
     public function actionDelete($id)
     {
-        $Productsmodel = new $this->modelClass;
-        $ret=$Productsmodel->deleteAll("id=".$id);
+        $Purchasesmodel = new $this->modelClass;
+        $ret=$Purchasesmodel->deleteAll("id=".$id);
         if($ret)
             return ['DelError' => $ret];
         throw new \yii\web\NotFoundHttpException("Client id not found!");

@@ -84,6 +84,34 @@ $config = [
                     ],
                     'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
                 ],
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'purchases',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total' ,
+                        'GET set/{limit}' => 'set',
+
+                        'POST post' => 'post',
+                        'PUT put/{id_purchases}'=>'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                ],
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'user',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total' ,
+                        'GET set/{limit}' => 'set',
+                        'GET {limit}/nif' => 'nif',
+                        'GET {limit}/username' => 'username',
+
+                        'POST post' => 'post',
+                        'PUT put/{id_user}'=>'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                ],
             ],
 ],
     ],

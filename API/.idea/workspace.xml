@@ -2,16 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="091e2e71-4f6e-4789-a3bd-5809ae6aa771" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/basic/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/basic/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/basic/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic/config/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/basic/config/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/basic/controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/basic/models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/yii-application/common/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/../web/yii-application/common/models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/yii-application/frontend/views/site/signup.php" beforeDir="false" afterPath="$PROJECT_DIR$/../web/yii-application/frontend/views/site/signup.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/basic/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -119,17 +121,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="E:/Cláudio/trabalho/escola/API" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../web/yii-application" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="ComposerRunConfigurationType" factoryName="Composer Script">
-      <option name="pathToComposerJson" value="$PROJECT_DIR$/basic/composer.json" />
-      <method v="2" />
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -140,6 +136,8 @@
       <option name="presentableId" value="Default" />
       <updated>1632133401635</updated>
       <workItem from="1632133403350" duration="2907000" />
+      <workItem from="1633513308761" duration="162000" />
+      <workItem from="1633513485869" duration="166000" />
     </task>
     <servers />
   </component>

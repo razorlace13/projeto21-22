@@ -11,10 +11,15 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'v1' => [
+            'class' => 'app\modules\v1\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '1TBfbK1ceOxuY8-vgZFRhpGbCcKJ5CD-',
+            'cookieValidationKey' => 'uQzeukx1q02J2uK4W5ExRQjYLCw9Gawl',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
@@ -83,6 +88,10 @@ $config = [
                         'DELETE  delete/{id}' => 'delete'
                     ],
                     'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                ],
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/purchases',
+                    'pluralize' => false,
                 ],
                 ['class' => 'yii\rest\UrlRule',
                     'controller' => 'purchases',

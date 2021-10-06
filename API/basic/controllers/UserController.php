@@ -3,35 +3,31 @@
 namespace app\controllers;
 
 use yii\filters\auth\HttpBasicAuth;
-use yii\filters\Cors;
 use yii\rest\ActiveController;
-use yii\web\Response;
 
 class UserController extends ActiveController
 {
     public $modelClass = 'app\models\User';
-    public function init()
-    {
-        parent::init();
-        \Yii::$app->user->enableSession = false;
-    }
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-
-        $behaviors ['corsFilter'] = [
-            'class' => Cors::className(),];
-
-        $behaviors ['format'] = [
-            'class' => 'yii\filters\ContentNegotiator',
-            'formats' =>[
-                'application/json' => Response::FORMAT_JSON,
-            ],
-        ];
         $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::class,
+            'class' => HttpBasicAuth::className(),
+            'auth' => [$this, 'auth']
         ];
+
         return $behaviors;
+    }
+    public function auth($username, $password_hash) {
+
+        $user = \app\models\User::findByUsername($username);
+        if ($user && $user->validatePassword($password_hash))
+        {
+            return $user;
+        } return null;
+
+
     }
 
 
@@ -76,6 +72,7 @@ class UserController extends ActiveController
 
         $username=\Yii::$app -> request -> post('username');
         $auth_key=\Yii::$app -> request -> post('auth_key');
+        $status=\Yii::$app -> request -> post('status');
         $password_hash=\Yii::$app -> request -> post('password_hash');
         $email=\Yii::$app -> request -> post('email');
         $created_at=\Yii::$app -> request -> post('created_at');
@@ -86,6 +83,7 @@ class UserController extends ActiveController
         $Usermodel = new $this -> modelClass;
         $Usermodel -> username = $username;
         $Usermodel -> auth_key = $auth_key;
+        $Usermodel -> status = $status;
         $Usermodel -> password_hash = $password_hash;
         $Usermodel -> email = $email;
         $Usermodel -> created_at = $created_at;

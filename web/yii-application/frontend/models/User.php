@@ -13,14 +13,12 @@ use Yii;
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $auth_key
- * @property int|null $status
+ * @property int $status
  * @property int $nif
  * @property int $numero
  * @property int $created_at
  * @property int $updated_at
  * @property string $verification_token
- *
- * @property Purchases[] $purchases
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -64,15 +62,5 @@ class User extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'verification_token' => 'Verification Token',
         ];
-    }
-
-    /**
-     * Gets query for [[Purchases]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPurchases()
-    {
-        return $this->hasMany(Purchases::className(), ['id_user' => 'id']);
     }
 }

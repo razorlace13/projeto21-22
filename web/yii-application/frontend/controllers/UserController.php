@@ -2,9 +2,6 @@
 
 namespace frontend\controllers;
 
-use app\models\Consumodepedido;
-use app\models\Pedidos;
-use app\models\Produto;
 use Yii;
 use app\models\User;
 use yii\web\Controller;
@@ -68,35 +65,6 @@ class UserController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
-        ]);
-    }
-
-    public function actionPedido($id)
-    {
-        $searchModel = Pedidos::find()
-            ->where(['id_utilizador' => $id])
-            ->all()
-        ;
-        $dataProvider = $searchModel;
-        return $this->render('pedidos', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionConsumo($id, $numero)
-    {
-        $session = Yii::$app->session;
-        $session->set('teste', $numero);
-        $searchModel = Consumodepedido::find()
-            ->joinWith('produto','')
-            ->where(['consumodepedido.id_pedido' => $id])
-            ->all()
-        ;
-        $dataProvider = $searchModel;
-        return $this->render('consumo', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
         ]);
     }
 

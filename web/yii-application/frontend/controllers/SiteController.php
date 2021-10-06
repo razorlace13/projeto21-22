@@ -16,6 +16,13 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
+use app\models\AuthAssignment;
+use app\models\AuthItem;
+use app\models\AuthItemChild;
+use app\models\AuthRule;
+use app\models\User;
+
+
 /**
  * Site controller
  */
@@ -83,12 +90,8 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
+    public function actionLogin(){
+        
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();

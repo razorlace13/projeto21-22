@@ -61,7 +61,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule',
-                    'controller' => 'products',
+                    'controller' => 'v1/products',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total' ,
@@ -76,7 +76,7 @@ $config = [
                 ],
 
                 ['class' => 'yii\rest\UrlRule',
-                    'controller' => 'category',
+                    'controller' => 'v1/category',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total' ,
@@ -92,10 +92,6 @@ $config = [
                 ['class' => 'yii\rest\UrlRule',
                     'controller' => 'v1/purchases',
                     'pluralize' => false,
-                ],
-                ['class' => 'yii\rest\UrlRule',
-                    'controller' => 'purchases',
-                    'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total' ,
                         'GET set/{limit}' => 'set',
@@ -107,7 +103,7 @@ $config = [
                     'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
                 ],
                 ['class' => 'yii\rest\UrlRule',
-                    'controller' => 'user',
+                    'controller' => 'v1/user',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total' ,

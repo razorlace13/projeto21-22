@@ -1,54 +1,38 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\v1\controllers;
 
-use app\models\LoginForm;
-use app\models\Products;
-use app\models\ProductsSearch;
-use yii\filters\Cors;
-use yii\rest\ActiveController;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use app\models\User;
 use yii\filters\auth\HttpBasicAuth;
-use yii\web\Response;
+use yii\rest\ActiveController;
 
-/**
- * ProductsController implements the CRUD actions for Products model.
- */
 class ProductsController extends ActiveController
 {
     public $modelClass = 'app\models\Products';
-    public function init()
-    {
-        parent::init();
-        \Yii::$app->user->enableSession = false;
-    }
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-
-        $behaviors ['corsFilter'] = [
-            'class' => Cors::className(),];
-
-        $behaviors ['format'] = [
-          'class' => 'yii\filters\ContentNegotiator',
-            'formats' =>[
-                'application/json' => Response::FORMAT_JSON,
-            ],
-        ];
         $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::class,
+            'class' => HttpBasicAuth::className(),
+            'auth' => [$this, 'auth']
         ];
+
         return $behaviors;
     }
+    public function auth($username, $password_hash) {
 
-    public function actionLogin()
+        $user = User::findByUsername($username);
+        if ($user && $user->validatePassword($password_hash))
+        {
+            return $user;
+        } return null;
+
+
+    }
+
+    public function actionIndex()
     {
-        $Productsmodel = new LoginForm();
-        if ($Productsmodel->load(\Yii::$app->request->post(),'') && $Productsmodel->login()){
-            return true;
-        }
+        return $this->render('index');
     }
 
     public function actionTotal(){
@@ -57,7 +41,7 @@ class ProductsController extends ActiveController
         return ['total' => count($recs)];
     }
 
-    //http://localhost:8888/produto/set/3
+    //http://localhost:8888/v1/produto/set/3
 
     public function actionSet($limit){
         $Productsmodel = new $this -> modelClass;
@@ -65,7 +49,7 @@ class ProductsController extends ActiveController
         return ['limite' => $limit, 'Records' => $rec ];
     }
 
-// http://localhost:8888/produto/post
+// http://localhost:8888/v1/produto/post
 
     public function actionPost() {
 
@@ -82,7 +66,7 @@ class ProductsController extends ActiveController
         return ['SaveError' => $ret];
     }
 
-    //http://localhost:8888/produto/delete/id
+    //http://localhost:8888/v1/produto/delete/id
 
     public function actionDelete($id)
     {

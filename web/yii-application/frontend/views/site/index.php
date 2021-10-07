@@ -1,53 +1,78 @@
 <?php
-
+use yii\helpers\Html;
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'SnakRestaurant';
 ?>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        text-align: center  ;
+    }
+</style>
 <div class="site-index">
 
-    <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+    <div style="text-align: center">
+        <h1>SnakRestaurant</h1>
+        <?php echo Html::img(\Yii::$app->homeUrl.'img/index.jpg', ['width'=>'1080','height'=>'400']);?>
+        <br>
+        <br>
+        <br>
+        <p style="font-family:Serif  ;font-size: large;">O SnakRestaurant nasceu à 37 anos, 1976, foi fundado pelo senhor Manuel Henriques, pai da actual
+            responsável pelo restaurante, Maria Luísa Henriques. <br>
+            Inicialmente começou por ser uma pequena adega onde eram servidos pequenos petiscos acompanhados ao som do bom fado português. Com o decorrer do
+            anos o restaurante foi crescendo e actualmente conta com 5 salas, cada sala têm uma decoração ligada
+            à arte da tauromaquia.<br>
+            Neste restaurante os nossos clientes são recebidos com enorme simpatia, e acabam assim por se sentir
+            como se fossem da casa, envolvendo se neste ambiente acolhedor transmitido por esta equipa.</p>
+    </div>
+    <br>
+    <br>
+    <div style="text-align: center">
+        <table style="width:100%">
+            <tr>
+                <th>Segunda-feira</th>
+                <th>Terça-feira</th>
+                <th>Quarta-feira</th>
+                <th>Quinta-feira</th>
+                <th>Sexta-feira</th>
+                <th>Sabado</th>
+                <th>Domingo</th>
+            </tr>
+            <tr>
+                <td>Aberto</td>
+                <td>Aberto</td>
+                <td>Fechado</td>
+                <td>Aberto</td>
+                <td>Aberto</td>
+                <td>Aberto</td>
+                <td>Aberto</td>
+            </tr>
+        </table>
     </div>
 
-    <div class="body-content">
+    <br>
+    <br>
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
+    <div style="text-align: center">
+        <table style="width:100%">
+            <tr>
+                <th>Facebook</th>
+                <th>tripadvisor</th>
+                <th>Intervalo de preços</th>
+                <th>Telefone</th>
+                <th>email</th>
+            </tr>
+            <tr>
+                <td><a href="https://www.facebook.com/">Facebook</a></td>
+                <th><a href="https://www.tripadvisor.pt/">Tripadvisor</a></th>
+                <th>$$</th>
+                <td>262 888 111</td>
+                <td>SnakRestaurant@hotmail.com</td>
+            </tr>
+        </table>
     </div>
+
+
+
 </div>

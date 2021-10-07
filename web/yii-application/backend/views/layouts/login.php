@@ -1,7 +1,7 @@
 <?php
-use app\assets\AppAsset;
+use backend\assets\AppAsset;
 use yii\helpers\Html;
-use app\assets\AdminLteAsset;
+use backend\assets\AdminLteAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */

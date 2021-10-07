@@ -129,7 +129,7 @@ use yii\helpers\Html;
                             <a href="#" class="btn btn-default btn-flat">Profile</a>
                         </div>
                         <div class="pull-right">
-                            <a href='/site/logout' class="btn btn-default btn-flat">Sign out</a>
+                            <?= Html::a('Logout', ['site/logout'], ['data' => ['method' => 'post']]) ?>
                         </div>
                     </li>
                 </ul>

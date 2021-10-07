@@ -19,6 +19,7 @@ class UserController extends ActiveController
 
         return $behaviors;
     }
+
     public function auth($username, $password_hash) {
 
         $user = User::findByUsername($username);
@@ -26,8 +27,6 @@ class UserController extends ActiveController
         {
             return $user;
         } return null;
-
-
     }
 
     public function actionIndex()
@@ -44,6 +43,7 @@ class UserController extends ActiveController
 
 
     //http://localhost:8888/v1/user/8/nif
+
     public function actionNif($id){
         $Usermodel = new $this -> modelClass;
         $rec = $Usermodel::find() -> where("id=".$id) -> one();
@@ -52,7 +52,9 @@ class UserController extends ActiveController
             return ['id' => $id, 'nif' => $rec -> nif ];
         return ['id' => $id, 'nif' => "null" ];
     }
+
     //http://localhost:8888/v1/user/8/username
+
     public function actionUsername($id){
         $Usermodel = new $this -> modelClass;
         $rec = $Usermodel::find() -> where("id=".$id) -> one();

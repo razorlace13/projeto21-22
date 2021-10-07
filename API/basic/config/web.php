@@ -108,8 +108,8 @@ $config = [
                     'extraPatterns' => [
                         'GET total' => 'total' ,
                         'GET set/{limit}' => 'set',
-                        'GET {limit}/nif' => 'nif',
-                        'GET {limit}/username' => 'username',
+                        'GET {id}/nif' => 'nif',
+                        'GET {id}/username' => 'username',
 
                         'POST post' => 'post',
                         'PUT put/{id_user}'=>'put',

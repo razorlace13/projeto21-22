@@ -14,7 +14,7 @@ $this->title = 'About - SnakRestaurant';
             <div class="row">
                 <div class="col-md-5">
                     <div class="vk-about-welcometo-left">
-                        <?php echo Html::img(\Yii::$app->homeUrl.'img/about.png', ['width'=>'400','height'=>'500']);?>
+                        <?php echo Html::img(\Yii::$app->homeUrl.'img/about.jpg', ['width'=>'400','height'=>'500']);?>
                     </div>
                 </div>
                 <div class="col-md-7">

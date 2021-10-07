@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use app\models\UserSearch;
 use Yii;
 use app\models\User;
 use yii\web\Controller;
@@ -14,26 +15,24 @@ use yii\web\NotFoundHttpException;
  */
 class UserController extends Controller
 {
-    /*
-    public function behaviors()
+
+    public function actionIndex()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
-*/
+
     public function actionInfo()
     {
 
         $nomeuser = Yii::$app->user->getIdentity();
 
-
-        if(Yii::$app->user->can('utilizador')) {
+        if(Yii::$app->user->can("user")) {
             return $this->render('info',
                 [
                     'nomeuser' =>  $nomeuser
@@ -41,18 +40,8 @@ class UserController extends Controller
         }
         else{
             throw new ForbiddenHttpException();
+
         }
-
-
-        /*
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-        */
     }
 
     /**

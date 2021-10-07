@@ -60,6 +60,7 @@ class SignupForm extends Model
         if ($this->validate()) {
 
             $user = new User();
+            Yii::debug('###########################');
 
             $user->username = $this->username;
             $user->email = $this->email;
@@ -68,12 +69,13 @@ class SignupForm extends Model
             $user->setPassword($this->password);
             $user->generateAuthKey();
             $user->generateEmailVerificationToken();
+            Yii::debug('###########################');
             $user->save();
             //&& $this->sendEmail($user);
 
             //permissões
-
-            $permission="utilizador";
+            Yii::debug('###########################');
+            $permission="admin";
             $newpermission = new AuthAssignment();
             $newpermission->user_id = $user->id;
             $newpermission->item_name = $permission;

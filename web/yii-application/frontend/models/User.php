@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use app\models\Purchases;
 use Yii;
 
 /**
@@ -13,12 +14,16 @@ use Yii;
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $auth_key
- * @property int $status
+ * @property int|null $status
  * @property int $nif
  * @property int $numero
  * @property int $created_at
  * @property int $updated_at
  * @property string $verification_token
+ *
+ * @property AuthAssignment[] $authAssignments
+ * @property AuthItem[] $itemNames
+ * @property Purchases[] $purchases
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -62,5 +67,35 @@ class User extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'verification_token' => 'Verification Token',
         ];
+    }
+
+    /**
+     * Gets query for [[AuthAssignments]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthAssignments()
+    {
+        return $this->hasMany(AuthAssignment::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[ItemNames]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItemNames()
+    {
+        return $this->hasMany(AuthItem::className(), ['name' => 'item_name'])->viaTable('auth_assignment', ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Purchases]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPurchases()
+    {
+        return $this->hasMany(Purchases::className(), ['id_user' => 'id']);
     }
 }

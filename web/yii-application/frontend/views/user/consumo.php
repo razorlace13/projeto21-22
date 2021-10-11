@@ -3,12 +3,11 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\PedidosSearch */
+/* @var $searchModel app\models\Purchases */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Pedidos';
-$this->params['breadcrumbs'][] = $this->title;
 $session = Yii::$app->session;
 ?>
 
@@ -31,7 +30,7 @@ $session = Yii::$app->session;
                 <tr style="width: 100%;text-align: center">
                     <td style="text-align: center">
                         <h4 class="meta" style="text-align: center;margin: 10px 20% 10px;">
-                            <?= $count ?>: <?= Html::encode($model->produto->designacao) ?></h4>
+                            <?= $count ?>: <?= Html::encode($model->product->name) ?></h4>
                         </td>
                 </tr>
                 <?php

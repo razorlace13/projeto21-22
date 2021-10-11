@@ -2,9 +2,11 @@
 
 namespace frontend\controllers;
 
+use app\models\Consumo;
+use app\models\Purchases;
 use app\models\UserSearch;
 use Yii;
-use frontend\models\User;
+use app\models\User;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -27,12 +29,41 @@ class UserController extends Controller
         ]);
     }
 
+    public function actionPedidos($id)
+    {
+        $searchModel = Purchases::find()
+            ->where(['id_user' => $id])
+            ->all()
+        ;
+        $dataProvider = $searchModel;
+        return $this->render('pedidos', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionConsumo($id, $numero)
+    {
+        $session = Yii::$app->session;
+        $session->set('teste', $numero);
+        $searchModel = Consumo::find()
+            ->joinWith('product','')
+            ->where(['consumo.id_pedido' => $id])
+            ->all()
+        ;
+        $dataProvider = $searchModel;
+        return $this->render('consumo', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     public function actionInfo()
     {
 
         $nomeuser = Yii::$app->user->getIdentity();
 
-        if(Yii::$app->user->can("utilizador")) {
+        if(Yii::$app->user->can("utilizador" )|| Yii::$app->user->can('empregado')|| Yii::$app->user->can('admin')) {
             return $this->render('info',
                 [
                     'nomeuser' =>  $nomeuser
@@ -67,7 +98,7 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        Yii::debug($model->username);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

@@ -1,15 +1,15 @@
 <?php
 
-use app\models\User;
+use frontend\models\User;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\User */
+/* @var $model frontend\models\User */
 
-$this->title = $model->username;
+$this->title = "update ".$model->username;
 
 ?>
 <div class="cliente-view">

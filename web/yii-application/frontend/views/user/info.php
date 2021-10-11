@@ -29,7 +29,7 @@ use yii\widgets\DetailView;
             ]) ?>
             <div style="text-align: center">
                 <?= Html::a('Editar', ['update', 'id' => $nomeuser->id], ['name' => 'edita', 'id' => 'edita', 'class' => 'btn btn-primary']) ?>
-                <?= Html::a('Pedidos', ['pedido', 'id' => $nomeuser->id], ['name' => 'edita', 'id' => 'edita', 'class' => 'btn btn-primary']) ?>
+                <?= Html::a('Pedidos', ['pedidos', 'id' => $nomeuser->id], ['name' => 'edita', 'id' => 'edita', 'class' => 'btn btn-primary']) ?>
             </div>
         </div>
 

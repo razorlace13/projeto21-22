@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace frontend\models;
 
 use Yii;
 
@@ -21,6 +21,7 @@ use Yii;
  * @property AuthItem[] $children
  * @property AuthItem[] $parents
  * @property AuthRule $ruleName
+ * @property User[] $users
  */
 class AuthItem extends \yii\db\ActiveRecord
 {
@@ -121,5 +122,15 @@ class AuthItem extends \yii\db\ActiveRecord
     public function getRuleName()
     {
         return $this->hasOne(AuthRule::className(), ['name' => 'rule_name']);
+    }
+
+    /**
+     * Gets query for [[Users]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(User::className(), ['id' => 'user_id'])->viaTable('auth_assignment', ['item_name' => 'name']);
     }
 }

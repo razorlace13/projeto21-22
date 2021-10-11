@@ -1,7 +1,7 @@
 <?php
 namespace frontend\models;
 
-use app\models\AuthAssignment;
+use frontend\models\AuthAssignment;
 use Yii;
 use yii\base\Model;
 use common\models\User;
@@ -60,25 +60,24 @@ class SignupForm extends Model
         if ($this->validate()) {
 
             $user = new User();
-            Yii::debug('###########################');
 
             $user->username = $this->username;
             $user->email = $this->email;
             $user->numero = $this->numero;
             $user->nif = $this->nif;
+            $user->status = 10;
             $user->setPassword($this->password);
             $user->generateAuthKey();
             $user->generateEmailVerificationToken();
-            Yii::debug('###########################');
             $user->save();
             //&& $this->sendEmail($user);
 
             //permissões
-            Yii::debug('###########################');
-            $permission="admin";
+            $permission="utilizador";
             $newpermission = new AuthAssignment();
             $newpermission->user_id = $user->id;
             $newpermission->item_name = $permission;
+            $newpermission->created_at = date('d-m-y');
             $newpermission->save();
 
             return $user;

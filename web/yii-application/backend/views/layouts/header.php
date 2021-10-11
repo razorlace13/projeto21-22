@@ -3,11 +3,11 @@ use yii\helpers\Html;
 ?>
 <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b><?=$title?></b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b><?=$title?></b> Administrator</span>
+          <span class="logo-lg"><b><?= $title = 'SnakRestaurant';
+                  $title?></b> </span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -83,10 +83,7 @@ use yii\helpers\Html;
                       </li><!-- end task item -->
                       <li><!-- Task item -->
                         <a href="#">
-                          <h3>
-                            Some task I need to do
-                            <small class="pull-right">60%</small>
-                          </h3>
+
                           <div class="progress xs">
                             <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                               <span class="sr-only">60% Complete</span>
@@ -95,11 +92,7 @@ use yii\helpers\Html;
                         </a>
                       </li><!-- end task item -->
                       <li><!-- Task item -->
-                        <a href="#">
-                          <h3>
-                            Make beautiful transitions
-                            <small class="pull-right">80%</small>
-                          </h3>
+
                           <div class="progress xs">
                             <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                               <span class="sr-only">80% Complete</span>
@@ -110,7 +103,7 @@ use yii\helpers\Html;
                     </ul>
                   </li>
                   <li class="footer">
-                    <a href="#">View all tasks</a>
+
                   </li>
                 </ul>
               </li>
@@ -126,7 +119,7 @@ use yii\helpers\Html;
                     <?= Html::img('@web/img/avatar04.png', ['class' => 'img-circle', 'alt'=>'User Image']) ?>
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                            <a href="" class="btn btn-default btn-flat">Profile</a>
                         </div>
                         <div class="pull-right">
                             <?= Html::a('Logout', ['site/logout'], ['data' => ['method' => 'post']]) ?>
@@ -134,14 +127,9 @@ use yii\helpers\Html;
                     </li>
                 </ul>
                   </li>
-
                   <!-- Menu Footer-->
-
               </li>
               <!-- Control Sidebar Toggle Button -->
-              <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-              </li>
             </ul>
           </div>
         </nav>

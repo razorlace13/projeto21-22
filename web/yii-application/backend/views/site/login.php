@@ -19,8 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-md-12 box box-radius">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
+                    <h3>Login</h3>
                 <?= $form->field($model, 'username', ['template' => '
-                        <div class="col-sm-12" style="margin-top:15px;">
+                        <div class="col-sm-12" style="margin-top:50px;">
                             <div class="input-group col-sm-12">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-user"></span>
@@ -31,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ->input('text', ['placeholder'=>'Username']) ?>
 
                 <?= $form->field($model, 'password', ['template' => '
-                        <div class="col-sm-12" style="margin-top:15px;">
+                        <div class="col-sm-12" style="margin-top:50px;">
                             <div class="input-group col-sm-12">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-lock"></span>
@@ -41,12 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>'])->passwordInput()
                                 ->input('password', ['placeholder'=>'Password'])?>
 
+                <br>
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
 
+                </div>
+                <br>
             <?php ActiveForm::end(); ?>
             </div>
         </div>

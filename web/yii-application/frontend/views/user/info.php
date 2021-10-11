@@ -5,7 +5,7 @@ use yii\web\View;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\User */
+/* @var $model User\models\User */
 
 //$this->title = $model->username;
 

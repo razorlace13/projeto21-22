@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use app\models\UserSearch;
 use Yii;
-use app\models\User;
+use frontend\models\User;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -32,7 +32,7 @@ class UserController extends Controller
 
         $nomeuser = Yii::$app->user->getIdentity();
 
-        if(Yii::$app->user->can("user")) {
+        if(Yii::$app->user->can("utilizador")) {
             return $this->render('info',
                 [
                     'nomeuser' =>  $nomeuser

@@ -3,11 +3,14 @@
 namespace backend\controllers;
 
 use common\models\LoginForm;
+use common\models\User;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\Response;
+use yii\web\NotFoundHttpException;
 
 /**
  * Site controller
@@ -62,7 +65,15 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if(Yii::$app->user->can('empregado')|| Yii::$app->user->can('admin')) {
+
+            return $this->render('index');
+
+        }
+        else{
+            throw new ForbiddenHttpException();
+
+        }
     }
 
     /**
@@ -97,8 +108,14 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
+        if(Yii::$app->user->can('empregado')|| Yii::$app->user->can('admin')) {
         Yii::$app->user->logout();
 
         return $this->goHome();
+        }
+        else{
+            throw new ForbiddenHttpException();
+
+        }
     }
 }

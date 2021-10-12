@@ -14,10 +14,11 @@ use yii\helpers\Url;
 <?= Html::img('@web/img/avatar04.png', ['class' => 'img-circle', 'alt' => 'User Image']) ?>
             </div>
             <div class="pull-left info">
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a<i class="fa fa-circle text-success"></i> Online</a><br>
+                <a><?= @Yii::$app->user->identity->username ?></a>
             </div>
         </div>
-        <!-- search form -->
+        <!-- search form
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -26,46 +27,44 @@ use yii\helpers\Url;
                 </span>
             </div>
         </form>
+        -->
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <?=
         Menu::widget(
                 [
-                   /* 'options' => ['class' => 'sidebar-menu'],
+                    'options' => ['class' => 'sidebar-menu'],
                     'items' => [
                         ['label' => 'Menu', 'options' => ['class' => 'header']],
-                        ['label' => 'Dashboard', 'icon' => 'fa fa-dashboard', 
+                        ['label' => 'Home',
                             'url' => ['/'], 'active' => $this->context->route == 'site/index'
                         ],
                         [
-                            'label' => 'Master',
-                            'icon' => 'fa fa-database',
-                            'url' => '#',
+                            'label' => 'Admin',
+                            'url' => '',
                             'items' => [
                                 [
-                                    'label' => 'Master1',
-                                    'icon' => 'fa fa-database',
-                                    'url' => '?r=master1/',
-				    'active' => $this->context->route == 'master1/index'
+                                    'label' => 'Users',
+                                    'url' => ['/user'],
+                                    'icon' => 'fa fa-users',
+				    'active' => $this->context->route == 'user/index'
                                 ],
                                 [
-                                    'label' => 'Master2',
+                                    'label' => 'Create permissions',
                                     'icon' => 'fa fa-database',
                                     'url' => '?r=master2/',
 				    'active' => $this->context->route == 'master2/index'
+                                ],
+                                [
+                                    'label' => 'grant permissions',
+                                    'icon' => 'fa fa-database',
+                                    'url' => '?r=master2/',
+                                    'active' => $this->context->route == 'master2/index'
                                 ]
                             ]
                         ],
-                        [
-                            'label' => 'Users',
-                            'icon' => 'fa fa-users',
-                            'url' => ['/user'],
-                            'active' => $this->context->route == 'user/index',
-                        ],
-                        ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii'],],
-                        ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
                     ],
-                */]
+                ]
         )
         ?>
         

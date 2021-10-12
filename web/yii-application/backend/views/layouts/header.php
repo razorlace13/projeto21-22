@@ -109,22 +109,21 @@ use yii\helpers\Html;
               </li>
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">
 					<?= Html::img('@web/img/avatar04.png', ['class' => 'user-image', 'alt'=>'User Image']) ?>
-                  <span class="hidden-xs">Nome</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <?= Html::img('@web/img/avatar04.png', ['class' => 'img-circle', 'alt'=>'User Image']) ?>
-                    <li class="user-footer">
+                   <!--imagem  /*Html::img('@web/img/avatar04.png', ['class' => 'img-circle', 'alt'=>'User Image']) */-->
+
                         <div class="pull-left">
-                            <a href="" class="btn btn-default btn-flat">Profile</a>
+                            <a class="btn btn-default btn-flat" <?= Html::a('Perfil', ['user/perfil']) ?></a>
                         </div>
                         <div class="pull-right">
-                            <?= Html::a('Logout', ['site/logout'], ['data' => ['method' => 'post']]) ?>
+                            <a class="btn btn-default btn-flat" <?= Html::a('Logout', ['site/logout'], ['data' => ['method' => 'post']])?></a>
                         </div>
-                    </li>
+
                 </ul>
                   </li>
                   <!-- Menu Footer-->

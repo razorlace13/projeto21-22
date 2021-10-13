@@ -1,13 +1,13 @@
 <?php
 
-use frontend\models\User;
+use app\models\User;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\User */
+/* @var $model app\models\User */
 
 $this->title = "update ".$model->username;
 
@@ -16,7 +16,6 @@ $this->title = "update ".$model->username;
 
     <div class="card card-container">
         <center><H1 id="idperfil">Perfil</H1></center>
-
 
 
         <?php $form = ActiveForm::begin(['id'=>'editarperfil']); ?>
@@ -28,11 +27,6 @@ $this->title = "update ".$model->username;
         <?= $form->field($model, 'nif')->textInput() ?>
 
         <?= $form->field($model, 'numero')->textInput(['maxlength' => true]) ?>
-
-
-
-
-
 
         <div class="form-group">
             <center><?= Html::submitButton('Gravar', ['class' => 'btn btn-primary']) ?></center>

@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = "update ".$model->username;
+$this->title = $model->username;
 
 ?>
 <div class="cliente-view">

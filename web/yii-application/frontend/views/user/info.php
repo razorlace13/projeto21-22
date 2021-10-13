@@ -1,7 +1,5 @@
 <?php
-//use app\models\Cliente;
 use yii\helpers\Html;
-use yii\web\View;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */

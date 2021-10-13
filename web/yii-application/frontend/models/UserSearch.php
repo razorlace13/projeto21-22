@@ -2,9 +2,9 @@
 
 namespace app\models;
 
+use app\models\User;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\User;
 
 /**
  * UserSearch represents the model behind the search form of `frontend\models\User`.
@@ -60,17 +60,17 @@ class UserSearch extends User
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            'nif' => $this->nif,
-            'numero' => $this->numero,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'numero' => $this->numero,
+            'nif' => $this->nif,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
             ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'verification_token', $this->verification_token]);
 
         return $dataProvider;

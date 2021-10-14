@@ -8,12 +8,12 @@ use Yii;
  * This is the model class for table "products".
  *
  * @property int $id_product
- * @property int $name
+ * @property string $name
  * @property int $price
  * @property int $id_category
  *
  * @property Category $category
- * @property Purchases[] $purchases
+ * @property Consumo[] $consumos
  */
 class Products extends \yii\db\ActiveRecord
 {
@@ -32,7 +32,8 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'price', 'id_category'], 'required'],
-            [['name', 'price', 'id_category'], 'integer'],
+            [['price', 'id_category'], 'integer'],
+            [['name'], 'string', 'max' => 11],
             [['id_category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['id_category' => 'id_category']],
         ];
     }
@@ -61,12 +62,12 @@ class Products extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Purchases]].
+     * Gets query for [[Consumos]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getPurchases()
+    public function getConsumos()
     {
-        return $this->hasMany(Purchases::className(), ['id_product' => 'id_product']);
+        return $this->hasMany(Consumo::className(), ['id_product' => 'id_product']);
     }
 }

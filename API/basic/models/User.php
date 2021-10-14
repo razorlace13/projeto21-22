@@ -212,4 +212,33 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+    /**
+     * Gets query for [[AuthAssignments]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthAssignments()
+    {
+        return $this->hasMany(AuthAssignment::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[ItemNames]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItemNames()
+    {
+        return $this->hasMany(AuthItem::className(), ['name' => 'item_name'])->viaTable('auth_assignment', ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Purchases]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPurchases()
+    {
+        return $this->hasMany(Purchases::className(), ['id_user' => 'id']);
+    }
 }

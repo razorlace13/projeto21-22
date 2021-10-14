@@ -117,6 +117,19 @@ $config = [
                     ],
                     'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
                 ],
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/consumo',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total' ,
+                        'GET set/{limit}' => 'set',
+
+                        'POST post' => 'post',
+                        'PUT put/{id_user}'=>'put',
+                        'DELETE  delete/{id}' => 'delete'
+                    ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                ],
             ],
 ],
     ],

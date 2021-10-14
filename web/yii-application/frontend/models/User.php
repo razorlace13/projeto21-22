@@ -2,7 +2,8 @@
 
 namespace app\models;
 
-use app\models\Purchases;
+use frontend\models\AuthAssignment;
+use frontend\models\AuthItem;
 use Yii;
 
 /**

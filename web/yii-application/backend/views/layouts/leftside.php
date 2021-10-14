@@ -37,11 +37,13 @@ use yii\helpers\Url;
                     'items' => [
                         ['label' => 'Menu', 'options' => ['class' => 'header']],
                         ['label' => 'Home',
-                            'url' => ['/'], 'active' => $this->context->route == 'site/index'
+                            'url' => ['/'], 'active' => $this->context->route == 'site/index',
+                            'icon' => 'fa fa-home',
                         ],
                         [
                             'label' => 'Admin',
                             'url' => '',
+                            'icon' => 'fa fa-user',
                             'items' => [
                                 [
                                     'label' => 'Users',

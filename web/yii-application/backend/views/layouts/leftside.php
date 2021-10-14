@@ -55,8 +55,8 @@ use yii\helpers\Url;
                                 [
                                     'label' => 'Create permissions',
                                     'icon' => 'fa fa-database',
-                                    'url' => '?r=master2/',
-				    'active' => $this->context->route == 'master2/index'
+                                    'url' => ['/authassignment'],
+				    'active' => $this->context->route == 'authassignment/index'
                                 ],
                                 [
                                     'label' => 'grant permissions',

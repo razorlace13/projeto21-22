@@ -1,7 +1,9 @@
 <?php
 
+use yii\bootstrap4\Modal;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\Models\UserSearch */
@@ -13,10 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -43,5 +41,22 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+    <?php
+    Modal::begin([
+        'title' => '<h4>Adicionar utilizador</h4>',
+        'id' => 'modal',
+        'size' => 'modal-lg',
+
+    ]);
+    echo "<div id='modalContent'></div>";
+    Modal::end();
+    ?>
+
+
+    <p>
+        <?= Html::button('Adicionar Utilizador', ['value' => Url::to('http://backend.test/user/create') ,
+                'class' => 'btn btn-success','id' => 'modalButton' ]
+        ) ?>
+    </p>
 
 </div>

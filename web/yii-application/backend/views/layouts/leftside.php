@@ -33,6 +33,7 @@ use yii\helpers\Url;
         <?=
         Menu::widget(
                 [
+
                     'options' => ['class' => 'sidebar-menu'],
                     'items' => [
                         ['label' => 'Menu', 'options' => ['class' => 'header']],

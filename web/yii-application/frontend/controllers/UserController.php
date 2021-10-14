@@ -98,8 +98,7 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        Yii::debug($model->save());
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
             return $this->redirect(['info', 'id' => $model->id]);
         }
 

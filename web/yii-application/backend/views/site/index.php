@@ -17,7 +17,7 @@ AppAsset::register($this);
         </header>
 
         <div class="body-content center">
-            <?= Html::a('User', ['user/indexb '], ['class' => 'button-1']) ?>
+            <?= Html::a('User', ['user/index'], ['class' => 'button-1']) ?>
 
             <?= Html::a('label', ['/controller/action'], ['class' => 'button-2']) ?>
         </div>

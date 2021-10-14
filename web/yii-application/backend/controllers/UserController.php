@@ -114,7 +114,7 @@ class UserController extends Controller
         if(Yii::$app->user->can('empregado')|| Yii::$app->user->can('admin')) {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save(false)) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

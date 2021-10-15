@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\AuthAssignment */
+/* @var $model backend\Models\Authassignment */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="auth-assignment-form">
+<div class="authassignment-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

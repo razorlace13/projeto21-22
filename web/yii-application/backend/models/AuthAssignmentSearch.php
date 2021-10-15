@@ -1,15 +1,15 @@
 <?php
 
-namespace backend\models;
+namespace backend\Models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\AuthAssignment;
+use backend\Models\Authassignment;
 
 /**
- * AuthAssignmentSearch represents the model behind the search form of `app\models\AuthAssignment`.
+ * AuthassignmentSearch represents the model behind the search form of `backend\Models\Authassignment`.
  */
-class AuthAssignmentSearch extends AuthAssignment
+class AuthassignmentSearch extends Authassignment
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class AuthAssignmentSearch extends AuthAssignment
      */
     public function search($params)
     {
-        $query = AuthAssignment::find();
+        $query = Authassignment::find();
 
         // add conditions that should always apply here
 

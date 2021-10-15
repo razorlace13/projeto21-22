@@ -2,19 +2,16 @@
 
 namespace backend\controllers;
 
-use app\models\AuthAssignment;
-use backend\models\AuthAssignmentSearch;
-use backend\Models\UserSearch;
-use Yii;
+use backend\Models\Authassignment;
+use backend\Models\AuthassignmentSearch;
 use yii\web\Controller;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AuthAssignmentController implements the CRUD actions for AuthAssignment model.
+ * AuthassignmentController implements the CRUD actions for Authassignment model.
  */
-class AuthAssignmentController extends Controller
+class AuthassignmentController extends Controller
 {
     /**
      * @inheritDoc
@@ -35,28 +32,22 @@ class AuthAssignmentController extends Controller
     }
 
     /**
-     * Lists all AuthAssignment models.
+     * Lists all Authassignment models.
      * @return mixed
      */
     public function actionIndex()
     {
-        if(Yii::$app->user->can('empregado')|| Yii::$app->user->can('admin')) {
-            $searchModel = new AuthAssignmentSearch();
-            $dataProvider = $searchModel->search($this->request->queryParams);
+        $searchModel = new AuthassignmentSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
-        }
-        else{
-            throw new ForbiddenHttpException();
-
-        }
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
-     * Displays a single AuthAssignment model.
+     * Displays a single Authassignment model.
      * @param string $item_name Item Name
      * @param int $user_id User ID
      * @return mixed
@@ -70,13 +61,13 @@ class AuthAssignmentController extends Controller
     }
 
     /**
-     * Creates a new AuthAssignment model.
+     * Creates a new Authassignment model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new AuthAssignment();
+        $model = new Authassignment();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -92,7 +83,7 @@ class AuthAssignmentController extends Controller
     }
 
     /**
-     * Updates an existing AuthAssignment model.
+     * Updates an existing Authassignment model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $item_name Item Name
      * @param int $user_id User ID
@@ -113,7 +104,7 @@ class AuthAssignmentController extends Controller
     }
 
     /**
-     * Deletes an existing AuthAssignment model.
+     * Deletes an existing Authassignment model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $item_name Item Name
      * @param int $user_id User ID
@@ -128,16 +119,16 @@ class AuthAssignmentController extends Controller
     }
 
     /**
-     * Finds the AuthAssignment model based on its primary key value.
+     * Finds the Authassignment model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $item_name Item Name
      * @param int $user_id User ID
-     * @return AuthAssignment the loaded model
+     * @return Authassignment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($item_name, $user_id)
     {
-        if (($model = AuthAssignment::findOne(['item_name' => $item_name, 'user_id' => $user_id])) !== null) {
+        if (($model = Authassignment::findOne(['item_name' => $item_name, 'user_id' => $user_id])) !== null) {
             return $model;
         }
 

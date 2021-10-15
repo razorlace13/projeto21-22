@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\AuthAssignment */
+/* @var $model backend\Models\Authassignment */
 
 $this->title = $model->item_name;
-$this->params['breadcrumbs'][] = ['label' => 'Auth Assignments', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Authassignments', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="auth-assignment-view">
+<div class="authassignment-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

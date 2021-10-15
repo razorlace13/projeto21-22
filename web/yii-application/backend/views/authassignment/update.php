@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\AuthAssignment */
+/* @var $model backend\Models\Authassignment */
 
-$this->title = 'Update Auth Assignment: ' . $model->item_name;
-$this->params['breadcrumbs'][] = ['label' => 'Auth Assignments', 'url' => ['index']];
+$this->title = 'Update Authassignment: ' . $model->item_name;
+$this->params['breadcrumbs'][] = ['label' => 'Authassignments', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->item_name, 'url' => ['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="auth-assignment-update">
+<div class="authassignment-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

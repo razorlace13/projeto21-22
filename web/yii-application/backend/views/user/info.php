@@ -1,11 +1,10 @@
 <?php
-//use app\models\Cliente;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model User\models\User */
+/* @var $model \backend\models\User */
 
 //$this->title = $model->username;
 
@@ -27,8 +26,7 @@ use yii\widgets\DetailView;
             ]) ?>
             <div style="text-align: center">
                 <?= Html::a('Editar', ['update', 'id' => $nomeuser->id], ['name' => 'edita', 'id' => 'edita', 'class' => 'btn btn-primary']) ?>
-                <?= Html::a('Pedidos', ['pedidos', 'id' => $nomeuser->id], ['name' => 'edita', 'id' => 'edita', 'class' => 'btn btn-primary']) ?>
-            </div>
+                  </div>
         </div>
     </div>
 </div>

@@ -114,10 +114,10 @@ use yii\helpers\Html;
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
-                  <li class="user-header">
+                  <li class="header">
                    <!--imagem  /*Html::img('@web/img/avatar04.png', ['class' => 'img-circle', 'alt'=>'User Image']) */-->
 
-                        <div class="pull-left">
+                        <div class="pull-right">
                             <a class="btn btn-default btn-flat" <?= Html::a('Perfil', ['user/perfil']) ?></a>
                         </div>
                         <div class="pull-right">

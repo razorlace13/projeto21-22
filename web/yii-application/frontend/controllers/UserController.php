@@ -63,7 +63,12 @@ class UserController extends Controller
 
         $nomeuser = Yii::$app->user->getIdentity();
 
-        if(Yii::$app->user->can("utilizador" )|| Yii::$app->user->can('empregado')|| Yii::$app->user->can('admin')) {
+        if (Yii::$app->user->can('empregado')|| Yii::$app->user->can('admin')) {
+
+            return $this->redirect('http://backend.test/');
+
+        }
+        if(Yii::$app->user->can("utilizador" )){
             return $this->render('info',
                 [
                     'nomeuser' =>  $nomeuser

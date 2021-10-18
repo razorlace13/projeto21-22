@@ -44,11 +44,11 @@ use yii\helpers\Url;
                     ],
                     ['label' => 'Produtos',
                         'url' => ['/products'], 'active' => $this->context->route == 'products/index',
-                        'icon' => 'fab fa-product-hunt',
+                        'icon' => 'fa fa-cutlery',
                     ],
                     ['label' => 'Categoria',
                         'url' => ['/category'], 'active' => $this->context->route == 'category/index',
-                        'icon' => 'fab fa-product-hunt',
+                        'icon' => 'fa fa-caret-square-o-down',
                     ],
                     [
                         'label' => 'Admin',
@@ -74,6 +74,14 @@ use yii\helpers\Url;
                                 'active' => $this->context->route == 'authassignment/index'
                             ]
                         ]
+                    ],
+                    ['label' => 'Purchases',
+                        'url' => ['/purchases'], 'active' => $this->context->route == 'purchases/index',
+                        'icon' => 'fa fa-money',
+                    ],
+                    ['label' => 'Consumo',
+                        'url' => ['/consumo'], 'active' => $this->context->route == 'consumo/index',
+                        'icon' => 'fa fa-cart-plus',
                     ],
                 ],
             ]

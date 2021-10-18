@@ -3,6 +3,7 @@
 use adminlte\widgets\Menu;
 use yii\helpers\Html;
 use yii\helpers\Url;
+
 ?>
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
@@ -11,7 +12,7 @@ use yii\helpers\Url;
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-<?= Html::img('@web/img/avatar04.png', ['class' => 'img-circle', 'alt' => 'User Image']) ?>
+                <?= Html::img('@web/img/avatar04.png', ['class' => 'img-circle', 'alt' => 'User Image']) ?>
             </div>
             <div class="pull-left info">
                 <a<i class="fa fa-circle text-success"></i> Online</a><br>
@@ -32,45 +33,53 @@ use yii\helpers\Url;
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <?=
         Menu::widget(
-                [
+            [
 
-                    'options' => ['class' => 'sidebar-menu'],
-                    'items' => [
-                        ['label' => 'Menu', 'options' => ['class' => 'header']],
-                        ['label' => 'Home',
-                            'url' => ['/'], 'active' => $this->context->route == 'site/index',
-                            'icon' => 'fa fa-home',
-                        ],
-                        [
-                            'label' => 'Admin',
-                            'url' => '',
-                            'icon' => 'fa fa-user',
-                            'items' => [
-                                [
-                                    'label' => 'Users',
-                                    'url' => ['/user'],
-                                    'icon' => 'fa fa-users',
-				    'active' => $this->context->route == 'user/index'
-                                ],
-                                [
-                                    'label' => 'Create permissions',
-                                    'icon' => 'fa fa-database',
-                                    'url' => ['/authassignment'],
-				    'active' => $this->context->route == 'authassignment/index'
-                                ],
-                                [
-                                    'label' => 'grant permissions',
-                                    'icon' => 'fa fa-database',
-                                    'url' => '?r=master2/',
-                                    'active' => $this->context->route == 'master2/index'
-                                ]
-                            ]
-                        ],
+                'options' => ['class' => 'sidebar-menu'],
+                'items' => [
+                    ['label' => 'Menu', 'options' => ['class' => 'header']],
+                    ['label' => 'Home',
+                        'url' => ['/'], 'active' => $this->context->route == 'site/index',
+                        'icon' => 'fa fa-home',
                     ],
-                ]
+                    ['label' => 'Produtos',
+                        'url' => ['/products'], 'active' => $this->context->route == 'products/index',
+                        'icon' => 'fab fa-product-hunt',
+                    ],
+                    ['label' => 'Categoria',
+                        'url' => ['/category'], 'active' => $this->context->route == 'category/index',
+                        'icon' => 'fab fa-product-hunt',
+                    ],
+                    [
+                        'label' => 'Admin',
+                        'url' => '',
+                        'icon' => 'fa fa-user',
+                        'items' => [
+                            [
+                                'label' => 'Users',
+                                'url' => ['/user'],
+                                'icon' => 'fa fa-users',
+                                'active' => $this->context->route == 'user/index'
+                            ],
+                            [
+                                'label' => 'Create permissions',
+                                'icon' => 'fa fa-database',
+                                'url' => ['/authitem'],
+                                'active' => $this->context->route == 'authitem/index'
+                            ],
+                            [
+                                'label' => 'grant permissions',
+                                'icon' => 'fa fa-database',
+                                'url' => '/authassignment',
+                                'active' => $this->context->route == 'authassignment/index'
+                            ]
+                        ]
+                    ],
+                ],
+            ]
         )
         ?>
-        
+
     </section>
     <!-- /.sidebar -->
 </aside>

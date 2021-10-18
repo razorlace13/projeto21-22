@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\Models\AuthassignmentSearch */
@@ -14,25 +15,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Authassignment', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php Pjax::begin(['enablePushState' => false]); ?>
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'item_name',
-            'user_id',
+            //como mudar o valor que aparede
+            [
+                'attribute' => 'user_id',//o valor da tabela em questao
+                'label' => 'Utilizador',//o titulo que queremos que apareça
+                'value'     => 'user.username'// e o valor pelo qual queremos que ele troque
+            ],
             'created_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
 
 
 </div>

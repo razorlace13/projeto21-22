@@ -2,8 +2,8 @@
 
 namespace backend\controllers;
 
-use backend\Models\Authassignment;
-use backend\Models\AuthassignmentSearch;
+use backend\models\Products;
+use backend\models\ProductsSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
@@ -11,9 +11,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AuthassignmentController implements the CRUD actions for Authassignment model.
+ * ProductsController implements the CRUD actions for Products model.
  */
-class AuthassignmentController extends Controller
+class ProductsController extends Controller
 {
     /**
      * @inheritDoc
@@ -34,13 +34,13 @@ class AuthassignmentController extends Controller
     }
 
     /**
-     * Lists all Authassignment models.
+     * Lists all Products models.
      * @return mixed
      */
     public function actionIndex()
     {
         if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
-            $searchModel = new AuthassignmentSearch();
+            $searchModel = new ProductsSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
 
             return $this->render('index', [
@@ -54,31 +54,30 @@ class AuthassignmentController extends Controller
     }
 
     /**
-     * Displays a single Authassignment model.
-     * @param string $item_name Item Name
-     * @param int $user_id User ID
+     * Displays a single Products model.
+     * @param int $id_product Id Product
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($item_name, $user_id)
+    public function actionView($id_product)
     {
         return $this->render('view', [
-            'model' => $this->findModel($item_name, $user_id),
+            'model' => $this->findModel($id_product),
         ]);
     }
 
     /**
-     * Creates a new Authassignment model.
+     * Creates a new Products model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Authassignment();
+        $model = new Products();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
+                return $this->redirect(['view', 'id_product' => $model->id_product]);
             }
         } else {
             $model->loadDefaultValues();
@@ -90,19 +89,18 @@ class AuthassignmentController extends Controller
     }
 
     /**
-     * Updates an existing Authassignment model.
+     * Updates an existing Products model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $item_name Item Name
-     * @param int $user_id User ID
+     * @param int $id_product Id Product
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($item_name, $user_id)
+    public function actionUpdate($id_product)
     {
-        $model = $this->findModel($item_name, $user_id);
+        $model = $this->findModel($id_product);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
+            return $this->redirect(['view', 'id_product' => $model->id_product]);
         }
 
         return $this->render('update', [
@@ -111,31 +109,29 @@ class AuthassignmentController extends Controller
     }
 
     /**
-     * Deletes an existing Authassignment model.
+     * Deletes an existing Products model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $item_name Item Name
-     * @param int $user_id User ID
+     * @param int $id_product Id Product
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($item_name, $user_id)
+    public function actionDelete($id_product)
     {
-        $this->findModel($item_name, $user_id)->delete();
+        $this->findModel($id_product)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Authassignment model based on its primary key value.
+     * Finds the Products model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $item_name Item Name
-     * @param int $user_id User ID
-     * @return Authassignment the loaded model
+     * @param int $id_product Id Product
+     * @return Products the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($item_name, $user_id)
+    protected function findModel($id_product)
     {
-        if (($model = Authassignment::findOne(['item_name' => $item_name, 'user_id' => $user_id])) !== null) {
+        if (($model = Products::findOne($id)) !== null) {
             return $model;
         }
 

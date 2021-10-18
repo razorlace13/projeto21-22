@@ -2,8 +2,8 @@
 
 namespace backend\controllers;
 
-use backend\Models\Authassignment;
-use backend\Models\AuthassignmentSearch;
+use backend\models\Authitem;
+use backend\models\AuthitemSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
@@ -11,9 +11,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AuthassignmentController implements the CRUD actions for Authassignment model.
+ * AuthitemController implements the CRUD actions for Authitem model.
  */
-class AuthassignmentController extends Controller
+class AuthitemController extends Controller
 {
     /**
      * @inheritDoc
@@ -34,13 +34,13 @@ class AuthassignmentController extends Controller
     }
 
     /**
-     * Lists all Authassignment models.
+     * Lists all Authitem models.
      * @return mixed
      */
     public function actionIndex()
     {
         if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
-            $searchModel = new AuthassignmentSearch();
+            $searchModel = new AuthitemSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
 
             return $this->render('index', [
@@ -54,31 +54,30 @@ class AuthassignmentController extends Controller
     }
 
     /**
-     * Displays a single Authassignment model.
-     * @param string $item_name Item Name
-     * @param int $user_id User ID
+     * Displays a single i model.
+     * @param string $name Name
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($item_name, $user_id)
+    public function actionView($name)
     {
         return $this->render('view', [
-            'model' => $this->findModel($item_name, $user_id),
+            'model' => $this->findModel($name),
         ]);
     }
 
     /**
-     * Creates a new Authassignment model.
+     * Creates a new Authitem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Authassignment();
+        $model = new Authitem();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
+                return $this->redirect(['view', 'name' => $model->name]);
             }
         } else {
             $model->loadDefaultValues();
@@ -90,19 +89,18 @@ class AuthassignmentController extends Controller
     }
 
     /**
-     * Updates an existing Authassignment model.
+     * Updates an existing Authitem model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $item_name Item Name
-     * @param int $user_id User ID
+     * @param string $name Name
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($item_name, $user_id)
+    public function actionUpdate($name)
     {
-        $model = $this->findModel($item_name, $user_id);
+        $model = $this->findModel($name);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
+            return $this->redirect(['view', 'name' => $model->name]);
         }
 
         return $this->render('update', [
@@ -111,31 +109,29 @@ class AuthassignmentController extends Controller
     }
 
     /**
-     * Deletes an existing Authassignment model.
+     * Deletes an existing Authitem model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $item_name Item Name
-     * @param int $user_id User ID
+     * @param string $name Name
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($item_name, $user_id)
+    public function actionDelete($name)
     {
-        $this->findModel($item_name, $user_id)->delete();
+        $this->findModel($name)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Authassignment model based on its primary key value.
+     * Finds the Authitem model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $item_name Item Name
-     * @param int $user_id User ID
-     * @return Authassignment the loaded model
+     * @param string $name Name
+     * @return Authitem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($item_name, $user_id)
+    protected function findModel($name)
     {
-        if (($model = Authassignment::findOne(['item_name' => $item_name, 'user_id' => $user_id])) !== null) {
+        if (($model = Authitem::findOne($name)) !== null) {
             return $model;
         }
 

@@ -11,6 +11,8 @@ use backend\Models\Authassignment;
  */
 class AuthassignmentSearch extends Authassignment
 {
+    public $globalSearch;
+
     /**
      * {@inheritdoc}
      */
@@ -19,6 +21,7 @@ class AuthassignmentSearch extends Authassignment
         return [
             [['item_name', 'created_at'], 'safe'],
             [['user_id'], 'integer'],
+            [['globalSearch'], 'safe'],
         ];
     }
 
@@ -40,13 +43,30 @@ class AuthassignmentSearch extends Authassignment
      */
     public function search($params)
     {
-        $query = Authassignment::find();
+        $query = Authassignment::find()->joinWith(['user']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        //aqui da para ver como adicionar a ordenção tanto para acs tanto para desc para todos os campos
+        $dataProvider->sort->attributes['id_utilizador'] = [
+            'asc' => ['user.username' =>SORT_ASC],
+            'desc' => ['user.username' =>SORT_DESC]
+        ];
+
+        $dataProvider->sort->attributes['data'] = [
+            'asc' => ['created_at' =>SORT_ASC],
+            'desc' => ['created_at' =>SORT_DESC]
+        ];
+
+        $dataProvider->sort->attributes['valor'] = [
+            'asc' => ['item_name' =>SORT_ASC],
+            'desc' => ['item_name' =>SORT_DESC]
+        ];
+
+        //acaba aqui
 
         $this->load($params);
 
@@ -62,7 +82,11 @@ class AuthassignmentSearch extends Authassignment
             'created_at' => $this->created_at,
         ]);
 
-        $query->andFilterWhere(['like', 'item_name', $this->item_name]);
+        $query->orFilterWhere(['like','user.username', $this->globalSearch]) //o valor do id_utilizador era integer
+                                                                             // para que conseguise procurar por
+                                                                             // letrar tive que mudar o id_utilizador
+                                                                             // para string la em cima no rules
+              ->orFilterWhere(['like', 'item_name', $this->globalSearch]);
 
         return $dataProvider;
     }

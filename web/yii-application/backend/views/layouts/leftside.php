@@ -51,7 +51,7 @@ use yii\helpers\Url;
                         'icon' => 'fa fa-caret-square-o-down',
                     ],
                     [
-                        'label' => 'Admin',
+                        'label' => 'Users Options',
                         'url' => '',
                         'icon' => 'fa fa-user',
                         'items' => [

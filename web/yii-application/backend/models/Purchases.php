@@ -10,9 +10,11 @@ use Yii;
  * @property int $id_purchase
  * @property float $valor
  * @property string $data
+ * @property int $id_product
  * @property int $id_user
  *
  * @property Consumo[] $consumos
+ * @property Products $product
  * @property User $user
  */
 class Purchases extends \yii\db\ActiveRecord
@@ -31,10 +33,11 @@ class Purchases extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['valor', 'data', 'id_user'], 'required'],
+            [['valor', 'data', 'id_product', 'id_user'], 'required'],
             [['valor'], 'number'],
             [['data'], 'safe'],
-            [['id_user'], 'integer'],
+            [['id_product', 'id_user'], 'integer'],
+            [['id_product'], 'exist', 'skipOnError' => true, 'targetClass' => Products::className(), 'targetAttribute' => ['id_product' => 'id_product']],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
     }
@@ -48,6 +51,7 @@ class Purchases extends \yii\db\ActiveRecord
             'id_purchase' => 'Id Purchase',
             'valor' => 'Valor',
             'data' => 'Data',
+            'id_product' => 'Id Product',
             'id_user' => 'Id User',
         ];
     }
@@ -60,6 +64,16 @@ class Purchases extends \yii\db\ActiveRecord
     public function getConsumos()
     {
         return $this->hasMany(Consumo::className(), ['id_pedido' => 'id_purchase']);
+    }
+
+    /**
+     * Gets query for [[Product]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProduct()
+    {
+        return $this->hasOne(Products::className(), ['id_product' => 'id_product']);
     }
 
     /**

@@ -59,11 +59,16 @@ class CategoryController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id_category)
+    public function actionView($id)
     {
+        if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
         return $this->render('view', [
-            'model' => $this->findModel($id_category),
+            'model' => $this->findModel($id),
         ]);
+        } else {
+            throw new ForbiddenHttpException();
+
+        }
     }
 
     /**
@@ -73,11 +78,14 @@ class CategoryController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Category();
+
+        if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
+
+            $model = new Category();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_category' => $model->id_category]);
+                return $this->redirect(['view', 'id' => $model->id_category]);
             }
         } else {
             $model->loadDefaultValues();
@@ -86,6 +94,10 @@ class CategoryController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+        } else {
+            throw new ForbiddenHttpException();
+
+        }
     }
 
     /**
@@ -95,17 +107,23 @@ class CategoryController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id_category)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($id_category);
+        if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
+
+            $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_category' => $model->id_category]);
+            return $this->redirect(['view', 'id' => $model->id_category]);
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+        } else {
+            throw new ForbiddenHttpException();
+
+        }
     }
 
     /**
@@ -115,11 +133,17 @@ class CategoryController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id_category)
+    public function actionDelete($id)
     {
-        $this->findModel($id_category)->delete();
+        if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
+
+            $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+        } else {
+            throw new ForbiddenHttpException();
+
+        }
     }
 
     /**
@@ -131,7 +155,7 @@ class CategoryController extends Controller
      */
     protected function findModel($id_category)
     {
-        if (($model = Category::findOne($id)) !== null) {
+        if (($model = Category::findOne($id_category)) !== null) {
             return $model;
         }
 

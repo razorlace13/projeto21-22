@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
     <?php
+    /*
     Modal::begin([
         'title' => '<h4>Adicionar Pedido</h4>',
         'id' => 'modal',
@@ -44,9 +45,12 @@ $this->params['breadcrumbs'][] = $this->title;
     ?><?php Pjax::end(); ?>
     <p> <?= Html::button('Adicionar pedido', ['value' => Url::to('http://backend.test/pedidos/create') ,
                 'class' => 'btn btn-success','id' => 'modalButton' ]
-        ) ?>
+        )
 
 
+    </p>*/
+    ?>
+        <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 

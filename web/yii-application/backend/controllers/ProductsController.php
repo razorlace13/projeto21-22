@@ -59,11 +59,16 @@ class ProductsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id_product)
+    public function actionView($id)
     {
+        if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
         return $this->render('view', [
-            'model' => $this->findModel($id_product),
+            'model' => $this->findModel($id),
         ]);
+        } else {
+            throw new ForbiddenHttpException();
+
+        }
     }
 
     /**
@@ -73,11 +78,13 @@ class ProductsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Products();
+        if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
+
+            $model = new Products();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_product' => $model->id_product]);
+                return $this->redirect(['view', 'id' => $model->id_product]);
             }
         } else {
             $model->loadDefaultValues();
@@ -86,6 +93,10 @@ class ProductsController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+        } else {
+            throw new ForbiddenHttpException();
+
+        }
     }
 
     /**
@@ -95,17 +106,23 @@ class ProductsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id_product)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($id_product);
+        if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
+
+            $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_product' => $model->id_product]);
+            return $this->redirect(['view', 'id' => $model->id_product]);
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+        } else {
+            throw new ForbiddenHttpException();
+
+        }
     }
 
     /**
@@ -115,11 +132,17 @@ class ProductsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id_product)
+    public function actionDelete($id)
     {
-        $this->findModel($id_product)->delete();
+        if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
+
+            $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+        } else {
+            throw new ForbiddenHttpException();
+
+        }
     }
 
     /**
@@ -131,7 +154,7 @@ class ProductsController extends Controller
      */
     protected function findModel($id_product)
     {
-        if (($model = Products::findOne($id)) !== null) {
+        if (($model = Products::findOne($id_product)) !== null) {
             return $model;
         }
 

@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.snakRestaurant;
+package amsi.dei.estg.ipleiria.snakrestaurant;
 
 import org.junit.Test;
 

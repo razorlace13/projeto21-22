@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.snakRestaurant;
+package amsi.dei.estg.ipleiria.snakrestaurant;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("amsi.dei.estg.ipleiria.snakRestaurant", appContext.getPackageName());
+        assertEquals("amsi.dei.estg.ipleiria.snakrestaurant", appContext.getPackageName());
     }
 }

@@ -39,7 +39,7 @@ class AuthassignmentController extends Controller
      */
     public function actionIndex()
     {
-        if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
+        if (Yii::$app->user->can('admin')) {
             $searchModel = new AuthassignmentSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
 

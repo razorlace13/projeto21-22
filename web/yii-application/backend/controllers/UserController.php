@@ -63,7 +63,7 @@ class UserController extends Controller
     public function actionView($id)
     {
 
-        if(Yii::$app->user->can('empregado')|| Yii::$app->user->can('admin')) {
+        if(Yii::$app->user->can('admin')) {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -81,7 +81,7 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
-        if(Yii::$app->user->can('empregado')|| Yii::$app->user->can('admin')) {
+        if(Yii::$app->user->can('admin')) {
         $model = new User();
 
         if ($this->request->isPost) {
@@ -111,7 +111,7 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        if(Yii::$app->user->can('empregado')|| Yii::$app->user->can('admin')) {
+        if(Yii::$app->user->can('admin')) {
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save(false)) {
@@ -137,7 +137,7 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        if(Yii::$app->user->can('empregado')|| Yii::$app->user->can('admin')) {
+        if(Yii::$app->user->can('admin')) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

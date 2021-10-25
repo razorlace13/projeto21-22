@@ -17,14 +17,14 @@ AppAsset::register($this);
         </header>
 
         <div class="body-content center">
-            <?= Html::a('User', ['user/index'], ['class' => 'button-1']) ?>
+            <?= Html::a('Purchases', ['purchases/index'], ['class' => 'button-1']) ?>
 
-            <?= Html::a('label', ['/controller/action'], ['class' => 'button-2']) ?>
+            <?= Html::a('Produtos', ['products/index'], ['class' => 'button-2']) ?>
         </div>
         <div class="body-content center">
-            <?= Html::a('label', ['/controller/action'], ['class' => 'button-2']) ?>
+            <?= Html::a('Categoria', ['category/index'], ['class' => 'button-2']) ?>
 
-            <?= Html::a('label', ['/controller/action'], ['class' => 'button-1']) ?>
+            <?= Html::a('Consumo', ['consumo/index'], ['class' => 'button-1']) ?>
         </div>
     </div>
 </div>

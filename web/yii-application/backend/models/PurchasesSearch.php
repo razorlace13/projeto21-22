@@ -17,7 +17,7 @@ class PurchasesSearch extends Purchases
     public function rules()
     {
         return [
-            [['id_purchase', 'id_product', 'id_user'], 'integer'],
+            [['id_purchase', 'id_user'], 'integer'],
             [['valor'], 'number'],
             [['data'], 'safe'],
         ];
@@ -62,7 +62,6 @@ class PurchasesSearch extends Purchases
             'id_purchase' => $this->id_purchase,
             'valor' => $this->valor,
             'data' => $this->data,
-            'id_product' => $this->id_product,
             'id_user' => $this->id_user,
         ]);
 

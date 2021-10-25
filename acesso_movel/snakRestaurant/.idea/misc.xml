@@ -7,12 +7,17 @@
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable-v24/bg.xml" value="0.2703125" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable-v24/ic_baseline_home_24.xml" value="0.2703125" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable-v24/ic_baseline_shopping_cart_24.xml" value="0.2703125" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable-v24/ic_twitter.xml" value="0.14635416666666667" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable-v24/item_selector.xml" value="0.2703125" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable/ic_menu_camera.xml" value="0.2703125" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/activity_login.xml" value="0.13020833333333334" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/activity_main.xml" value="0.16394927536231885" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/activity_signup.xml" value="0.13020833333333334" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/app_bar_main.xml" value="0.16394927536231885" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_login.xml" value="0.4" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_signup.xml" value="0.25416666666666665" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/menu/menu_items.xml" value="0.25416666666666665" />
       </map>
     </option>
@@ -22,5 +27,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.25416666666666665" />
+      </ProjectState>
+    </option>
   </component>
 </project>

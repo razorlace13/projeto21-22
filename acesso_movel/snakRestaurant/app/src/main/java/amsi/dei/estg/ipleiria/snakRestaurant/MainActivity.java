@@ -1,33 +1,22 @@
-package amsi.dei.estg.ipleiria.snakrestaurant;
+package amsi.dei.estg.ipleiria.snakRestaurant;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import amsi.dei.estg.ipleiria.snakRestaurant.login_registo_vistas.LoginFragment;
+import amsi.dei.estg.ipleiria.snakrestaurant.R;
 
 public class MainActivity extends AppCompatActivity {
-
-    BottomNavigationView bottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bottomBar = findViewById(R.id.bottomBar);
-
-        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
-
-                return true;
-            }
-        });
+        Fragment fragment = new LoginFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
 
     }
 }

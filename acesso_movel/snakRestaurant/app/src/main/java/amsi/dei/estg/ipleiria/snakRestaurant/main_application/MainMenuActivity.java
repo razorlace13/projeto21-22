@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.snakRestaurant.main_application;
+package amsi.dei.estg.ipleiria.snakrestaurant.main_application;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

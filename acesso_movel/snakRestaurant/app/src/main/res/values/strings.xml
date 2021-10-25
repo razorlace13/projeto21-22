@@ -22,4 +22,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_signin">Ja tem conta? Faça o Login</string>
+
+    <string name="txt_name_detalhes">nome</string>
+    <string name="txt_price_detalhes">preço</string>
+    <string name="txt_idcategory_detalhes">categoria</string>
+
+
 </resources>

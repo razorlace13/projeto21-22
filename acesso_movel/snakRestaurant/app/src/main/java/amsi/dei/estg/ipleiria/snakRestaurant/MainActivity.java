@@ -1,11 +1,11 @@
-package amsi.dei.estg.ipleiria.snakRestaurant;
+package amsi.dei.estg.ipleiria.snakrestaurant;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
-import amsi.dei.estg.ipleiria.snakRestaurant.login_registo_vistas.LoginFragment;
+import amsi.dei.estg.ipleiria.snakrestaurant.login_registo_vistas.LoginFragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
 
 public class MainActivity extends AppCompatActivity {

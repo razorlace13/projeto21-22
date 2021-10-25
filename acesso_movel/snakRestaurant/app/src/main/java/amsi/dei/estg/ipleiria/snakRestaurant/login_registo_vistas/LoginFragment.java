@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.snakRestaurant.login_registo_vistas;
+package amsi.dei.estg.ipleiria.snakrestaurant.login_registo_vistas;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,8 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import amsi.dei.estg.ipleiria.snakRestaurant.MainActivity;
-import amsi.dei.estg.ipleiria.snakRestaurant.main_application.MainMenuActivity;
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
 
 public class LoginFragment extends Fragment {

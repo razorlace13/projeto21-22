@@ -11,6 +11,8 @@ use backend\Models\Purchases;
  */
 class PurchasesSearch extends Purchases
 {
+    public $globalSearch;
+
     /**
      * {@inheritdoc}
      */
@@ -20,6 +22,7 @@ class PurchasesSearch extends Purchases
             [['id_purchase', 'id_user'], 'integer'],
             [['valor'], 'number'],
             [['data'], 'safe'],
+            [['globalSearch'], 'safe'],
         ];
     }
 
@@ -57,13 +60,18 @@ class PurchasesSearch extends Purchases
             return $dataProvider;
         }
 
-        // grid filtering conditions
+        /* grid filtering conditions
         $query->andFilterWhere([
             'id_purchase' => $this->id_purchase,
             'valor' => $this->valor,
             'data' => $this->data,
             'id_user' => $this->id_user,
-        ]);
+        ]);*/
+
+        $query->orFilterWhere(['like','valor',$this->globalSearch])
+            ->orFilterWhere(['like','data',$this->globalSearch])
+            ->orFilterWhere(['like','id_product',$this->globalSearch])
+            ->orFilterWhere(['like','id_user',$this->globalSearch]);
 
         return $dataProvider;
     }

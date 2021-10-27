@@ -46,14 +46,15 @@ class ProductsSearch extends Products
      */
     public function search($params)
     {
-        $query = Products::find()->joinWith(['category']);
+        //$query = Products::find()->joinWith(['category']);
+        $query = Products::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-        //aqui da para ver como adicionar a ordenção tanto para acs tanto para desc para todos os campos
+
         $dataProvider->sort->attributes['price'] = [
             'asc' => ['price' =>SORT_ASC],
             'desc' => ['price' =>SORT_DESC]
@@ -69,17 +70,19 @@ class ProductsSearch extends Products
             'desc' => ['name' =>SORT_DESC]
         ];
 
-        //acaba aqui
 
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+
             return $dataProvider;
         }
 
-        // grid filtering conditions
+        $query->orFilterWhere(['like','name',$this->globalSearch])
+              ->orFilterWhere(['like','price',$this->globalSearch])
+              ->orFilterWhere(['like','id_category',$this->globalSearch]);
+
+        /*  // grid filtering conditions
         $query->andFilterWhere([
             'id_product' => $this->id_product,
             'price' => $this->price,
@@ -93,7 +96,7 @@ class ProductsSearch extends Products
         // para string la em cima no rules
         ->orFilterWhere(['like','name',$this->globalSearch])
             ->orFilterWhere(['like','price',$this->globalSearch]);
-
+*/
 
         return $dataProvider;
     }

@@ -11,6 +11,8 @@ use backend\Models\Consumo;
  */
 class ConsumoSearch extends Consumo
 {
+    public $globalSearch;
+
     /**
      * {@inheritdoc}
      */
@@ -55,12 +57,15 @@ class ConsumoSearch extends Consumo
             return $dataProvider;
         }
 
-        // grid filtering conditions
+        /* grid filtering conditions
         $query->andFilterWhere([
             'id_consumo' => $this->id_consumo,
             'id_pedido' => $this->id_pedido,
             'id_product' => $this->id_product,
         ]);
+*/
+        $query->orFilterWhere(['like','id_pedido',$this->globalSearch])
+            ->orFilterWhere(['like','id_product',$this->globalSearch]);
 
         return $dataProvider;
     }

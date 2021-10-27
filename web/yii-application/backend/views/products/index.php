@@ -16,12 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="products-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(['enablePushState' => false]); ?>
+
+
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -29,9 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'price',
             [
-                'attribute' => 'id_category',//o valor da tabela em questao
-                'label' => 'Categoria',//o titulo que queremos que apareça
-                'value'     => 'category.id_category'// e o valor pelo qual queremos que ele troque
+                'attribute' => 'id_category',
+                'label' => 'id da categoria',
+            ],
+            [
+                'attribute' => 'id_category',
+                'label' => 'nome da categoria',
+                'value'     => 'category.name'
             ],
 
             ['class' => 'yii\grid\ActionColumn'],

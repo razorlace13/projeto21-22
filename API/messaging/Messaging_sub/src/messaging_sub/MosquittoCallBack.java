@@ -6,13 +6,14 @@
 package messaging_sub;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 /**
  *
  * @author claud
  */
-public class MosquittoCallBack {
+public class MosquittoCallBack implements MqttCallback {
     
     public void connectionLost(Throwable throwable) {
         System.out.println("Perda de ligação ao mosquitto"); 

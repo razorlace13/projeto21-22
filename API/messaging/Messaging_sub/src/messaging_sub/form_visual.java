@@ -5,6 +5,12 @@
  */
 package messaging_sub;
 
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -161,7 +167,18 @@ public class form_visual extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new form_visual().setVisible(true);                
+                new form_visual().setVisible(true);
+                MqttClient client;
+                try {
+                    client = new MqttClient("tcp://localhost:1883",MqttClient.generateClientId());
+                    client.setCallback( new MosquittoCallBack() );
+                    client.connect();
+                    client.subscribe("INSERT");
+                    client.subscribe("UPDATE");
+                    client.subscribe("DELETE"); 
+                } catch (MqttException ex) {
+                    Logger.getLogger(form_visual.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

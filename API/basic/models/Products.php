@@ -2,8 +2,9 @@
 
 namespace app\models;
 
+
+use Bluerhinos\phpMQTT;
 use Yii;
-use app\phpMQTT;
 
 /**
  * This is the model class for table "products".
@@ -106,7 +107,7 @@ class Products extends \yii\db\ActiveRecord
     public function FazPublish($canal,$msg)
     {
         $server = "127.0.0.1";
-        $port = 8888;
+        $port = 1883;
         $username = ""; // set your username
         $password = ""; // set your password
         $client_id = "phpMQTT-publisher"; // unique!

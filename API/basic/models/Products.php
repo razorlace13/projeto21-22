@@ -107,7 +107,7 @@ class Products extends \yii\db\ActiveRecord
     public function FazPublish($canal,$msg)
     {
         $server = "127.0.0.1";
-        $port = 1883;
+        $port = 1884;
         $username = ""; // set your username
         $password = ""; // set your password
         $client_id = "phpMQTT-publisher"; // unique!

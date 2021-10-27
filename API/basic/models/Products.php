@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\phpMQTT;
 
 /**
  * This is the model class for table "products".
@@ -70,4 +71,52 @@ class Products extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Consumo::className(), ['id_product' => 'id_product']);
     }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        //Obter dados do registo em causa
+        $id_product = $this->id_product;
+        $name = $this->name;
+        $price = $this->price;
+        $id_category = $this->id_category;
+        $myObj=new \stdClass();
+
+        $myObj->id_product=$id_product;
+        $myObj->name=$name;
+        $myObj->price=$price;
+        $myObj->id_category=$id_category;
+        $myJSON = json_encode($myObj);
+        if($insert)
+            $this->FazPublish("INSERT",$myJSON);
+        else
+            $this->FazPublish("UPDATE",$myJSON);
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        $prod_id= $this->id_product;
+        $myObj=new \stdClass();
+        $myObj->id_product=$prod_id;
+        $myJSON = json_encode($myObj);
+        $this->FazPublish("DELETE",$myJSON);
+    }
+    public function FazPublish($canal,$msg)
+    {
+        $server = "127.0.0.1";
+        $port = 8888;
+        $username = ""; // set your username
+        $password = ""; // set your password
+        $client_id = "phpMQTT-publisher"; // unique!
+        $mqtt = new phpMQTT($server, $port, $client_id);
+        if ($mqtt->connect(true, NULL, $username, $password))
+        {
+            $mqtt->publish($canal, $msg, 0);
+            $mqtt->close();
+        }
+        else { file_put_contents("debug.output","Time out!"); }
+}
+
 }

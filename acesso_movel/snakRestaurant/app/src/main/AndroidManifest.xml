@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SnakRestaurant">
-
+        <activity
+            android:name=".profile.ProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -22,19 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Products.Detalhe_produto"
+        <activity
+            android:name=".Products.Detalhe_produto"
             android:exported="true" />
         <activity
             android:name=".Products.List_pagamentos"
             android:exported="true" />
-        <activity android:name=".main_application.MainMenuActivity"
-            android:exported="true">
-        </activity>
-        
-
-
-
+        <activity
+            android:name=".main_application.MainMenuActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

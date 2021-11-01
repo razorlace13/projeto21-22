@@ -22,7 +22,7 @@ class ProductsSearch extends Products
     public function rules()
     {
         return [
-            [['id_product', 'price', 'id_category'], 'integer'],
+            [['mesa', 'price', 'id_category'], 'integer'],
             [['name'], 'safe'],
             [['globalSearch'], 'safe'],
         ];
@@ -70,6 +70,10 @@ class ProductsSearch extends Products
             'desc' => ['name' =>SORT_DESC]
         ];
 
+        $dataProvider->sort->attributes['mesa'] = [
+            'asc' => ['mesa' =>SORT_ASC],
+            'desc' => ['mesa' =>SORT_DESC]
+        ];
 
         $this->load($params);
 
@@ -80,6 +84,7 @@ class ProductsSearch extends Products
 
         $query->orFilterWhere(['like','name',$this->globalSearch])
               ->orFilterWhere(['like','price',$this->globalSearch])
+            ->orFilterWhere(['like','mesa',$this->globalSearch])
               ->orFilterWhere(['like','id_category',$this->globalSearch]);
 
         /*  // grid filtering conditions

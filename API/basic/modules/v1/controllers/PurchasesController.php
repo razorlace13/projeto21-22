@@ -56,10 +56,12 @@ class PurchasesController extends ActiveController
         //mudar
         $id_product =\Yii::$app -> request -> post('id_product ');
         $id_user=\Yii::$app -> request -> post('id_user');
+        $mesa=\Yii::$app -> request -> post('mesa');
 
         $Purchasesmodel = new $this -> modelClass;
         $Purchasesmodel -> name = $id_product ;
         $Purchasesmodel -> price = $id_user;
+        $Purchasesmodel -> mesa = $mesa;
 
         $ret = $Purchasesmodel -> save(false);
         return ['SaveError' => $ret];

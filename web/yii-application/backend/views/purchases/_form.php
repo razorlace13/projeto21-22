@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'data')->textInput() ?>
 
-    <?= $form->field($model, 'id_product')->textInput() ?>
+    <?= $form->field($model, 'mesa')->textInput() ?>
 
     <?= $form->field($model, 'id_user')->textInput() ?>
 

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -37,6 +38,8 @@ public class MainMenuActivity extends AppCompatActivity {
                     case R.id.products:
                         break;
                     case R.id.user:
+                        Intent intent = new Intent(getActivity(), MainMenuActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.shop:
                         break;

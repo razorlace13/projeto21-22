@@ -18,9 +18,9 @@
         android:scrollbarThumbVertical="@null">
 
         <LinearLayout
-            android:layout_centerVertical="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:orientation="vertical">
 
             <ImageView
@@ -72,7 +72,8 @@
                         android:imeOptions="actionNext"
                         android:minWidth="320dp"
                         android:minHeight="50dp"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:text="claudiomartins819@hotmail.com" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.cardview.widget.CardView>
 
@@ -107,7 +108,8 @@
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:minWidth="320dp"
-                        android:minHeight="50dp" />
+                        android:minHeight="50dp"
+                        android:text="password" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.cardview.widget.CardView>
 
@@ -123,11 +125,11 @@
 
             <LinearLayout
                 android:id="@+id/social_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:orientation="vertical" />
 
             <Button
                 android:id="@+id/button_signup"

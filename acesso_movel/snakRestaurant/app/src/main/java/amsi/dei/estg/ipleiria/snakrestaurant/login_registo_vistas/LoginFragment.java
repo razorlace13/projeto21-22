@@ -1,5 +1,6 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.login_registo_vistas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
+import amsi.dei.estg.ipleiria.snakrestaurant.main_application.MainMenuActivity;
 
 public class LoginFragment extends Fragment {
 
@@ -39,7 +41,7 @@ public class LoginFragment extends Fragment {
         et_password = view.findViewById(R.id.et_password);
         button_signin = view.findViewById(R.id.button_signin);
         button_signup = view.findViewById(R.id.button_signup);
-
+        button_signin.setOnClickListener(mCorkyListener);
         button_signup.setOnClickListener(mCorkyListener);
 
         return view;
@@ -52,7 +54,8 @@ public class LoginFragment extends Fragment {
                         String message = "Todos os campos devem ser preenchidos";
                         Toast.makeText(getActivity(),message,Toast.LENGTH_LONG).show();
                     }else{
-
+                        Intent intent = new Intent(getContext(), MainMenuActivity.class);
+                        startActivity(intent);
                     }
                     break;
                 case R.id.button_signup:

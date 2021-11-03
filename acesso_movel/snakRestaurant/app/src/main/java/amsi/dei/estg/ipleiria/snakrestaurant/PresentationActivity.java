@@ -41,9 +41,9 @@ public class PresentationActivity extends AppCompatActivity {
         appName.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
         lottieAnimationView.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
 
-        Intent i = new Intent(PresentationActivity.this,LoginFragment.class);
+      /*  Intent i = new Intent(PresentationActivity.this,LoginFragment.class);
         startActivity(i);
-
+*/
     }
 
 

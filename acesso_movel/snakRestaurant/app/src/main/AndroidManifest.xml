@@ -16,9 +16,6 @@
             android:name=".profile.PurchasesActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity
             android:name=".PresentationActivity"
             android:exported="true" />
         <activity
@@ -34,7 +31,7 @@
             android:name=".main_application.MainMenuActivity"
             android:exported="true" />
         <activity
-            android:name=".Products.ProductsActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -38,8 +38,8 @@ public class MainMenuActivity extends AppCompatActivity {
                     case R.id.products:
                         break;
                     case R.id.user:
-                        Intent intent = new Intent(getActivity(), MainMenuActivity.class);
-                        startActivity(intent);
+                       // Intent intent = new Intent(getActivity(), MainMenuActivity.class);
+                        //startActivity(intent);
                         break;
                     case R.id.shop:
                         break;

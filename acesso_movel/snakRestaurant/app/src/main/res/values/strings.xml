@@ -26,6 +26,10 @@
     <string name="txt_name_detalhes">nome</string>
     <string name="txt_price_detalhes">preço</string>
     <string name="txt_idcategory_detalhes">categoria</string>
+    <string name="data_purchases">Data: </string>
+    <string name="mesa_purchases">"Mesa: "</string>
+    <string name="valor_purchases">"Valor: "</string>
+
 
 
 </resources>

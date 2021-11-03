@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SnakRestaurant">
         <activity
+            android:name=".profile.PurchasesActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity

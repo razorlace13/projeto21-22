@@ -24,7 +24,7 @@ public class PurchasesActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         rv_purchases.setLayoutManager(layoutManager);
 
-        adaptador = new RecyclerPurchasesAdaptador(this, SingletonGestorPurchases.getInstance().getLivros());
+        adaptador = new RecyclerPurchasesAdaptador(this, SingletonGestorPurchases.getInstance().getPurchases());
         System.out.println(adaptador);
         rv_purchases.setAdapter(adaptador);
         rv_purchases.setItemAnimator(new DefaultItemAnimator());

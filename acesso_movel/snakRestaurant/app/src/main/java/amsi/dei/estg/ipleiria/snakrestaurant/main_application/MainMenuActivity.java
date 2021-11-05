@@ -39,8 +39,8 @@ public class MainMenuActivity extends AppCompatActivity {
                     case R.id.products:
                         break;
                     case R.id.user:
-                        //Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                        //startActivity(intent);
+                        mostraprofile();
+
                         break;
                     case R.id.shop:
                         break;
@@ -49,5 +49,10 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void mostraprofile() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
     }
 }

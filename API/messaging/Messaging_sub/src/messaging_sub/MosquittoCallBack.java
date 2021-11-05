@@ -28,8 +28,6 @@ public class MosquittoCallBack implements MqttCallback {
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         System.out.println("Mensagem recebida:\n\t"+ new String(mqttMessage.getPayload())
         +"topico:"+s);
-        private String mq = mqttMessage.getPayload();
-        purchases = mqttMessage.getPayload();
     }
     
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {

@@ -39,7 +39,7 @@ public class SingletonGestorPurchases {
     }
 
 
-    public ArrayList<Purchases> getLivros(){
+    public ArrayList<Purchases> getPurchases(){
         return purchases;
     }
 }

@@ -24,34 +24,41 @@
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:text="TextView"
+                android:text="@string/products_title"
+                android:textAlignment="center"
                 android:textSize="24sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="114dp">
 
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="106dp"
-                    android:layout_height="85dp"
-                    android:layout_marginStart="68dp"
-                    android:text="Button"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.551" />
-
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="106dp"
-                    android:layout_height="85dp"
-                    android:text="Button"
+                <ImageButton
+                    android:id="@+id/drinks_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/drinks1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/button2"
+                    app:layout_constraintStart_toEndOf="@+id/food_btn"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.551" />
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/food_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/food"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/drinks_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.448"
+                    tools:ignore="SpeakableTextPresentCheck"
+                    tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -61,6 +68,7 @@
                 android:orientation="vertical">
 
                 <ListView
+                    android:id="@+id/list_products"
                     android:layout_width="match_parent"
                     android:layout_height="537dp">
 
@@ -69,8 +77,10 @@
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="22dp" />
+
             </LinearLayout>
 
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

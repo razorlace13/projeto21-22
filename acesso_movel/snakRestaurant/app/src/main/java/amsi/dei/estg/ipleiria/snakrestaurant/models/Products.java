@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.snakrestaurant.Products.model;
+package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
 public class Products {
 

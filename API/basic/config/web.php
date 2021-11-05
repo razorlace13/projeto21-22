@@ -67,12 +67,11 @@ $config = [
                         'GET total' => 'total' ,
                         'GET {id}/name' => 'name',
                         'GET set/{limit}' => 'set',
-
                         'POST post' => 'post',
                         'PUT put/{id_product}'=>'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'DELETE  delete/{id_product}' => 'delete'
                     ],
-                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                    'tokens' => [ '{id_product}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
                 ],
 
                 ['class' => 'yii\rest\UrlRule',
@@ -82,13 +81,13 @@ $config = [
                         'GET total' => 'total' ,
                         'GET {id}/name' => 'name',
                         'GET set/{limit}' => 'set',
-
                         'POST post' => 'post',
-                        'PUT put/{id_product}'=>'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'PUT put/{id_category}'=>'put',
+                        'DELETE  delete/{id_category}' => 'delete'
                     ],
-                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                    'tokens' => [ '{id_category}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
                 ],
+
                 ['class' => 'yii\rest\UrlRule',
                     'controller' => 'v1/purchases',
                     'pluralize' => false,
@@ -98,10 +97,11 @@ $config = [
 
                         'POST post' => 'post',
                         'PUT put/{id_purchases}'=>'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'DELETE  delete/{id_purchase}' => 'delete'
                     ],
-                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                    'tokens' => [ '{id_purchase}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
                 ],
+
                 ['class' => 'yii\rest\UrlRule',
                     'controller' => 'v1/user',
                     'pluralize' => false,
@@ -112,7 +112,7 @@ $config = [
                         'GET {id}/username' => 'username',
 
                         'POST post' => 'post',
-                        'PUT put/{id_user}'=>'put',
+                        'PUT put/{id}'=>'put',
                         'DELETE  delete/{id}' => 'delete'
                     ],
                     'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
@@ -125,10 +125,10 @@ $config = [
                         'GET set/{limit}' => 'set',
 
                         'POST post' => 'post',
-                        'PUT put/{id_user}'=>'put',
-                        'DELETE  delete/{id}' => 'delete'
+                        'PUT put/{id_consumo}'=>'put',
+                        'DELETE  delete/{id_consumo}' => 'delete'
                     ],
-                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                    'tokens' => [ '{id_consumo}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
                 ],
             ],
 ],

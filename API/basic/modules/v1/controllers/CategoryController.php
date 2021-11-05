@@ -60,13 +60,26 @@ class CategoryController extends ActiveController
         $ret = $Categorysmodel -> save(false);
         return ['SaveError' => $ret];
     }
+    public function actionPut($id){
+
+        $name=\Yii::$app -> request -> post('name');
+
+        $Productsmodel = new $this->modelClass;
+        $rec = $Productsmodel::find()->where('id_category = '.$id)->one();
+
+        $rec->name = $name;
+
+        $rec->save(false);
+        return ['SaveError1' => $rec];
+        //throw new \yii\web\NotFoundHttpException("Client id not found!");
+    }
 
     //http://localhost:8888/v1/category/delete/id
 
-    public function actionDelete($id)
+    public function actionDelete($id_category)
     {
         $Categorysmodel = new $this->modelClass;
-        $ret=$Categorysmodel->deleteAll("id=".$id);
+        $ret=$Categorysmodel->deleteAll("id_category=".$id_category);
         if($ret)
             return ['DelError' => $ret];
         throw new \yii\web\NotFoundHttpException("Client id not found!");

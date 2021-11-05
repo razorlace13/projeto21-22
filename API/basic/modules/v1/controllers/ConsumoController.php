@@ -52,21 +52,38 @@ class ConsumoController extends ActiveController
 
     public function actionPost() {
 
-        $name=\Yii::$app -> request -> post('name');
+        $id_pedido=\Yii::$app -> request -> post('id_pedido');
+        $id_product=\Yii::$app -> request -> post('id_product');
 
         $Consumosmodel = new $this -> modelClass;
-        $Consumosmodel -> name = $name;
+        $Consumosmodel -> id_pedido = $id_pedido;
+        $Consumosmodel -> id_product = $id_product;
 
         $ret = $Consumosmodel -> save(false);
         return ['SaveError' => $ret];
     }
+    public function actionPut($id){
+
+        $id_pedido=\Yii::$app -> request -> post('id_pedido');
+        $id_product=\Yii::$app -> request -> post('id_product');
+
+        $Productsmodel = new $this->modelClass;
+        $rec = $Productsmodel::find()->where('id_consumo = '.$id)->one();
+
+        $rec->id_pedido = $id_pedido;
+        $rec->id_product = $id_product;
+
+        $rec->save(false);
+        return ['SaveError1' => $rec];
+        //throw new \yii\web\NotFoundHttpException("Client id not found!");
+    }
 
     //http://localhost:8888/v1/consumo/delete/id
 
-    public function actionDelete($id)
+    public function actionDelete($id_consumo)
     {
         $Consumosmodel = new $this->modelClass;
-        $ret=$Consumosmodel->deleteAll("id=".$id);
+        $ret=$Consumosmodel->deleteAll("id_consumo=".$id_consumo);
         if($ret)
             return ['DelError' => $ret];
         throw new \yii\web\NotFoundHttpException("Client id not found!");

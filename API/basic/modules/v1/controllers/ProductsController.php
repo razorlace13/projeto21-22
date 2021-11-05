@@ -9,6 +9,7 @@ use yii\rest\ActiveController;
 class ProductsController extends ActiveController
 {
     public $modelClass = 'app\models\Products';
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -29,7 +30,6 @@ class ProductsController extends ActiveController
 
 
     }
-
     public function actionIndex()
     {
         return $this->render('index');
@@ -66,12 +66,30 @@ class ProductsController extends ActiveController
         return ['SaveError' => $ret];
     }
 
+    public function actionPut($id){
+
+        $name=\Yii::$app -> request -> post('name');
+        $price=\Yii::$app -> request -> post('price');
+        $id_category=\Yii::$app -> request -> post('id_category');
+
+        $Productsmodel = new $this->modelClass;
+        $rec = $Productsmodel::find()->where('id_product = '.$id)->one();
+
+            $rec->name = $name;
+            $rec->price = $price;
+            $rec->id_category = $id_category;
+
+            $rec->save(false);
+            return ['SaveError1' => $rec];
+            //throw new \yii\web\NotFoundHttpException("Client id not found!");
+    }
+
     //http://localhost:8888/v1/produto/delete/id
 
-    public function actionDelete($id)
+    public function actionDelete($id_product)
     {
         $Productsmodel = new $this->modelClass;
-        $ret=$Productsmodel->deleteAll("id=".$id);
+        $ret=$Productsmodel->deleteAll("id_product=".$id_product);
         if($ret)
             return ['DelError' => $ret];
         throw new \yii\web\NotFoundHttpException("Client id not found!");

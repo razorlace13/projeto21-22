@@ -66,13 +66,34 @@ class PurchasesController extends ActiveController
         $ret = $Purchasesmodel -> save(false);
         return ['SaveError' => $ret];
     }
+    public function actionPut($id_purchase){
+
+        $valor =\Yii::$app -> request -> post('valor ');
+        $data =\Yii::$app -> request -> post('data ');
+        $id_product =\Yii::$app -> request -> post('id_product ');
+        $id_user=\Yii::$app -> request -> post('id_user');
+        $mesa=\Yii::$app -> request -> post('mesa');
+
+        $Purchasesmodel = new $this->modelClass;
+        $rec = $Purchasesmodel::find()->where('id_purchase = '.$id_purchase)->one();
+
+        $rec -> valor  = $valor ;
+        $rec -> data = $data;
+        $rec -> id_product  = $id_product ;
+        $rec -> id_user = $id_user;
+        $rec -> mesa = $mesa;
+
+        $rec->save(false);
+        return ['SaveError1' => $rec];
+        //throw new \yii\web\NotFoundHttpException("Client id not found!");
+    }
 
     //http://localhost:8888/v1/purchases/delete/id
 
-    public function actionDelete($id)
+    public function actionDelete($id_purchase)
     {
         $Purchasesmodel = new $this->modelClass;
-        $ret=$Purchasesmodel->deleteAll("id=".$id);
+        $ret=$Purchasesmodel->deleteAll("id_purchase=".$id_purchase);
         if($ret)
             return ['DelError' => $ret];
         throw new \yii\web\NotFoundHttpException("Client id not found!");

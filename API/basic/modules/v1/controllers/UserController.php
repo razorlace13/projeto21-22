@@ -97,10 +97,38 @@ class UserController extends ActiveController
         $Usermodel -> numero = $numero;
         $Usermodel -> nif = $nif;
 
-
-
         $ret = $Usermodel -> save(false);
         return ['SaveError' => $ret];
+    }
+
+    public function actionPut($id){
+
+        $username=\Yii::$app -> request -> post('username');
+        $auth_key=\Yii::$app -> request -> post('auth_key');
+        $status=\Yii::$app -> request -> post('status');
+        $password_hash=\Yii::$app -> request -> post('password_hash');
+        $email=\Yii::$app -> request -> post('email');
+        $created_at=\Yii::$app -> request -> post('created_at');
+        $updated_at=\Yii::$app -> request -> post('updated_at');
+        $numero=\Yii::$app -> request -> post('numero');
+        $nif=\Yii::$app -> request -> post('nif');
+
+        $Usermodel = new $this->modelClass;
+        $rec = $Usermodel::find()->where('id = '.$id)->one();
+
+        $rec-> username = $username;
+        $rec-> auth_key = $auth_key;
+        $rec-> status = $status;
+        $rec-> password_hash = $password_hash;
+        $rec-> email = $email;
+        $rec-> created_at = $created_at;
+        $rec-> updated_at = $updated_at;
+        $rec-> numero = $numero;
+        $rec-> nif = $nif;
+
+        $rec->save(false);
+        return ['SaveError1' => $rec];
+        //throw new \yii\web\NotFoundHttpException("Client id not found!");
     }
 
     //http://localhost:8888/v1/user/delete/id

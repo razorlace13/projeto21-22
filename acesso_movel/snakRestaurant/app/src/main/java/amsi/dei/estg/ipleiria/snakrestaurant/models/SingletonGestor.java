@@ -7,20 +7,18 @@ import androidx.annotation.RequiresApi;
 import java.time.*;
 import java.util.ArrayList;
 
-import amsi.dei.estg.ipleiria.snakrestaurant.R;
-
-public class SingletonGestorPurchases {
+public class SingletonGestor {
     private ArrayList<Purchases> purchases;
-    private static SingletonGestorPurchases instancia = null;
+    private static SingletonGestor instancia = null;
 
-    public static synchronized SingletonGestorPurchases getInstance(){
+    public static synchronized SingletonGestor getInstance(){
         if(instancia == null){
-            instancia = new SingletonGestorPurchases();
+            instancia = new SingletonGestor();
         }
         return instancia;
     }
 
-    private SingletonGestorPurchases() {
+    private SingletonGestor() {
         //fazer codigo para receber os livros da api
     }
 

@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
 import amsi.dei.estg.ipleiria.snakrestaurant.adaptadores.RecyclerPurchasesAdaptador;
-import amsi.dei.estg.ipleiria.snakrestaurant.models.SingletonGestorPurchases;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.SingletonGestor;
 
 public class PurchasesActivity extends AppCompatActivity {
 
@@ -24,7 +24,7 @@ public class PurchasesActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         rv_purchases.setLayoutManager(layoutManager);
 
-        adaptador = new RecyclerPurchasesAdaptador(this, SingletonGestorPurchases.getInstance().getPurchases());
+        adaptador = new RecyclerPurchasesAdaptador(this, SingletonGestor.getInstance().getPurchases());
         System.out.println(adaptador);
         rv_purchases.setAdapter(adaptador);
         rv_purchases.setItemAnimator(new DefaultItemAnimator());

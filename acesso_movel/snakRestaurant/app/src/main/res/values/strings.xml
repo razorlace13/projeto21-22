@@ -31,5 +31,7 @@
     <string name="valor_purchases">Valor: </string>
 
     <string name="products_title">Products</string>
+    <string name="data">Data:  </string>
+    <string name="value">Valor:  </string>
 
 </resources>

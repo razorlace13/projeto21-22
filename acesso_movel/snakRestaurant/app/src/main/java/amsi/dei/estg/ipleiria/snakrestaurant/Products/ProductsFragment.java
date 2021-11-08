@@ -11,12 +11,14 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
+import amsi.dei.estg.ipleiria.snakrestaurant.adaptadores.ListaProductsAdaptador;
 
 public class ProductsFragment extends Fragment {
 
 
     Button food_btn,drinks_btn;
     ListView list_products;
+    private ListaProductsAdaptador adaptador;
 
     public ProductsFragment() {
 

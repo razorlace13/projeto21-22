@@ -6,12 +6,14 @@ public class Products {
     private String name;
     private String price;
     private String id_category;
+    private int capa;
 
-    public Products(long id_product, String name, String price, String id_category) {
+    public Products(long id_product, String name, String price, String id_category,int capa) {
         this.id_product = id_product;
         this.name = name;
         this.price = price;
         this.id_category = id_category;
+        this.capa = capa;
     }
 
     public long getId_product() {
@@ -45,4 +47,13 @@ public class Products {
     public void setId_category(String id_category) {
         this.id_category = id_category;
     }
+
+    public int getCapa() {
+        return capa;
+    }
+
+    public void setCapa(int capa) {
+        this.capa = capa;
+    }
+
 }

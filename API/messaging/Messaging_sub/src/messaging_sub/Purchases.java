@@ -10,17 +10,17 @@ package messaging_sub;
  * @author claud
  */
 public class Purchases {
-    private int id_purchases,mesa;
+    private int id_purchase,mesa;
     private double valor;
 
-    public Purchases(int id_purchases, int mesa, double valor) {
-        this.id_purchases = id_purchases;
+    public Purchases(int id_purchase, int mesa, double valor) {
+        this.id_purchase = id_purchase;
         this.mesa = mesa;
         this.valor = valor;
     }
 
-    public int getId_purchases() {
-        return id_purchases;
+    public int getId_purchase() {
+        return id_purchase;
     }
 
     public int getMesa() {
@@ -31,8 +31,8 @@ public class Purchases {
         return valor;
     }
 
-    public void setId_purchases(int id_purchases) {
-        this.id_purchases = id_purchases;
+    public void setId_purchases(int id_purchase) {
+        this.id_purchase = id_purchase;
     }
 
     public void setMesa(int mesa) {
@@ -43,5 +43,9 @@ public class Purchases {
         this.valor = valor;
     }
    
+    public String toString()
+    {
+        return "Purchases [ id_purchases: "+id_purchase+", mesa: "+ mesa+", valor: "+ valor+ "]";
+    }
     
 }

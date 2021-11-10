@@ -89,7 +89,6 @@ class Purchases extends \yii\db\ActiveRecord
 
         $myObj->id_purchase=$id_purchase;
         $myObj->valor=$valor;
-        $myObj->data=$data;
         $myObj->mesa=$mesa;
         $myJSON = json_encode($myObj);
         if($insert)

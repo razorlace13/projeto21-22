@@ -1,6 +1,8 @@
 <?php
 
 
+use backend\models\Products;
+
 class ExampleTest extends \Codeception\TestCase\Test
 {
     /**
@@ -19,6 +21,6 @@ class ExampleTest extends \Codeception\TestCase\Test
     // tests
     public function testMe()
     {
-
+        $model = new Products();
     }
 }

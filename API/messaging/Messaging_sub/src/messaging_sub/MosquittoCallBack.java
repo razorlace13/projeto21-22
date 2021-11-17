@@ -39,8 +39,7 @@ public class MosquittoCallBack implements MqttCallback {
         double Dados_valor = rootNode.get("valor").asDouble();
         Purchases purchases = new Purchases(Dados_id_purchase,Dados_mesa,Dados_valor);
         m_arrPurchases.add(purchases);
-        System.out.println("Eu sou um teste:\n\t"+ m_arrPurchases);
-        
+        System.out.println("Eu sou um teste:\n\t"+ m_arrPurchases);        
     }
     
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {

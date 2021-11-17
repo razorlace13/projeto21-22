@@ -4,26 +4,27 @@ namespace app\modules\v1\controllers;
 
 use app\models\User;
 use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 
 class ProductsController extends ActiveController
 {
     public $modelClass = 'app\models\Products';
+    const noPermission = 'Access denied';
 
     public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::className(),
-            'auth' => [$this, 'auth']
+            'class' => QueryParamAuth::className(),
         ];
 
         return $behaviors;
     }
-    public function auth($username, $password_hash) {
+    public function auth($token) {
 
-        $user = User::findByUsername($username);
-        if ($user && $user->validatePassword($password_hash))
+        $user = User::findIdentityByAccessToken($token);
+        if ($user != null)
         {
             return $user;
         } return null;

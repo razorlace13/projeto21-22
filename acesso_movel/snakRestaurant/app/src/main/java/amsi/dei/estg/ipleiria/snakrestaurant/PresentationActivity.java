@@ -1,21 +1,14 @@
 package amsi.dei.estg.ipleiria.snakrestaurant;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.window.SplashScreen;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-import amsi.dei.estg.ipleiria.snakrestaurant.login_registo_vistas.LoginFragment;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.LoginFragment;
 
 
 public class PresentationActivity extends AppCompatActivity {

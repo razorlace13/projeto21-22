@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.snakrestaurant.Products;
+package amsi.dei.estg.ipleiria.snakrestaurant.controllers.Products;
 
 import androidx.appcompat.app.AppCompatActivity;
 

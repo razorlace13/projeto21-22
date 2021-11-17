@@ -29,7 +29,7 @@ public class RecyclerPurchasesAdaptador extends RecyclerView.Adapter<RecyclerPur
     @Override
     public RecyclerPurchasesAdaptador.ViewHolderPurchases onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.purchases_cartao,parent,false);
-
+        RecyclerPurchasesAdaptador.ViewHolderPurchases vHolder = new RecyclerPurchasesAdaptador.ViewHolderPurchases(view);
         return new ViewHolderPurchases(view);
     }
 
@@ -37,6 +37,7 @@ public class RecyclerPurchasesAdaptador extends RecyclerView.Adapter<RecyclerPur
     public void onBindViewHolder(@NonNull RecyclerPurchasesAdaptador.ViewHolderPurchases holder, int position) {
         Purchases purchases = listaPurchases.get(position);
         holder.update(purchases);
+        //perguntar
     }
 
     @Override

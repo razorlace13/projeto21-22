@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Products.List_pagamentos">
+    tools:context=".controllers.Products.List_pagamentos">
 
     <ListView
         android:id="@+id/lista_pagamentos"

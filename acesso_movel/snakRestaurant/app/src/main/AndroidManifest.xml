@@ -13,22 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SnakRestaurant">
         <activity
-            android:name=".profile.DetalhePurchasesActivity"
+            android:name=".controllers.profile.DetalhePurchasesActivity"
             android:exported="false" />
         <activity
-            android:name=".profile.ProfileActivity"
+            android:name=".controllers.profile.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".profile.PurchasesActivity"
+            android:name=".controllers.profile.PurchasesActivity"
             android:exported="false" />
         <activity
             android:name=".PresentationActivity"
             android:exported="true" />
         <activity
-            android:name=".Products.Detalhe_produto"
+            android:name=".controllers.Products.Detalhe_produto"
             android:exported="true" />
         <activity
-            android:name=".Products.List_pagamentos"
+            android:name=".controllers.Products.List_pagamentos"
             android:exported="true" />
         <activity
             android:name=".main_application.MainMenuActivity"

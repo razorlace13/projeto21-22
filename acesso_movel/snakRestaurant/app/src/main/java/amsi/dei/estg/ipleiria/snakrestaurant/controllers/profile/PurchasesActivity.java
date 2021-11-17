@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.snakrestaurant.profile;
+package amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;

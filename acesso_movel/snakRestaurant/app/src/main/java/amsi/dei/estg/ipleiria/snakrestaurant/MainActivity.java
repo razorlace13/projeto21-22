@@ -5,8 +5,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
-import amsi.dei.estg.ipleiria.snakrestaurant.login_registo_vistas.LoginFragment;
-import amsi.dei.estg.ipleiria.snakrestaurant.R;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.LoginFragment;
 
 public class MainActivity extends AppCompatActivity {
 

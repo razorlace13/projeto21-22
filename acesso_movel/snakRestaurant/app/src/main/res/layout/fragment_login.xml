@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:fillViewport="true"
     android:fitsSystemWindows="true"
-    tools:context="amsi.dei.estg.ipleiria.snakrestaurant.login_registo_vistas.LoginFragment">
+    tools:context=".controllers.login_registo_vistas.LoginFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

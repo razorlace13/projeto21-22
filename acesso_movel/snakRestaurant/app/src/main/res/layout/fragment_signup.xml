@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context="amsi.dei.estg.ipleiria.snakrestaurant.login_registo_vistas.SignupFragment">
+    tools:context=".controllers.login_registo_vistas.SignupFragment">
 
 
     <ScrollView

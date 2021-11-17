@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.snakrestaurant.login_registo_vistas;
+package amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas;
 
 import android.os.Bundle;
 

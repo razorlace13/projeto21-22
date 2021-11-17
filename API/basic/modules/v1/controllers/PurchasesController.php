@@ -3,26 +3,28 @@
 namespace app\modules\v1\controllers;
 
 use app\models\User;
-use yii\filters\auth\HttpBasicAuth;
+//use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 
 class PurchasesController extends ActiveController
 {
     public $modelClass = 'app\models\Purchases';
+    const noPermission = 'Access denied';
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::className(),
-            'auth' => [$this, 'auth']
+            'class' => QueryParamAuth::className(),
         ];
 
         return $behaviors;
     }
-    public function auth($username, $password_hash) {
+    public function auth($token) {
 
-        $user = User::findByUsername($username);
-        if ($user && $user->validatePassword($password_hash))
+        $user = User::findIdentityByAccessToken($token);
+        if ($user != null)
         {
             return $user;
         } return null;
@@ -97,5 +99,16 @@ class PurchasesController extends ActiveController
         if($ret)
             return ['DelError' => $ret];
         throw new \yii\web\NotFoundHttpException("Client id not found!");
+    }
+
+    public function actionCarsuser()
+    {
+        if (\Yii::$app->user->can('frontendCrudVehicle')) {
+            $CarsModel = new $this->modelClass;
+            $recs = $CarsModel::find()->where('userId = ' . \Yii::$app->user->getId())->all();
+            return $recs;
+        } else {
+            return self::noPermission;
+        }
     }
 }

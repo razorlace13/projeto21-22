@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
-import amsi.dei.estg.ipleiria.snakrestaurant.profile.ProfileActivity;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.ProfileActivity;
 
 
 public class MainMenuActivity extends AppCompatActivity {

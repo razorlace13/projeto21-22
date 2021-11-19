@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -25,11 +28,15 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  * @author claud
  */
 public class MosquittoCallBack implements MqttCallback {
+    MqttClient client;
     ObjectMapper mapper = new ObjectMapper();
     List<Purchases> m_arrPurchases = new ArrayList<Purchases>();
+    ObservableList<Purchases> list = FXCollections.observableArrayList();
+    public ListView<Purchases> listview;
     
     public void connectionLost(Throwable throwable) {
-        System.out.println("Perda de ligação ao mosquitto"); 
+        System.out.println("Perda de ligação ao mosquitto");
+        this.connect();
     }
     
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
@@ -39,10 +46,21 @@ public class MosquittoCallBack implements MqttCallback {
         double Dados_valor = rootNode.get("valor").asDouble();
         Purchases purchases = new Purchases(Dados_id_purchase,Dados_mesa,Dados_valor);
         m_arrPurchases.add(purchases);
-        System.out.println("Eu sou um teste:\n\t"+ m_arrPurchases);        
+        System.out.println("Eu sou um teste de uma lista:\n\t"+ purchases);
+     
     }
     
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
         // Não usado, para já…
     }
+    
+    public void connect(){
+        try {
+            client = new MqttClient("tcp://localhost:1884",MqttClient.generateClientId());
+            client.setCallback( new MosquittoCallBack() );
+            client.connect();
+        } catch (MqttException ex) {
+            Logger.getLogger(form_visual.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  }
 }

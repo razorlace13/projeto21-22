@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
 import amsi.dei.estg.ipleiria.snakrestaurant.main_application.MainMenuActivity;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.LoginSingleton;
 
 public class LoginFragment extends Fragment {
 
@@ -54,8 +55,12 @@ public class LoginFragment extends Fragment {
                         String message = "Todos os campos devem ser preenchidos";
                         Toast.makeText(getActivity(),message,Toast.LENGTH_LONG).show();
                     }else{
-                        Intent intent = new Intent(getContext(), MainMenuActivity.class);
-                        startActivity(intent);
+                        //if(LoginSingleton.getInstance(getContext(),)) {
+                            if (LoginSingleton.getInstance(getContext(), et_username.toString(), et_password.toString()).getLogin().isEntrar() == true) {
+                                Intent intent = new Intent(getContext(), MainMenuActivity.class);
+                                startActivity(intent);
+                            }
+                        //}
                     }
                     break;
                 case R.id.button_signup:

@@ -12,12 +12,16 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.Products.ProductsFragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.ProfileActivity;
 
 
 public class MainMenuActivity extends AppCompatActivity {
 
     BottomNavigationView bottomBar;
+
+    public static final int FRAGMENTO_LISTA = 1;
+    private static int fragmentoActual = FRAGMENTO_LISTA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,8 @@ public class MainMenuActivity extends AppCompatActivity {
 
                         break;
                     case R.id.products:
+                       // mostraprodutos();
+
                         break;
                     case R.id.user:
                         mostraprofile();
@@ -49,6 +55,15 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void mostraprodutos() {
+        if(fragmentoActual == FRAGMENTO_LISTA){
+            Fragment fragmento2 = new ProductsFragment();
+            if(fragmento2 != null){
+                getSupportFragmentManager().beginTransaction().commit();
+            }
+        }
     }
 
     private void mostraprofile() {

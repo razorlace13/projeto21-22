@@ -4,16 +4,15 @@ public class Products {
 
     private long id_product ;
     private String name;
-    private String price;
-    private String id_category;
+    private int price;
+    private int id_category;
     private int capa;
 
-    public Products(long id_product, String name, String price, String id_category,int capa) {
+    public Products(long id_product, String name, int price, int id_category) {
         this.id_product = id_product;
         this.name = name;
         this.price = price;
         this.id_category = id_category;
-        this.capa = capa;
     }
 
     public long getId_product() {
@@ -32,19 +31,19 @@ public class Products {
         this.name = name;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public String getId_category() {
+    public int getId_category() {
         return id_category;
     }
 
-    public void setId_category(String id_category) {
+    public void setId_category(int id_category) {
         this.id_category = id_category;
     }
 

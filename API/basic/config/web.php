@@ -66,6 +66,7 @@ $config = [
                     'extraPatterns' => [
                         'GET total' => 'total' ,
                         'GET {id}/name' => 'name',
+                        'GET find_id_category/{limit}' => 'find_id_category',
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
                         'PUT put/{id_product}'=>'put',

@@ -42,6 +42,12 @@ class ProductsController extends ActiveController
         return ['total' => count($recs)];
     }
 
+    public function actionFind_id_category($limit){
+        $Productsmodel = new $this -> modelClass;
+        $rec = $Productsmodel::find() -> where("id_category=".$limit) -> all();
+        return ['limite' => $limit, 'Records' => $rec ];
+    }
+
     //http://localhost:8888/v1/produto/set/3
 
     public function actionSet($limit){

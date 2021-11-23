@@ -3,8 +3,11 @@ package amsi.dei.estg.ipleiria.snakrestaurant;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -13,38 +16,34 @@ import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.Lo
 
 public class PresentationActivity extends AppCompatActivity {
 
-    ImageView logo,appName,splashImg;
+    ImageView logo,splashImg;
     LottieAnimationView lottieAnimationView;
-
+    TextView appName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_presentation);
-
-
 
         logo = findViewById(R.id.logo);
         appName = findViewById(R.id.app_name);
         splashImg = findViewById(R.id.img);
         lottieAnimationView = findViewById(R.id.Lottie);
 
-
-        splashImg.animate().translationY(-1600).setDuration(1000).setStartDelay(4000);
-        logo.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
-        appName.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
-        lottieAnimationView.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
-
-      /*  Intent i = new Intent(PresentationActivity.this,LoginFragment.class);
-        startActivity(i);
-*/
-    }
+        splashImg.animate().translationY(-1600).setDuration(1000).setStartDelay(1500);
+        logo.animate().translationY(1400).setDuration(1000).setStartDelay(1500);
+        appName.animate().translationY(1400).setDuration(1000).setStartDelay(1500);
+        lottieAnimationView.animate().translationY(1400).setDuration(1000).setStartDelay(1500);
 
 
-
-    public void mudar(){
-        Fragment fragment = new LoginFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(i);
+            }
+        },2700);
 
     }
+
 }

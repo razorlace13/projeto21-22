@@ -24,8 +24,11 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
  public class SingletonGestor {
 
     private ArrayList<Purchases> purchases;
+     // substituir String pelo ipv4 da rede
+     public static final String UrlBASEAPI = "http://127.0.0.1:1884/v1/";
 
     private static SingletonGestor instancia = null;
+     private static RequestQueue volleyQueue = null;
 
     public static synchronized SingletonGestor getInstance(){
         if(instancia == null){
@@ -45,10 +48,12 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
 
 
     private ProductsBDHelper productsbd = null;
-    private static RequestQueue volleyQueue = null;
     private ArrayList<Products> listaproducts;
-    // substituir String pelo ipv4 da rede
-    public String UrlAPIProducts = "http://127.0.0.1:1884/v1/products?access-token=LiqR3mIcdkg54WhAl2P2mMX7Zuhp1D-5";
+
+
+     public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token=LiqR3mIcdkg54WhAl2P2mMX7Zuhp1D-5";
+     public static final String UrlAPIProducts_food = UrlBASEAPI + "products/find_id_category/1?access-token=LiqR3mIcdkg54WhAl2P2mMX7Zuhp1D-5";
+     public static final String UrlAPIProducts_drink = UrlBASEAPI + "products/find_id_category/2?access-token=LiqR3mIcdkg54WhAl2P2mMX7Zuhp1D-5";
 
     private ProductsListener productslistener;
 

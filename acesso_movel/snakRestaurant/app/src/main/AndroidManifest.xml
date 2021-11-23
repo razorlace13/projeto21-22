@@ -22,9 +22,6 @@
             android:name=".controllers.profile.PurchasesActivity"
             android:exported="false" />
         <activity
-            android:name=".PresentationActivity"
-            android:exported="true" />
-        <activity
             android:name=".controllers.Products.Detalhe_produto"
             android:exported="true" />
         <activity
@@ -35,6 +32,9 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".PresentationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

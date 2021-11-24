@@ -41,22 +41,42 @@ public class ListaProductsAdaptador extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parents) {
-        return null;
+        if(inflater == null){
+            this.inflater = (LayoutInflater) contexto.getSystemService(
+                    Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        if(convertView == null){
+            convertView = inflater.inflate(R.layout.item_lista_products, null);
+        }
+
+        //preencher o item através de um ViewHolder
+        ViewHolderProducts vHolder = (ViewHolderProducts) convertView.getTag();
+        if(vHolder == null){
+            vHolder = new ViewHolderProducts(convertView);
+            convertView.setTag(vHolder);
+        }
+
+        vHolder.update(this.listaProducts.get(position));
+
+        return convertView;
     }
 
     private class ViewHolderProducts {
-        private TextView tvName, tvPrice;
+        private TextView tvName, tvPrice, tvid_category;
         private ImageView ivCapa;
 
         public ViewHolderProducts(View view) {
             tvName = view.findViewById(R.id.tvName);
             tvPrice = view.findViewById(R.id.tvPrice);
-            ivCapa = view.findViewById(R.id.ivCapa);
+            tvPrice = view.findViewById(R.id.tvPrice);
+            //tvid_category = view.findViewById(R.id.tvid_category);
         }
 
         public void update(Products products) {
             this.tvName.setText(products.getName());
-            this.tvPrice.setText(products.getPrice());
+            this.tvPrice.setText(""+products.getPrice());
+            //this.tvid_category.setText(""+products.getId_category());
             //ivCapa.setImageResource(livro.getCapa());
 
         }

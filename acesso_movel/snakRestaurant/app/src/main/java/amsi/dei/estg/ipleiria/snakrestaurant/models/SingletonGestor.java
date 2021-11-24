@@ -25,6 +25,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
 
     private ArrayList<Purchases> purchases;
      // substituir String pelo ipv4 da rede
+     //10.80.226.82 do polo de Tv
      public static final String UrlBASEAPI = "http://127.0.0.1:1884/v1/";
 
     private static SingletonGestor instancia = null;

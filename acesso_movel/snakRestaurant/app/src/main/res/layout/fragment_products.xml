@@ -23,7 +23,7 @@
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="wrap_content"
                 android:text="@string/products_title"
                 android:textAlignment="center"
                 android:textSize="24sp" />

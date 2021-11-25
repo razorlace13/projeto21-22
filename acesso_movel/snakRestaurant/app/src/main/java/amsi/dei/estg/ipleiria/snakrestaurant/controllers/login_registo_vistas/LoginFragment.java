@@ -22,6 +22,7 @@ public class LoginFragment extends Fragment {
 
     private TextView et_username, et_password;
     private Button button_signin, button_signup;
+    private String user, pass;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -47,20 +48,64 @@ public class LoginFragment extends Fragment {
 
         return view;
     }
+
+    private boolean efetuarLogin() {
+        user = et_username.getText().toString();
+        pass = et_password.getText().toString();
+        boolean userBool = isUserValid(user);
+        boolean passBool = isPassValid(pass);
+
+        if(userBool != true)
+            Toast.makeText(getContext(), "Invalid User", Toast.LENGTH_SHORT).show();
+
+        if (passBool != true)
+            Toast.makeText(getContext(), "Invalid Password", Toast.LENGTH_SHORT).show();
+
+        if(userBool == true && passBool == true) {
+            return true;
+        }
+        return false;
+    }
+
+
+    private boolean isUserValid(String user){
+        if(user.length() > 1 && user != "Username")
+            return true;
+        else
+            return false;
+    }
+
+    private boolean isPassValid(String pass){
+        if(pass == null)
+            return false;
+
+        if (pass.length() < 8)
+            return false;
+        else
+            return true;
+    }
+
+
     private View.OnClickListener mCorkyListener = new View.OnClickListener() {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.button_signin:
-                    if (TextUtils.isEmpty(et_username.getText().toString()) || TextUtils.isEmpty(et_password.getText().toString())){
-                        String message = "Todos os campos devem ser preenchidos";
-                        Toast.makeText(getActivity(),message,Toast.LENGTH_LONG).show();
-                    }else{
-                        //if(LoginSingleton.getInstance(getContext(),)) {
-                            if (LoginSingleton.getInstance(getContext(), et_username.toString(), et_password.toString()).getLogin().isEntrar() == true) {
-                                Intent intent = new Intent(getContext(), MainMenuActivity.class);
-                                startActivity(intent);
+                    LoginSingleton.getInstance(getContext(),et_username.toString(), et_password.toString()).getLogin();
+                    if(efetuarLogin()==true) {
+                        if (TextUtils.isEmpty(et_username.getText().toString()) || TextUtils.isEmpty(et_password.getText().toString())) {
+                            String message = "Todos os campos devem ser preenchidos";
+                            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                        } else {
+                            if (LoginSingleton.getInstance(getContext(), et_username.toString(), et_password.toString()).getLogin() != null) {
+                                if (LoginSingleton.getInstance(getContext(), et_username.toString(), et_password.toString()).getLogin().isEntrar() == true) {
+                                    Intent intent = new Intent(getContext(), MainMenuActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(getContext(), "Conta não existente", Toast.LENGTH_SHORT).show();
+                                    LoginSingleton.setInstancia(null);
+                                }
                             }
-                        //}
+                        }
                     }
                     break;
                 case R.id.button_signup:

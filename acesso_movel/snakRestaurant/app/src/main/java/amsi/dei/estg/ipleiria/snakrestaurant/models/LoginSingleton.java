@@ -31,7 +31,7 @@ public class LoginSingleton {
 
     public void apiLogin(Context context, String user, String pass) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://localhost:8888/v1/login/get?username=" + user + "&password=" + pass;
+        String url = "http://10.80.226.92:1884/v1/login/get?username=" + user + "&password=" + pass;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

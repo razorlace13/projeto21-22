@@ -73,7 +73,7 @@
                         android:minWidth="320dp"
                         android:minHeight="50dp"
                         android:singleLine="true"
-                        android:text="claudiomartins819@hotmail.com" />
+                        android:text="Claudio Martins" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.cardview.widget.CardView>
 

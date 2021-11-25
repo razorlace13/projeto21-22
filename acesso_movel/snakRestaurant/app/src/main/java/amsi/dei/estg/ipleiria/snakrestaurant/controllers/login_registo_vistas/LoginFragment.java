@@ -15,6 +15,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.Products.ProductsFragment;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.DetalhePurchasesActivity;
 import amsi.dei.estg.ipleiria.snakrestaurant.main_application.MainMenuActivity;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.LoginSingleton;
 

@@ -41,7 +41,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
                         break;
                     case R.id.products:
-                       // mostraprodutos();
+                       mostraprodutos();
 
                         break;
                     case R.id.user:
@@ -60,9 +60,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private void mostraprodutos() {
         if(fragmentoActual == FRAGMENTO_LISTA){
             Fragment fragmento2 = new ProductsFragment();
-            if(fragmento2 != null){
-                getSupportFragmentManager().beginTransaction().commit();
-            }
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_frame, fragmento2, fragmento2.getClass().getSimpleName()).commit();
         }
     }
 

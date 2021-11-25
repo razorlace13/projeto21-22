@@ -74,7 +74,14 @@ $config = [
                     ],
                     'tokens' => [ '{id_product}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
                 ],
-
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/login',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET get/{username}&{password}' => 'get',
+                    ],
+                    'tokens' => [ '{id_product}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                ],
                 ['class' => 'yii\rest\UrlRule',
                     'controller' => 'v1/category',
                     'pluralize' => false,

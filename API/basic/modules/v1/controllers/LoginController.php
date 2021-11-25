@@ -1,13 +1,13 @@
 <?php
 
-namespace modules\v1\controllers;
+namespace app\modules\v1\controllers;
 
 use Yii;
 use yii\rest\ActiveController;
 
 class LoginController extends ActiveController
 {
-    public $modelClass = 'models\LoginForm';
+    public $modelClass = 'app\models\LoginForm';
 
     public function actionGet($username, $password)
     {

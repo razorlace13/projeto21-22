@@ -8,17 +8,15 @@
     tools:context="amsi.dei.estg.ipleiria.snakrestaurant.main_application.MainMenuActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="30dp"
         android:elevation="2dp"
-        android:background="@drawable/bg"
-        app:menu="@menu/menu_items"
-        app:labelVisibilityMode="unlabeled"
         app:itemIconSize="30dp"
-        app:itemRippleColor="@android:color/transparent"
         app:itemIconTint="@drawable/item_selector"
-        android:id="@+id/bottomBar"
-        />
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/menu_items" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

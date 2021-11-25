@@ -90,14 +90,14 @@ public class LoginFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.button_signin:
-                    LoginSingleton.getInstance(getContext(),et_username.toString(), et_password.toString()).getLogin();
                     if(efetuarLogin()==true) {
-                        if (TextUtils.isEmpty(et_username.getText().toString()) || TextUtils.isEmpty(et_password.getText().toString())) {
+                        LoginSingleton.getInstance(getContext(),user, pass);
+                        if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass)) {
                             String message = "Todos os campos devem ser preenchidos";
                             Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
                         } else {
-                            if (LoginSingleton.getInstance(getContext(), et_username.toString(), et_password.toString()).getLogin() != null) {
-                                if (LoginSingleton.getInstance(getContext(), et_username.toString(), et_password.toString()).getLogin().isEntrar() == true) {
+                            if (LoginSingleton.getInstance(getContext(), user, pass).getLogin() != null) {
+                                if (LoginSingleton.getInstance(getContext(), user, pass).getLogin().isEntrar() == true) {
                                     Intent intent = new Intent(getContext(), MainMenuActivity.class);
                                     startActivity(intent);
                                 } else {

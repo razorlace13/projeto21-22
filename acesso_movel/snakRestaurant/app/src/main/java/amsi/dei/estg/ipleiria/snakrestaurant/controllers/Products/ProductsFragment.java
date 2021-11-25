@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class ProductsFragment extends Fragment implements ProductsListener {
     public ListView list_products;
     private ListaProductsAdaptador adaptador;
     private ArrayList<Products> listaproducts;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     public ProductsFragment() {
 
@@ -47,6 +49,8 @@ public class ProductsFragment extends Fragment implements ProductsListener {
 
         View view = inflater.inflate(R.layout.fragment_products, container, false);
 
+        list_products = view.findViewById(R.id.list_products);
+        getProducts();
 
         food_btn = view.findViewById(R.id.food_btn);
         food_btn.setOnClickListener(new View.OnClickListener() {
@@ -63,12 +67,26 @@ public class ProductsFragment extends Fragment implements ProductsListener {
             }
         });
 
-        list_products = view.findViewById(R.id.list_products);
-        SingletonGestor.getInstance(getContext()).setProductslistener(this);
-        SingletonGestor.getInstance(getContext()).getAllProductsAPI(getContext());
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setColorScheme(R.color.md_green_500);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getProducts();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+
 
         return view;
     }
+
+    private void getProducts() {
+        SingletonGestor.getInstance(getContext()).setProductslistener(this);
+        SingletonGestor.getInstance(getContext()).getAllProductsAPI(getContext());
+    }
+
 
     @Override
     public void onRefreshListaProducts(ArrayList<Products> listaproducts) {

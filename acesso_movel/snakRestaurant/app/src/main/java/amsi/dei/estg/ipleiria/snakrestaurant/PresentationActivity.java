@@ -30,9 +30,9 @@ public class PresentationActivity extends AppCompatActivity {
         splashImg = findViewById(R.id.img);
         lottieAnimationView = findViewById(R.id.Lottie);
 
-        splashImg.animate().translationY(-1600).setDuration(1000).setStartDelay(1500);
-        logo.animate().translationY(1400).setDuration(1000).setStartDelay(1500);
-        appName.animate().translationY(1400).setDuration(1000).setStartDelay(1500);
+        splashImg.animate().translationY(1600).setDuration(1000).setStartDelay(1500);
+        logo.animate().translationY(-1000).setDuration(1000).setStartDelay(1500);
+        appName.animate().translationY(-1000).setDuration(1000).setStartDelay(1500);
         lottieAnimationView.animate().translationY(1400).setDuration(1000).setStartDelay(1500);
 
 

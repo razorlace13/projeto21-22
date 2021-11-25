@@ -65,16 +65,18 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <ListView
-                    android:id="@+id/list_products"
-                    android:layout_width="match_parent"
-                    android:layout_height="537dp">
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
-                </ListView>
+                    android:id="@+id/swipeRefreshLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="22dp" />
+                    <ListView
+                        android:id="@+id/list_products"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"></ListView>
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
             </LinearLayout>
 

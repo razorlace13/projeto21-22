@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile;
+package amsi.dei.estg.ipleiria.snakrestaurant.controllers.puchases;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -24,7 +24,7 @@ public class PurchasesActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         rv_purchases.setLayoutManager(layoutManager);
 
-        adaptador = new RecyclerPurchasesAdaptador(this, SingletonGestor.getInstance().getPurchases());
+        //adaptador = new RecyclerPurchasesAdaptador(this, SingletonGestor.getInstance().getPurchases());
         System.out.println(adaptador);
         rv_purchases.setAdapter(adaptador);
         rv_purchases.setItemAnimator(new DefaultItemAnimator());

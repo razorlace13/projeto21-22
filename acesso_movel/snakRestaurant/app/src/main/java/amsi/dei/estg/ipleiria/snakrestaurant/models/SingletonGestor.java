@@ -25,8 +25,9 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
 
     private ArrayList<Purchases> purchases;
      // substituir String pelo ipv4 da rede
-     //10.80.226.82 do polo de Tv
-     public static final String UrlBASEAPI = "http://127.0.0.1:1884/v1/";
+     //10.80.226.82 do polo de Tv do tiago
+     //10.80.226.92 do polo de Tv do Claudio
+     public static final String UrlBASEAPI = "http://10.80.226.92:1884/v1/";
 
     private static SingletonGestor instancia = null;
      private static RequestQueue volleyQueue = null;
@@ -52,9 +53,9 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
     private ArrayList<Products> listaproducts;
 
 
-     public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token=LiqR3mIcdkg54WhAl2P2mMX7Zuhp1D-5";
-     public static final String UrlAPIProducts_food = UrlBASEAPI + "products/find_id_category/1?access-token=LiqR3mIcdkg54WhAl2P2mMX7Zuhp1D-5";
-     public static final String UrlAPIProducts_drink = UrlBASEAPI + "products/find_id_category/2?access-token=LiqR3mIcdkg54WhAl2P2mMX7Zuhp1D-5";
+     public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
+     public static final String UrlAPIProducts_food = UrlBASEAPI + "products/find_id_category/1?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
+     public static final String UrlAPIProducts_drink = UrlBASEAPI + "products/find_id_category/2?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
 
     private ProductsListener productslistener;
 

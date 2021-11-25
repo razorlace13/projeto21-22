@@ -37,7 +37,6 @@ public class LoginSingleton {
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        // nao tou a entender a partir daqui
 
                         try {
                             login = new Login(response.getBoolean("Login"), response.getString("authkey"));

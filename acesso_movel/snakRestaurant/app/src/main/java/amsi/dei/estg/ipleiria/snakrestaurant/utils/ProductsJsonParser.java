@@ -31,9 +31,7 @@ public class ProductsJsonParser {
                 int price = productsjson.getInt("price");
                 int id_category = productsjson.getInt("id_category");
 
-                //criar o objeto livro
                 Products products = new Products(id_product, name, price, id_category);
-                //adicionar o livro à lista
                 listaproducts.add(products);
 
             }
@@ -43,61 +41,6 @@ public class ProductsJsonParser {
         }
 
         return listaproducts;
-    }
-
-    public static Products parserJsonLivro(JSONObject resposta){
-        Products products = null;
-
-        try {
-            long id_product = resposta.getLong("id_product");
-            String name = resposta.getString("name");
-            int price = resposta.getInt("price");
-            int id_category = resposta.getInt("id_category");
-
-            products = new Products(id_product, name, price, id_category);
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return products;
-    }
-
-    public static Products parserJsonLivro(String resposta){
-        Products products = null;
-
-        try {
-            JSONObject productsjson = new JSONObject(resposta);
-
-            long id_product = productsjson.getLong("id_product");
-            String name = productsjson.getString("name");
-            int price = productsjson.getInt("price");
-            int id_category = productsjson.getInt("id_category");
-
-            products = new Products(id_product, name, price, price);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return products;
-    }
-
-    public static String parserJsonLogin(String resposta){
-        String token = null;
-
-        try {
-            JSONObject login = new JSONObject(resposta);
-            if(login.getBoolean("success")){
-                token = login.getString("token");
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return token;
     }
 
     public static boolean isConnectionInternet(Context contexto){

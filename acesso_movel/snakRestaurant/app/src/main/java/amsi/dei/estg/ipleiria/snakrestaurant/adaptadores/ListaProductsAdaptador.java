@@ -69,15 +69,20 @@ public class ListaProductsAdaptador extends BaseAdapter {
         public ViewHolderProducts(View view) {
             tvName = view.findViewById(R.id.tvName);
             tvPrice = view.findViewById(R.id.tvPrice);
-            tvPrice = view.findViewById(R.id.tvPrice);
+            ivCapa = view.findViewById(R.id.ivCapa);
             //tvid_category = view.findViewById(R.id.tvid_category);
         }
 
         public void update(Products products) {
             this.tvName.setText(products.getName());
             this.tvPrice.setText(""+products.getPrice());
+            int id_category = products.getId_category();
+            if (id_category == 1){
+                this.ivCapa.setImageResource(R.drawable.food);
+            }else if (id_category == 2){
+                this.ivCapa.setImageResource(R.drawable.drinks1);
+            }
             //this.tvid_category.setText(""+products.getId_category());
-            //ivCapa.setImageResource(livro.getCapa());
 
         }
     }

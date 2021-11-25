@@ -27,6 +27,7 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        getSupportActionBar().hide();
         bottomBar = findViewById(R.id.bottomBar);
 
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -60,7 +61,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private void mostraprodutos() {
         if(fragmentoActual == FRAGMENTO_LISTA){
             Fragment fragmento2 = new ProductsFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_frame, fragmento2, fragmento2.getClass().getSimpleName()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.MainMenuFL, fragmento2, fragmento2.getClass().getSimpleName()).commit();
         }
     }
 

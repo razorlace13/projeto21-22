@@ -16,8 +16,8 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:cropToPadding="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/food" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/new_final_logo" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,13 +36,14 @@
 
                 <TextView
                     android:id="@+id/textView2"
-                    android:layout_width="29dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="1"
-                    android:text="name: "
+                    android:text="name:"
+                    android:textColor="@color/colorBackground"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -53,7 +54,8 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="10"
-                    android:hint="texto" />
+                    android:hint="texto"
+                    android:textColor="@color/colorBackground" />
 
             </LinearLayout>
 
@@ -64,13 +66,14 @@
 
                 <TextView
                     android:id="@+id/textView4"
-                    android:layout_width="25dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="1"
                     android:text="price:"
+                    android:textColor="@color/colorBackground"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -81,7 +84,8 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="10"
-                    android:hint="texto" />
+                    android:hint="texto"
+                    android:textColor="@color/colorBackground" />
 
             </LinearLayout>
 
@@ -92,9 +96,8 @@
 
                 <ImageButton
                     android:id="@+id/imageButton"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:backgroundTint="#F1EDED"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/card"

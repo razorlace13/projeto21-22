@@ -78,9 +78,9 @@ public class ListaProductsAdaptador extends BaseAdapter {
             this.tvPrice.setText(""+products.getPrice());
             int id_category = products.getId_category();
             if (id_category == 1){
-                this.ivCapa.setImageResource(R.drawable.food);
+                this.ivCapa.setImageResource(R.drawable.comida);
             }else if (id_category == 2){
-                this.ivCapa.setImageResource(R.drawable.drinks1);
+                this.ivCapa.setImageResource(R.drawable.copo);
             }
             //this.tvid_category.setText(""+products.getId_category());
 

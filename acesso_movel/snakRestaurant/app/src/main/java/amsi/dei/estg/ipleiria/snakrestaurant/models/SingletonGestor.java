@@ -1,10 +1,7 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
 import android.content.Context;
-import android.os.Build;
 import android.widget.Toast;
-
-import androidx.annotation.RequiresApi;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,7 +12,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 
-import java.time.*;
 import java.util.ArrayList;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.listeners.ProductsListener;
@@ -27,7 +23,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
      // substituir String pelo ipv4 da rede
      //10.80.226.82 do polo de Tv do tiago
      //10.80.226.92 do polo de Tv do Claudio
-     public static final String UrlBASEAPI = "http://10.80.226.92:1884/v1/";
+     public static final String UrlBASEAPI = "http://192.168.1.153:1884/v1/";
 
     private static SingletonGestor instancia = null;
      private static RequestQueue volleyQueue = null;
@@ -41,7 +37,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
 
     private SingletonGestor(Context contexto) {
         this.listaproducts = new ArrayList<>();
-        this.productsbd = new ProductsBDHelper(contexto);
+        this.productsbd = new BDHelper(contexto);
     }
 
     public ArrayList<Purchases> getPurchases(){
@@ -49,13 +45,11 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
     }
 
 
-    private ProductsBDHelper productsbd = null;
+    private BDHelper productsbd = null;
     private ArrayList<Products> listaproducts;
 
 
-     public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
-     public static final String UrlAPIProducts_food = UrlBASEAPI + "products/find_id_category/1?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
-     public static final String UrlAPIProducts_drink = UrlBASEAPI + "products/find_id_category/2?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
+    public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
 
     private ProductsListener productslistener;
 
@@ -70,8 +64,10 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
 
     public ArrayList<Products> getListalivrosBD() {
         listaproducts = productsbd.getAllProducts();
+        System.out.println(listaproducts);
         return listaproducts;
     }
+
     public void setProductslistener(ProductsListener productslistener) {
         this.productslistener = productslistener;
     }
@@ -91,7 +87,8 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
                         @Override
                         public void onResponse(JSONArray response) {
                             listaproducts = ProductsJsonParser.parserJsonProducts(response);
-                            //adicionarBD(listaproducts);
+
+                            productsbd.adicionarProductsBD(listaproducts);
 
                             if (productslistener != null) {
                                 productslistener.onRefreshListaProducts(listaproducts);
@@ -101,7 +98,10 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+                            if(productslistener != null){
+                                productslistener.onRefreshListaProducts(getListalivrosBD());
+                            }
+                            Toast.makeText(contexto,"sem acesso api", Toast.LENGTH_SHORT).show();
                         }
                     });
             volleyQueue.add(request);

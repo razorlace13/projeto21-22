@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.LoginFragment;
+import amsi.dei.estg.ipleiria.snakrestaurant.main_application.MainMenuActivity;
 
 
 public class PresentationActivity extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class PresentationActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
             }
         },2700);

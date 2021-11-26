@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -32,6 +32,7 @@ public class ProductsFragment extends Fragment implements ProductsListener {
     private ListaProductsAdaptador adaptador;
     private ArrayList<Products> listaproducts;
     SwipeRefreshLayout swipeRefreshLayout;
+    ProgressBar progressBar;
 
     public ProductsFragment() {
 
@@ -46,12 +47,11 @@ public class ProductsFragment extends Fragment implements ProductsListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_products, container, false);
 
         list_products = view.findViewById(R.id.list_products);
+        progressBar = view.findViewById(R.id.PB_Products);
         getProducts();
-
         food_btn = view.findViewById(R.id.food_btn);
         food_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +90,7 @@ public class ProductsFragment extends Fragment implements ProductsListener {
 
     @Override
     public void onRefreshListaProducts(ArrayList<Products> listaproducts) {
+        progressBar.setVisibility(View.INVISIBLE);
         if(listaproducts != null){
             list_products.setAdapter(new ListaProductsAdaptador(getContext(), listaproducts));
         }
@@ -99,4 +100,5 @@ public class ProductsFragment extends Fragment implements ProductsListener {
     public void onRefreshDetalhes() {
 
     }
+
 }

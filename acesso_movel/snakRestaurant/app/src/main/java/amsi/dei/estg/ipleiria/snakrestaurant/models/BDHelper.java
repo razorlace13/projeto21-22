@@ -75,7 +75,7 @@ public class BDHelper extends SQLiteOpenHelper {
         return lista;
     }
 
-    //para adicionar
+    //para adicionar depois de ir ao adicionarProductsBD de baixo
     public void adicionarProductsBD(Products products){
         ContentValues valores = new ContentValues();
 

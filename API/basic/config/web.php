@@ -118,6 +118,7 @@ $config = [
                         'GET set/{limit}' => 'set',
                         'GET {id}/nif' => 'nif',
                         'GET {id}/username' => 'username',
+                        'GET {token}/token'=> 'token',
 
                         'POST post' => 'post',
                         'PUT put/{id}'=>'put',

@@ -2,8 +2,8 @@
 
 namespace backend\controllers;
 
-use backend\models\Products;
-use backend\models\ProductsSearch;
+use backend\Models\Products;
+use backend\Models\ProductsSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
@@ -40,18 +40,18 @@ class ProductsController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
-            $searchModel = new ProductsSearch();
-            $dataProvider = $searchModel->search($this->request->queryParams);
+        $searchModel = new ProductsSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
         } else {
             throw new ForbiddenHttpException();
 
         }
-    }
+        }
 
     /**
      * Displays a single Products model.
@@ -59,11 +59,12 @@ class ProductsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id_product)
     {
         if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id_product),
         ]);
         } else {
             throw new ForbiddenHttpException();
@@ -80,11 +81,11 @@ class ProductsController extends Controller
     {
         if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
 
-            $model = new Products();
+        $model = new Products();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id_product]);
+                return $this->redirect(['view', 'id_product' => $model->id_product]);
             }
         } else {
             $model->loadDefaultValues();
@@ -106,14 +107,14 @@ class ProductsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id_product)
     {
         if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
 
-            $model = $this->findModel($id);
+        $model = $this->findModel($id_product);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_product]);
+            return $this->redirect(['view', 'id_product' => $model->id_product]);
         }
 
         return $this->render('update', [
@@ -132,11 +133,11 @@ class ProductsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id_product)
     {
         if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
 
-            $this->findModel($id)->delete();
+        $this->findModel($id_product)->delete();
 
         return $this->redirect(['index']);
         } else {
@@ -154,10 +155,13 @@ class ProductsController extends Controller
      */
     protected function findModel($id_product)
     {
-        if (($model = Products::findOne($id_product)) !== null) {
+        if (Yii::$app->user->can('empregado') || Yii::$app->user->can('admin')) {
+
+        if (($model = Products::findOne($id_product
+            )) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-}
+}}

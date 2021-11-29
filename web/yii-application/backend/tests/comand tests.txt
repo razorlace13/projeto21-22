@@ -1,0 +1,11 @@
+Testes unitarios linhas de comando
+
+codecept generate:test unit ExampleTest
+
+codecept run unit ExampleTest
+
+Testes funcionais linhas de comando
+
+codecept g:cest functional MyNewScenarioCest
+
+codecept run functional ExampleTest

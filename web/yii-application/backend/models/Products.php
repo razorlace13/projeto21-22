@@ -14,7 +14,6 @@ use Yii;
  *
  * @property Category $category
  * @property Consumo[] $consumos
- * @property Purchases[] $purchases
  */
 class Products extends \yii\db\ActiveRecord
 {
@@ -72,13 +71,19 @@ class Products extends \yii\db\ActiveRecord
         return $this->hasMany(Consumo::className(), ['id_product' => 'id_product']);
     }
 
-    /**
-     * Gets query for [[Purchases]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPurchases()
+
+    public function setname($name)
     {
-        return $this->hasMany(Purchases::className(), ['id_product' => 'id_product']);
+        $this->name=$name;
     }
+    public function setprice($price)
+    {
+        $this->price=$price;
+    }
+
+    public function setid_category($id_category)
+    {
+        $this->id_category=$id_category;
+    }
+
 }

@@ -1,22 +1,15 @@
-actor: Tester
+namespace: backend\tests
+actor_suffix: Tester
 paths:
     tests: tests
     output: tests/_output
-    log: tests/log
     data: tests/_data
     support: tests/_support
-    envs: tests/_envs
+bootstrap: _bootstrap.php
 settings:
-    bootstrap: _bootstrap.php
-    colors: false
+    colors: true
     memory_limit: 1024M
-extensions:
-    enabled:
-        - Codeception\Extension\RunFailed
 modules:
     config:
-        Db:
-            dsn: ''
-            user: ''
-            password: ''
-            dump: tests/_data/dump.sql
+        Yii2:
+            configFile: 'config/codeception-local.php'

@@ -118,13 +118,13 @@ $config = [
                         'GET set/{limit}' => 'set',
                         'GET {id}/nif' => 'nif',
                         'GET {id}/username' => 'username',
-                        'GET {token}/token'=> 'token',
+                        'GET {acess}/token' => 'token',
 
                         'POST post' => 'post',
                         'PUT put/{id}'=>'put',
                         'DELETE  delete/{id}' => 'delete'
                     ],
-                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                    'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>',"{acess}" => "<acess>", ],
                 ],
                 ['class' => 'yii\rest\UrlRule',
                     'controller' => 'v1/consumo',

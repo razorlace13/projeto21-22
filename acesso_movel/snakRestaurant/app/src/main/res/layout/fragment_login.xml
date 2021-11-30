@@ -73,7 +73,6 @@
                         android:minWidth="320dp"
                         android:minHeight="50dp"
                         android:singleLine="true"
-                        android:text="Claudio Martins"
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.cardview.widget.CardView>

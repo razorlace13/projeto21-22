@@ -63,14 +63,13 @@ class UserController extends ActiveController
         return ['id' => $id, 'username' => "null" ];
     }
 
-http://192.168.1.153:1884/v1/user/XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA/token?username=Claudio%20Martins&password=password
+ //http://192.168.1.153:1884/v1/user/XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA/token?username=Claudio%20Martins&password=password
 
-    public function actionToken($token){
+    public function actionToken($acess){
         $Usermodel = new $this -> modelClass;
-        $rec = $Usermodel::find() -> where("auth_key=".($token)) -> one();
-        if ($rec)
-        	return ['username' => username , 'telefone' => telefone,  'email' => email];
-	return ['id' => $id, 'username' => "null" ];
+        $sql = "SELECT * FROM user WHERE auth_key = '$acess'";
+        $rec = $Usermodel::findBySql($sql) ->one();
+        return ['username' => $rec -> username,'email' => $rec -> email,'numero' => $rec -> numero,  ];
     }
 
     //http://localhost:8888/v1/user/set/3

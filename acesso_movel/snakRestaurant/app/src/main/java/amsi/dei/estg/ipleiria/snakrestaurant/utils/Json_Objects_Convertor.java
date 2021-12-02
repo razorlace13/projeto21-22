@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.snakrestaurant.models;
+package amsi.dei.estg.ipleiria.snakrestaurant.utils;
 
 import android.util.Log;
 

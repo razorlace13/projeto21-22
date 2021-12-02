@@ -12,9 +12,10 @@ import java.util.ArrayList;
 
 
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Products;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.User;
 
 
-public class ProductsJsonParser {
+public class JsonParser {
 
     public static ArrayList<Products> parserJsonProducts(JSONArray resposta){
         //Criar o ArrayList
@@ -49,5 +50,25 @@ public class ProductsJsonParser {
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
 
         return networkInfo != null && networkInfo.isConnected();
+    }
+
+    public static User parserJsonUser(JSONObject resposta){
+
+
+        try {
+
+            JSONObject myObject = new JSONObject(String.valueOf(resposta));
+
+                String username = myObject.getString("username");
+                int email = myObject.getInt("email");
+                int numero = myObject.getInt("numero");
+
+            return new User(username, email, numero);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return  null;
     }
 }

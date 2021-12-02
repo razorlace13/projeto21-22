@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/products_title"
                 android:textAlignment="center"
+                android:textColor="@color/colorBackground"
                 android:textSize="24sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout

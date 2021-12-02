@@ -8,14 +8,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.listeners.ProductsListener;
-import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
+import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
 
  public class SingletonGestor {
 
@@ -23,21 +25,14 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
      // substituir String pelo ipv4 da rede
      //10.80.226.82 do polo de Tv do tiago
      //10.80.226.92 do polo de Tv do Claudio
-     public static final String UrlBASEAPI = "http://192.168.1.153:1884/v1/";
+     public static final String UrlBASEAPI = "http://10.80.226.92:1884/v1/";
 
     private static SingletonGestor instancia = null;
      private static RequestQueue volleyQueue = null;
 
-    public static synchronized SingletonGestor getInstance(){
-        if(instancia == null){
-            //instancia = new SingletonGestor(contexto);
-        }
-        return instancia;
-    }
-
     private SingletonGestor(Context contexto) {
         this.listaproducts = new ArrayList<>();
-        this.productsbd = new BDHelper(contexto);
+        this.bd = new BDHelper(contexto);
     }
 
     public ArrayList<Purchases> getPurchases(){
@@ -45,11 +40,14 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
     }
 
 
-    private BDHelper productsbd = null;
+    private BDHelper bd = null;
     private ArrayList<Products> listaproducts;
+    private User user;
 
 
     public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
+    public static final String UrlAPIUser = UrlBASEAPI + "user/XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA/token?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
+
 
     private ProductsListener productslistener;
 
@@ -62,8 +60,8 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
     }
 
 
-    public ArrayList<Products> getListalivrosBD() {
-        listaproducts = productsbd.getAllProducts();
+    public ArrayList<Products> getListaproductsBD() {
+        listaproducts = bd.getAllProducts();
         System.out.println(listaproducts);
         return listaproducts;
     }
@@ -73,11 +71,11 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
     }
 
     public void getAllProductsAPI(final Context contexto){
-        if(!ProductsJsonParser.isConnectionInternet(contexto)){
+        if(!JsonParser.isConnectionInternet(contexto)){
             Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
 
             if(productslistener != null){
-                productslistener.onRefreshListaProducts(getListalivrosBD());
+                productslistener.onRefreshListaProducts(getListaproductsBD());
             }
         }
         else{
@@ -86,9 +84,9 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            listaproducts = ProductsJsonParser.parserJsonProducts(response);
+                            listaproducts = JsonParser.parserJsonProducts(response);
 
-                            productsbd.adicionarProductsBD(listaproducts);
+                            bd.adicionarProductsBD(listaproducts);
 
                             if (productslistener != null) {
                                 productslistener.onRefreshListaProducts(listaproducts);
@@ -99,7 +97,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             if(productslistener != null){
-                                productslistener.onRefreshListaProducts(getListalivrosBD());
+                                productslistener.onRefreshListaProducts(getListaproductsBD());
                             }
                             Toast.makeText(contexto,"sem acesso api", Toast.LENGTH_SHORT).show();
                         }
@@ -107,6 +105,27 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.ProductsJsonParser;
             volleyQueue.add(request);
         }
     }
+    public void getUserAPI(final Context contexto){
+         if(!JsonParser.isConnectionInternet(contexto)){
+             Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
+         }
+         else{
+
+             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, UrlAPIUser,
+                     null, new Response.Listener<JSONObject>() {
+                 @Override
+                 public void onResponse(JSONObject response) {
+                     user = JsonParser.parserJsonUser(response);
+                 }
+             }, new Response.ErrorListener() {
+                 @Override
+                 public void onErrorResponse(VolleyError error) {
+                     Toast.makeText(contexto,"sem acesso api", Toast.LENGTH_SHORT).show();
+                 }
+             });
+             volleyQueue.add(request);
+         }
+     }
 }
 
 

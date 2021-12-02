@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.Products.ProductsFragment;
-import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.ProfileActivity;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.ProfileFragment;
 
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -71,7 +71,14 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     private void mostraprofile() {
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
+        Fragment fragmento2 = new ProfileFragment();
+        ProfileFragment fragment = (ProfileFragment) getSupportFragmentManager().findFragmentByTag(fragmento2.getClass().getSimpleName());
+        // deixa ficar assim, ja tentei de outras formas, faz ele crahar entao mais vale ficar assim
+        if (fragment != null && fragment.isVisible()) {
+        }else{
+            if (fragmentoActual == FRAGMENTO_LISTA) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.MainMenuFL, fragmento2, fragmento2.getClass().getSimpleName()).commit();
+            }
+        }
     }
 }

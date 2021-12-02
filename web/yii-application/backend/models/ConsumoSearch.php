@@ -11,15 +11,16 @@ use backend\Models\Consumo;
  */
 class ConsumoSearch extends Consumo
 {
-    public $globalSearch;
-
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
+
     public function rules()
     {
         return [
-            [['id_consumo', 'id_pedido', 'id_product'], 'integer'],
+            [['id_consumo', 'id_pedido', 'id_product', 'quantidade'], 'integer'],
+            [['globalSearch'], 'safe'],
         ];
     }
 
@@ -57,15 +58,18 @@ class ConsumoSearch extends Consumo
             return $dataProvider;
         }
 
-        /* grid filtering conditions
+        // grid filtering conditions
         $query->andFilterWhere([
             'id_consumo' => $this->id_consumo,
             'id_pedido' => $this->id_pedido,
             'id_product' => $this->id_product,
+            'quantidade' => $this->quantidade,
         ]);
-*/
-        $query->orFilterWhere(['like','id_pedido',$this->globalSearch])
-            ->orFilterWhere(['like','id_product',$this->globalSearch]);
+
+        $query->orFilterWhere(['like','id_consumo',$this->globalSearch])
+            ->orFilterWhere(['like','id_pedido',$this->globalSearch])
+            ->orFilterWhere(['like','id_product',$this->globalSearch])
+            ->orFilterWhere(['like','quantidade',$this->globalSearch]);
 
         return $dataProvider;
     }

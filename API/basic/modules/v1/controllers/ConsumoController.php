@@ -56,10 +56,12 @@ class ConsumoController extends ActiveController
 
         $id_pedido=\Yii::$app -> request -> post('id_pedido');
         $id_product=\Yii::$app -> request -> post('id_product');
+        $quantidade=\Yii::$app -> request -> post('quantidade');
 
         $Consumosmodel = new $this -> modelClass;
         $Consumosmodel -> id_pedido = $id_pedido;
         $Consumosmodel -> id_product = $id_product;
+        $Consumosmodel -> quantidade = $quantidade;
 
         $ret = $Consumosmodel -> save(false);
         return ['SaveError' => $ret];
@@ -68,12 +70,14 @@ class ConsumoController extends ActiveController
 
         $id_pedido=\Yii::$app -> request -> post('id_pedido');
         $id_product=\Yii::$app -> request -> post('id_product');
+        $quantidade=\Yii::$app -> request -> post('quantidade');
 
         $Productsmodel = new $this->modelClass;
         $rec = $Productsmodel::find()->where('id_consumo = '.$id)->one();
 
         $rec->id_pedido = $id_pedido;
         $rec->id_product = $id_product;
+        $rec->quantidade = $quantidade;
 
         $rec->save(false);
         return ['SaveError1' => $rec];

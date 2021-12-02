@@ -10,6 +10,7 @@ use Yii;
  * @property int $id_consumo
  * @property int $id_pedido
  * @property int $id_product
+ * @property int $quantidade
  *
  * @property Purchases $pedido
  * @property Products $product
@@ -30,8 +31,8 @@ class Consumo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_pedido', 'id_product'], 'required'],
-            [['id_pedido', 'id_product'], 'integer'],
+            [['id_pedido', 'id_product', 'quantidade'], 'required'],
+            [['id_pedido', 'id_product', 'quantidade'], 'integer'],
             [['id_pedido'], 'exist', 'skipOnError' => true, 'targetClass' => Purchases::className(), 'targetAttribute' => ['id_pedido' => 'id_purchase']],
             [['id_product'], 'exist', 'skipOnError' => true, 'targetClass' => Products::className(), 'targetAttribute' => ['id_product' => 'id_product']],
         ];
@@ -46,6 +47,7 @@ class Consumo extends \yii\db\ActiveRecord
             'id_consumo' => 'Id Consumo',
             'id_pedido' => 'Id Pedido',
             'id_product' => 'Id Product',
+            'quantidade' => 'Quantidade',
         ];
     }
 

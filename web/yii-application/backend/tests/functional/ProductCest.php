@@ -1,19 +1,14 @@
-<?php
-
-namespace backend\tests\functional;
-
+<?php namespace backend\tests\functional;
 use backend\tests\FunctionalTester;
 use common\fixtures\UserFixture;
 
-/**
- * Class LoginCest
- */
-class LoginCest
+class ProductCest
 {
+
+    protected $tester;
     /**
      * @var \backend\tests\FunctionalTester
      */
-    protected $tester;
     public function _fixtures()
     {
         return [
@@ -23,18 +18,26 @@ class LoginCest
             ]
         ];
     }
-    
-    /**
-     * @param FunctionalTester $I
-     */
-    public function loginUser(FunctionalTester $I)
+    public function _before(FunctionalTester $I)
+    {
+    }
+
+    // tests
+    public function createBCest(FunctionalTester $I)
     {
         $I->amOnPage('/site/login');
         $I->fillField('username', 'teste');
         $I->fillField('password', 'password');
         $I->click('login-button');
-        $I->canSeeCurrentUrlMatches("http://backend.test/site/login");
-        $I->dontSeeLink('Login');
-        $I->dontSeeLink('Signup');
+
+
+        $I->amOnPage('/products/create');
+        //$I->fillField('name','teste');
+        $I->fillField('price','12');
+        $I->fillField('id_category','1');
+        $I->click('Save');
+        
+        
+
     }
 }

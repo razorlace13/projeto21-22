@@ -86,4 +86,6 @@ class Products extends \yii\db\ActiveRecord
         $this->id_category=$id_category;
     }
 
+
+
 }

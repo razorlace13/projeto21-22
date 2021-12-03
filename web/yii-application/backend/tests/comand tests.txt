@@ -9,3 +9,10 @@ Testes funcionais linhas de comando
 codecept g:cest functional MyNewScenarioCest
 
 codecept run functional ExampleTest
+
+
+Claudio Martins
+
+
+vendor\bin\codecept run functional LoginCest:loginUser -c backend
+vendor\bin\codecept run functional ProductCest:createBCest -c backend

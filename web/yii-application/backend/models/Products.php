@@ -71,7 +71,7 @@ class Products extends \yii\db\ActiveRecord
         return $this->hasMany(Consumo::className(), ['id_product' => 'id_product']);
     }
 
-
+// nomes para os testes
     public function setname($name)
     {
         $this->name=$name;

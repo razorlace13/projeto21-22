@@ -15,8 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
-import amsi.dei.estg.ipleiria.snakrestaurant.controllers.Products.ProductsFragment;
-import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.DetalhePurchasesActivity;
 import amsi.dei.estg.ipleiria.snakrestaurant.main_application.MainMenuActivity;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.LoginSingleton;
 
@@ -41,8 +39,8 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        et_username = view.findViewById(R.id.et_username);
-        et_password = view.findViewById(R.id.et_password);
+        et_username = view.findViewById(R.id.et_username_login);
+        et_password = view.findViewById(R.id.et_password_login);
         button_signin = view.findViewById(R.id.button_signin);
         button_signup = view.findViewById(R.id.button_signup);
         button_signin.setOnClickListener(mCorkyListener);

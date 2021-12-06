@@ -64,7 +64,8 @@
                         android:inputType="textEmailAddress"
                         android:minWidth="320dp"
                         android:minHeight="45dp"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView

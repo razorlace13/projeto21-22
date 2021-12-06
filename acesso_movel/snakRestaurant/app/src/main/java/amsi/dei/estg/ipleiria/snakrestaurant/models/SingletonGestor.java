@@ -1,5 +1,8 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIProducts;
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlBASEAPI;
+
 import android.content.Context;
 import android.widget.Toast;
 
@@ -22,10 +25,6 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
  public class SingletonGestor {
 
     private ArrayList<Purchases> purchases;
-     // substituir String pelo ipv4 da rede
-     //10.80.226.82 do polo de Tv do tiago
-     //10.80.226.92 do polo de Tv do Claudio
-     public static final String UrlBASEAPI = "http://10.80.226.92:1884/v1/";
 
     private static SingletonGestor instancia = null;
      private static RequestQueue volleyQueue = null;
@@ -45,7 +44,6 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
     private User user;
 
 
-    public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
     public static final String UrlAPIUser = UrlBASEAPI + "user/XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA/token?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
 
 
@@ -127,10 +125,3 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
          }
      }
 }
-
-
-
-
-
-
-

@@ -1,5 +1,7 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlBASEAPI;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -31,7 +33,7 @@ public class LoginSingleton {
 
     public void apiLogin(Context context, String user, String pass) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://10.80.226.92:1884/v1/login/get?username=" + user + "&password=" + pass;
+        String url = UrlBASEAPI + "login/get?username=" + user + "&password=" + pass;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

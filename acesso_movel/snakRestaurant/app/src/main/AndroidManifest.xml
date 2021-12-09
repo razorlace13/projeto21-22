@@ -30,7 +30,7 @@
             android:name=".main_application.MainMenuActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".controllers.login_registo_vistas.MainActivity"
             android:exported="true"/>
         <activity
             android:name=".PresentationActivity"

@@ -2,7 +2,6 @@ package amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +14,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
-import amsi.dei.estg.ipleiria.snakrestaurant.controllers.Products.ProductsFragment;
-import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.DetalhePurchasesActivity;
+import amsi.dei.estg.ipleiria.snakrestaurant.listeners.LoginListener;
 import amsi.dei.estg.ipleiria.snakrestaurant.main_application.MainMenuActivity;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.Login;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.LoginSingleton;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements LoginListener {
 
     private TextView et_username, et_password;
     private Button button_signin, button_signup;
     private String user, pass;
+    private BDHelper bd;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -33,6 +34,10 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LoginSingleton.getInstance(getContext()).setLoginListener(this);
+        bd = new BDHelper(getContext());
+
+        verificarutilizador();
 
     }
 
@@ -93,21 +98,7 @@ public class LoginFragment extends Fragment {
             switch (v.getId()){
                 case R.id.button_signin:
                     if(efetuarLogin()==true) {
-                        LoginSingleton.getInstance(getContext(),user, pass);
-                        if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass)) {
-                            String message = "Todos os campos devem ser preenchidos";
-                            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-                        } else {
-                            if (LoginSingleton.getInstance(getContext(), user, pass).getLogin() != null) {
-                                if (LoginSingleton.getInstance(getContext(), user, pass).getLogin().isEntrar() == true) {
-                                    Intent intent = new Intent(getContext(), MainMenuActivity.class);
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(getContext(), "Conta não existente", Toast.LENGTH_SHORT).show();
-                                    LoginSingleton.setInstancia(null);
-                                }
-                            }
-                        }
+                        LoginSingleton.getInstance(getContext()).apiLogin(getContext(), user, pass);
                     }
                     break;
                 case R.id.button_signup:
@@ -125,6 +116,21 @@ public class LoginFragment extends Fragment {
         }
     };
 
+    public void verificarutilizador() {
+        if(bd.getUser().size() > 0){
+            Intent menu = new Intent(getContext(), MainMenuActivity.class);
+            startActivity(menu);
+        }
+    }
 
-
+    @Override
+    public void onValidateLogin(Login login) {
+        if (login.getToken() != null){
+            bd.inserirDadosLogin(login);
+            Intent menu = new Intent(getContext(), MainMenuActivity.class);
+            startActivity(menu);
+        }else{
+            Toast.makeText(getContext(), "Username or password incorrect", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

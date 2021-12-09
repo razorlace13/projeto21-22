@@ -7,15 +7,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "projeto21_22";
-    private static final int VERSAO_BD = 1;
+    private static final int VERSAO_BD = 2;
     //dados da tabela
     private static final String TABELA = "products", ID_PRODUCT = "id_product",NAME = "name",PRICE = "price",ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo",ID_PEDIDO = "id_pedido ",QUANTIDADE = "quantidade";
     private static final String TABELA3 = "purchases", ID_PURCHASES = "id_purchase", VALOR = "valor", DATA = "data", MESA = "mesa", ID_USER = "id_user";
+    private static final String TABELA4 = "login", TOKEN = "token", USERNAME = "username", EMAIL = "email";
 
     private final SQLiteDatabase basedados;
 
@@ -46,6 +48,12 @@ public class BDHelper extends SQLiteOpenHelper {
                 DATA + " INTEGER NOT NULL, " +
                 MESA + " INTEGER NOT NULL, " +
                 ID_USER + " INTEGER NOT NULL)";
+
+        db.execSQL(sqlTabela);
+        sqlTabela = "CREATE TABLE " + TABELA4 + "(" +
+                TOKEN + " TEXT NOT NULL, " +
+                USERNAME + " VARCHAR(100) NOT NULL, " +
+                EMAIL + " VARCHAR(100) NOT NULL)";
 
         db.execSQL(sqlTabela);
     }
@@ -97,4 +105,34 @@ public class BDHelper extends SQLiteOpenHelper {
         }
     }
 
+    public LinkedList<Login> getUser() {
+        LinkedList<Login> login = new LinkedList<>();
+        Cursor cursor = this.basedados.rawQuery("SELECT * FROM login",
+                null);
+        if (cursor.moveToFirst()) {
+            do {
+                login.add(new Login(cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2)
+                ));
+            } while (cursor.moveToNext());
+        }
+        return login;
+    }
+
+    public void inserirDadosLogin(Login login) {
+        ContentValues values = new ContentValues();
+        values.put("token", login.getToken());
+        values.put("username", login.getUsername());
+        values.put("email", login.getEmail());
+
+        if(!verificarLogin(login, values)){
+            basedados.insert("login", null, values);
+        }
+
+    }
+
+    private boolean verificarLogin(Login login, ContentValues values) {
+        return this.basedados.update("login",values, "token = ?", new String[]{"" + login.getToken()}) > 0;
+    }
 }

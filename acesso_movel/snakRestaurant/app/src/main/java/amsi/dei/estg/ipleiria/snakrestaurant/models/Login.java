@@ -1,19 +1,45 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
 public class Login {
-    private boolean entrar;
-    private String token;
+    private String username, email, authkey;
 
-    public Login(boolean entrar, String token) {
-        this.entrar = entrar;
-        this.token = token;
+    public Login(String authkey, String username, String email) {
+        this.authkey = authkey;
+        this.username = username;
+        this.email = email;
     }
 
-    public boolean isEntrar() {
-        return entrar;
-    }
 
     public String getToken() {
-        return token;
+        return authkey;
+    }
+
+    public void setToken(String token) {
+        this.authkey = token;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Login{" +
+                "authkey='" + authkey + '\'' +
+        ", username='" + username + '\'' +
+        ", email='" + email + '\'' +
+        '}';
     }
 }

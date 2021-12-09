@@ -16,7 +16,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.ProfileFragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.listeners.ProductsListener;
+import amsi.dei.estg.ipleiria.snakrestaurant.listeners.UserListener;
 import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
 
  public class SingletonGestor {
@@ -25,13 +27,14 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
      // substituir String pelo ipv4 da rede
      //10.80.226.82 do polo de Tv do tiago
      //10.80.226.92 do polo de Tv do Claudio
-     public static final String UrlBASEAPI = "http://10.80.226.92:1884/v1/";
+     public static final String UrlBASEAPI = "http://192.168.1.154:1884/v1/";
 
     private static SingletonGestor instancia = null;
      private static RequestQueue volleyQueue = null;
 
     private SingletonGestor(Context contexto) {
         this.listaproducts = new ArrayList<>();
+        this.user = new User(null, null,0);
         this.bd = new BDHelper(contexto);
     }
 
@@ -45,11 +48,12 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
     private User user;
 
 
-    public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
-    public static final String UrlAPIUser = UrlBASEAPI + "user/XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA/token?access-token=XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA";
+    public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token=";
+    public static final String UrlAPIUser = UrlBASEAPI + "user/";
 
 
     private ProductsListener productslistener;
+    private UserListener userlistener;
 
     public static synchronized SingletonGestor getInstance(Context contexto){
         if(instancia == null){
@@ -70,6 +74,10 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
         this.productslistener = productslistener;
     }
 
+     public void setUserlistener(ProfileFragment profileFragment) {
+         this.userlistener = profileFragment;
+     }
+
     public void getAllProductsAPI(final Context contexto){
         if(!JsonParser.isConnectionInternet(contexto)){
             Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
@@ -80,7 +88,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
         }
         else{
             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                    UrlAPIProducts, null,
+                    UrlAPIProducts + LoginSingleton.getInstance(contexto).getLogin().getToken(), null,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
@@ -110,12 +118,17 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
              Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
          }
          else{
-
-             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, UrlAPIUser,
-                     null, new Response.Listener<JSONObject>() {
+             String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
+             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
+                     UrlAPIUser + token + "/token?access-token=" + token,
+                     null,
+                     new Response.Listener<JSONObject>() {
                  @Override
                  public void onResponse(JSONObject response) {
                      user = JsonParser.parserJsonUser(response);
+                     if (user != null) {
+                         userlistener.onUser(user);
+                     }
                  }
              }, new Response.ErrorListener() {
                  @Override

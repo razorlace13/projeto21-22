@@ -33,5 +33,8 @@
     <string name="products_title">Products</string>
     <string name="data">Data:  </string>
     <string name="value">Valor:  </string>
+    <string name="username_dois_pontos">Username: </string>
+    <string name="numero_dois_pontos">Numero: </string>
+    <string name="email_dois_pontos">Email: </string>
 
 </resources>

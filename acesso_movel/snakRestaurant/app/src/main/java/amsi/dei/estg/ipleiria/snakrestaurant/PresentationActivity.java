@@ -1,7 +1,6 @@
 package amsi.dei.estg.ipleiria.snakrestaurant;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +10,9 @@ import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.LoginFragment;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.MainActivity;
 import amsi.dei.estg.ipleiria.snakrestaurant.main_application.MainMenuActivity;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
 
 
 public class PresentationActivity extends AppCompatActivity {
@@ -20,6 +20,7 @@ public class PresentationActivity extends AppCompatActivity {
     ImageView logo,splashImg;
     LottieAnimationView lottieAnimationView;
     TextView appName;
+    BDHelper bd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class PresentationActivity extends AppCompatActivity {
         logo.animate().translationY(-1000).setDuration(1000).setStartDelay(1500);
         appName.animate().translationY(-1000).setDuration(1000).setStartDelay(1500);
         lottieAnimationView.animate().translationY(1400).setDuration(1000).setStartDelay(1500);
+        bd = new BDHelper(this);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -46,5 +48,4 @@ public class PresentationActivity extends AppCompatActivity {
         },2700);
 
     }
-
 }

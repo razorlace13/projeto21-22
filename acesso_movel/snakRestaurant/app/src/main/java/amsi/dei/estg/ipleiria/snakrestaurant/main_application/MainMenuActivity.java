@@ -61,24 +61,12 @@ public class MainMenuActivity extends AppCompatActivity {
     private void mostraprodutos() {
         Fragment fragmento2 = new ProductsFragment();
         ProductsFragment fragment = (ProductsFragment) getSupportFragmentManager().findFragmentByTag(fragmento2.getClass().getSimpleName());
-        // deixa ficar assim, ja tentei de outras formas, faz ele crahar entao mais vale ficar assim
-        if (fragment != null && fragment.isVisible()) {
-        }else{
-            if (fragmentoActual == FRAGMENTO_LISTA) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.MainMenuFL, fragmento2, fragmento2.getClass().getSimpleName()).commit();
-            }
-        }
+         getSupportFragmentManager().beginTransaction().replace(R.id.MainMenuFL, fragmento2, fragmento2.getClass().getSimpleName()).commit();
     }
 
     private void mostraprofile() {
         Fragment fragmento2 = new ProfileFragment();
         ProfileFragment fragment = (ProfileFragment) getSupportFragmentManager().findFragmentByTag(fragmento2.getClass().getSimpleName());
-        // deixa ficar assim, ja tentei de outras formas, faz ele crahar entao mais vale ficar assim
-        if (fragment != null && fragment.isVisible()) {
-        }else{
-            if (fragmentoActual == FRAGMENTO_LISTA) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.MainMenuFL, fragmento2, fragmento2.getClass().getSimpleName()).commit();
-            }
-        }
     }
 }

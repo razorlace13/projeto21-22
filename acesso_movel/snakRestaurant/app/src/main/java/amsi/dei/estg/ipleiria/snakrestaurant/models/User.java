@@ -2,10 +2,12 @@ package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
 public class User {
 
-    private String username;
-    private int email, numero;
+    private String username,email;
+    private int numero;
 
-    public User(String username, int email, int numero) {
+
+
+    public User(String username, String email, int numero) {
         this.username = username;
         this.email = email;
         this.numero = numero;
@@ -20,11 +22,11 @@ public class User {
         this.username = username;
     }
 
-    public int getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(int email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -34,5 +36,14 @@ public class User {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", numero=" + numero +
+                '}';
     }
 }

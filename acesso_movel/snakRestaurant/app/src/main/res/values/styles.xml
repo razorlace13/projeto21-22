@@ -31,4 +31,7 @@
         <item name="cornerSize">50%</item>
         <item name="color">#00FFFFFF</item>
     </style>
+    <style name="boldStyle">
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

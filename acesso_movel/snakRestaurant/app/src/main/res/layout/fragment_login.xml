@@ -69,7 +69,7 @@
                         android:drawableLeft="@drawable/ic_person"
                         android:drawablePadding="12dp"
                         android:hint="@string/hint_username"
-                        android:text="Claudio Martins"
+                        android:text="teste"
                         android:imeOptions="actionNext"
                         android:minWidth="320dp"
                         android:minHeight="50dp"

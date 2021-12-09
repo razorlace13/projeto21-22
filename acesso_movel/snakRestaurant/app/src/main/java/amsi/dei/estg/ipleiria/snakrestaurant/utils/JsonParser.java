@@ -60,7 +60,7 @@ public class JsonParser {
             JSONObject myObject = new JSONObject(String.valueOf(resposta));
 
                 String username = myObject.getString("username");
-                int email = myObject.getInt("email");
+                String email = myObject.getString("email");
                 int numero = myObject.getInt("numero");
 
             return new User(username, email, numero);

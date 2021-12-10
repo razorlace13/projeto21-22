@@ -9,7 +9,7 @@ public class Connections {
 
     public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi";
 
-    public static final String UrlResgister = UrlBASEAPI + "?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi";
+    public static final String UrlResgister = UrlBASEAPI + "signup/post";
 
 
 }

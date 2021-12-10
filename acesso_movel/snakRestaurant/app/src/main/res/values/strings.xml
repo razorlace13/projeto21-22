@@ -2,6 +2,7 @@
     <string name="app_name">SnakRestaurant</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
+    <string name="hint_nif">Nif</string>
     <string name="button_sign_in">Sign in</string>
     <string name="button_sign_up">Sign up</string>
     <string name="button_send">Send</string>
@@ -36,5 +37,6 @@
     <string name="username_dois_pontos">Username: </string>
     <string name="numero_dois_pontos">Numero: </string>
     <string name="email_dois_pontos">Email: </string>
+    <string name="Register_Message">Registo efetuado com sucesso</string>
 
 </resources>

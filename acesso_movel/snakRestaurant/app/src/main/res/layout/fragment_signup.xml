@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:fillViewport="true"
-        android:fitsSystemWindows="true"
         tools:context="in.insideandroid.template.LoginActivity">
 
         <RelativeLayout
@@ -65,6 +64,7 @@
                         android:minWidth="320dp"
                         android:minHeight="45dp"
                         android:singleLine="true"
+                        android:text="123@gmail.com"
                         tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
                 </androidx.cardview.widget.CardView>
 
@@ -98,7 +98,8 @@
                             android:imeOptions="actionNext"
                             android:minWidth="320dp"
                             android:minHeight="45dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            android:text="teste2" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -130,9 +131,47 @@
                             android:drawablePadding="12dp"
                             android:hint="@string/hint_phone"
                             android:imeOptions="actionNext"
+                            android:inputType="phone"
                             android:minWidth="320dp"
                             android:minHeight="45dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            android:text="999000999" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    app:cardBackgroundColor="@color/colorTextInputBackground"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_nif"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:background="@android:color/transparent"
+                            android:drawableStart="@drawable/ic_phone"
+                            android:drawableLeft="@drawable/ic_phone"
+                            android:drawablePadding="12dp"
+                            android:hint="@string/hint_nif"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:minWidth="320dp"
+                            android:minHeight="45dp"
+                            android:singleLine="true"
+                            android:text="999000999" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -152,7 +191,7 @@
                         app:hintEnabled="false"
                         app:passwordToggleEnabled="true">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_password"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -167,7 +206,8 @@
                             android:imeOptions="actionNext"
                             android:inputType="textPassword"
                             android:minWidth="320dp"
-                            android:minHeight="45dp" />
+                            android:minHeight="45dp"
+                            android:text="password" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -187,7 +227,7 @@
                         app:hintEnabled="false"
                         app:passwordToggleEnabled="true">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_confirm_password"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -202,7 +242,8 @@
                             android:imeOptions="actionDone"
                             android:inputType="textPassword"
                             android:minWidth="320dp"
-                            android:minHeight="45dp" />
+                            android:minHeight="45dp"
+                            android:text="password" />/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
 

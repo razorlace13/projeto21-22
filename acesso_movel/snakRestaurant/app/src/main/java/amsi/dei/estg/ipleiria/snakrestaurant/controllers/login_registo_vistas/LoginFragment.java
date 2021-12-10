@@ -44,6 +44,7 @@ public class LoginFragment extends Fragment implements LoginListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         et_username = view.findViewById(R.id.et_username);
         et_password = view.findViewById(R.id.et_password);
@@ -52,6 +53,15 @@ public class LoginFragment extends Fragment implements LoginListener {
         button_signin.setOnClickListener(mCorkyListener);
         button_signup.setOnClickListener(mCorkyListener);
 
+
+        Bundle bundle = getArguments();
+        
+        if (bundle != null){
+            String username = bundle.getString("username");
+            String password = bundle.getString("password");
+            et_username.setText(username);
+            et_password.setText(password);
+    }
         return view;
     }
 

@@ -1,4 +1,4 @@
-package amsi.dei.estg.ipleiria.snakrestaurant;
+package amsi.dei.estg.ipleiria.snakrestaurant.main_application;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import amsi.dei.estg.ipleiria.snakrestaurant.R;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.MainActivity;
 import amsi.dei.estg.ipleiria.snakrestaurant.main_application.MainMenuActivity;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;

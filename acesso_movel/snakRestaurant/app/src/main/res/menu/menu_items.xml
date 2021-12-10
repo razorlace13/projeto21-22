@@ -17,4 +17,8 @@
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="Carrinho"/>
 
+    <item android:id="@+id/logout"
+    android:icon="@drawable/ic_baseline_logout_24"
+    android:title="Logout"/>
+
 </menu>

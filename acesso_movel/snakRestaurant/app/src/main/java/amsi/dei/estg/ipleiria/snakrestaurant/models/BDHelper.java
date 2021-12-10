@@ -135,4 +135,8 @@ public class BDHelper extends SQLiteOpenHelper {
     private boolean verificarLogin(Login login, ContentValues values) {
         return this.basedados.update("login",values, "token = ?", new String[]{"" + login.getToken()}) > 0;
     }
+
+    public boolean removerUserDB(){
+        return basedados.delete(TABELA4,null, null) == 1;
+    }
 }

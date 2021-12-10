@@ -33,7 +33,7 @@
             android:name=".controllers.login_registo_vistas.MainActivity"
             android:exported="true"/>
         <activity
-            android:name=".PresentationActivity"
+            android:name=".main_application.PresentationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

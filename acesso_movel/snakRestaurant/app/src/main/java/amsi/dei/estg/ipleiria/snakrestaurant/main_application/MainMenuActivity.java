@@ -13,12 +13,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.Products.ProductsFragment;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.MainActivity;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.ProfileFragment;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
 
 
 public class MainMenuActivity extends AppCompatActivity {
 
     BottomNavigationView bottomBar;
+    private BDHelper bd;
 
     public static final int FRAGMENTO_LISTA = 1;
     private static int fragmentoActual = FRAGMENTO_LISTA;
@@ -29,6 +32,7 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         getSupportActionBar().hide();
         bottomBar = findViewById(R.id.bottomBar);
+        bd = new BDHelper(this);
 
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -50,6 +54,11 @@ public class MainMenuActivity extends AppCompatActivity {
 
                         break;
                     case R.id.shop:
+                        break;
+                    case R.id.logout:
+                        bd.removerUserDB();
+                        Intent login = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(login);
                         break;
                 }
                 return true;

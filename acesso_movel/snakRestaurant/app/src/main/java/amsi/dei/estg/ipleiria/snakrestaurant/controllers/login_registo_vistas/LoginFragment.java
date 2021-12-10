@@ -36,7 +36,6 @@ public class LoginFragment extends Fragment implements LoginListener {
         super.onCreate(savedInstanceState);
         LoginSingleton.getInstance(getContext()).setLoginListener(this);
         bd = new BDHelper(getContext());
-
         verificarutilizador();
 
     }

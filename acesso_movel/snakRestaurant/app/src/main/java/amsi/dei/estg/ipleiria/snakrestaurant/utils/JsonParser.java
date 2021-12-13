@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Products;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.Purchases;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.User;
 
 
@@ -44,6 +45,34 @@ public class JsonParser {
         return listaproducts;
     }
 
+    public static ArrayList<Purchases> parserJsonPurchases(JSONArray resposta){
+        //Criar o ArrayList
+        ArrayList<Purchases> listapurchases = new ArrayList<>();
+
+        //percorrer o array de objectos
+
+        try {
+            for(int i = 0; i < resposta.length(); i++){
+                JSONObject purchasesjson = (JSONObject) resposta.get(i);
+
+                long id_purchase = purchasesjson.getLong("id_purchase");
+                int mesa = purchasesjson.getInt("mesa");
+                String data = purchasesjson.getString("data");
+                double valor = purchasesjson.getInt("valor");
+                int id_user = purchasesjson.getInt("id_user");
+
+                Purchases purchases = new Purchases(id_purchase, valor, data, mesa,id_user);
+                listapurchases.add(purchases);
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return listapurchases;
+    }
+
     public static boolean isConnectionInternet(Context contexto){
         ConnectivityManager cm = (ConnectivityManager) contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -59,11 +88,12 @@ public class JsonParser {
 
             JSONObject myObject = new JSONObject(String.valueOf(resposta));
 
+                int id = myObject.getInt("id");
                 String username = myObject.getString("username");
                 String email = myObject.getString("email");
                 int numero = myObject.getInt("numero");
 
-            return new User(username, email, numero);
+            return new User(id,username, email, numero);
 
         } catch (JSONException e) {
             e.printStackTrace();

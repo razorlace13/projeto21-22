@@ -1,55 +1,61 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIProducts;
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIPurchases;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIUser;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlBASEAPI;
 
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.ProfileFragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.listeners.ProductsListener;
+import amsi.dei.estg.ipleiria.snakrestaurant.listeners.PurchasesListener;
 import amsi.dei.estg.ipleiria.snakrestaurant.listeners.UserListener;
 import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
 
  public class SingletonGestor {
 
-    private ArrayList<Purchases> purchases;
 
     private static SingletonGestor instancia = null;
      private static RequestQueue volleyQueue = null;
 
+
+     private BDHelper bd = null;
+     private ArrayList<Products> listaproducts;
+     private ArrayList<Purchases> listapurchases;
+     private User user;
+
+
+     private ProductsListener productslistener;
+     private PurchasesListener purchaseslistener;
+     private UserListener userlistener;
+
     private SingletonGestor(Context contexto) {
         this.listaproducts = new ArrayList<>();
-        this.user = new User(null, null,0);
+        this.listapurchases = new ArrayList<>();
+        this.user = new User(0,null, null,0);
         this.bd = new BDHelper(contexto);
     }
-
-    public ArrayList<Purchases> getPurchases(){
-        return purchases;
-    }
-
-
-    private BDHelper bd = null;
-    private ArrayList<Products> listaproducts;
-    private User user;
-
-
-    private ProductsListener productslistener;
-    private UserListener userlistener;
 
     public static synchronized SingletonGestor getInstance(Context contexto){
         if(instancia == null){
@@ -62,13 +68,21 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
 
     public ArrayList<Products> getListaproductsBD() {
         listaproducts = bd.getAllProducts();
-        System.out.println(listaproducts);
         return listaproducts;
     }
+
+     public ArrayList<Purchases> getListapurchasesBD() {
+         listapurchases = bd.getAllPurchases();
+         return listapurchases;
+     }
 
     public void setProductslistener(ProductsListener productslistener) {
         this.productslistener = productslistener;
     }
+
+     public void setPurchaseslistener(PurchasesListener purchaseslistener) {
+         this.purchaseslistener = purchaseslistener;
+     }
 
      public void setUserlistener(ProfileFragment profileFragment) {
          this.userlistener = profileFragment;
@@ -109,6 +123,44 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
             volleyQueue.add(request);
         }
     }
+
+     public void getAllPurchasesAPI(final Context contexto){
+         String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
+         if(!JsonParser.isConnectionInternet(contexto)){
+             Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
+
+             if(purchaseslistener != null){
+                 purchaseslistener.onRefreshListaPurchases(getListapurchasesBD());
+             }
+         }
+         else{
+             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
+                     UrlAPIPurchases + "?access-token=" + token, null,
+                     new Response.Listener<JSONArray>() {
+                         @Override
+                         public void onResponse(JSONArray response) {
+                             listapurchases = JsonParser.parserJsonPurchases(response);
+
+                             bd.adicionarPurchasesBD(listapurchases);
+
+                             if(purchaseslistener != null){
+                                 purchaseslistener.onRefreshListaPurchases(getListapurchasesBD());
+                             }
+                         }
+                     },
+                     new Response.ErrorListener() {
+                         @Override
+                         public void onErrorResponse(VolleyError error) {
+                             if(purchaseslistener != null){
+                                 purchaseslistener.onRefreshListaPurchases(getListapurchasesBD());
+                             }
+                             Toast.makeText(contexto,"sem acesso api", Toast.LENGTH_SHORT).show();
+                         }
+                     });
+             volleyQueue.add(request);
+         }
+     }
+
     public void getUserAPI(final Context contexto){
          if(!JsonParser.isConnectionInternet(contexto)){
              Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
@@ -135,7 +187,42 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
              volleyQueue.add(request);
          }
      }
-}
+
+     public void updateUserAPI(final Context contexto, int id, User user){
+
+         String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
+         if(!JsonParser.isConnectionInternet(contexto)){
+             Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
+         }
+         else{
+             StringRequest request = new StringRequest(Request.Method.PUT,
+                     UrlAPIUser + "putsomefields/" + id + "?access-token=" + token,
+                     new Response.Listener<String>() {
+                         @Override
+                         public void onResponse(String response) {
+                             userlistener.onPutuser();
+                         }
+                     },
+                     new Response.ErrorListener() {
+                         @Override
+                         public void onErrorResponse(VolleyError error) {
+                             Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+                         }
+                     }){
+                 @Override
+                 protected Map<String, String> getParams() {
+                     Map<String, String> params = new HashMap<String, String>();
+                     params.put("username", user.getUsername());
+                     params.put("email", user.getEmail());
+                     params.put("numero", "" + user.getNumero());
+                     return params;
+                 }
+             };
+             volleyQueue.add(request);
+         }
+     }
+
+ }
 
 
 

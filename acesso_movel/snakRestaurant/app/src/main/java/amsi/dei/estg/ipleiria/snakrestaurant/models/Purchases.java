@@ -4,19 +4,24 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Purchases {
-    private int id_purchase ,id_user, mesa;
-    private LocalDate data;
+    private int id_user, mesa;
+    private String data;
     private double valor;
+    private long id_purchase;
 
-    public Purchases(int id_purchase, int id_user, int mesa, LocalDate data, double valor) {
+    public Purchases(long id_purchase, double valor, String data, int mesa, int id_user) {
         this.id_purchase = id_purchase;
-        this.id_user = id_user;
-        this.mesa = mesa;
-        this.data = data;
         this.valor = valor;
+        this.data = data;
+        this.mesa = mesa;
+        this.id_user = id_user;
     }
 
-    public int getId_purchase() {
+    public void setId_purchase(long id_purchase) {
+        this.id_purchase = id_purchase;
+    }
+
+    public long getId_purchase() {
         return id_purchase;
     }
 
@@ -36,11 +41,11 @@ public class Purchases {
         this.mesa = mesa;
     }
 
-    public LocalDate getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -50,5 +55,16 @@ public class Purchases {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    @Override
+    public String toString() {
+        return "Purchases{" +
+                "id_purchase=" + id_purchase +
+                ", mesa=" + mesa +
+                ", data='" + data + '\'' +
+                ", valor=" + valor +
+                ", id_user=" + id_user +
+                '}';
     }
 }

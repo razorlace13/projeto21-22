@@ -22,4 +22,6 @@ public class Connections {
 
     public static final String UrlAPIUser = UrlBASEAPI + "user/"+ token + "/token?access-token=" + token;
 
+    public static final String UrlAPIPurchases = UrlBASEAPI + "purchases";
+
 }

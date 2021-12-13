@@ -4,5 +4,5 @@ import amsi.dei.estg.ipleiria.snakrestaurant.models.User;
 
 public interface UserListener {
     void onUser(User user);
-
+    void onPutuser();
 }

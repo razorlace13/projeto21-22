@@ -29,8 +29,6 @@ public class ProductsFragment extends Fragment implements ProductsListener {
 
     ImageButton food_btn,drinks_btn;
     public ListView list_products;
-    private ListaProductsAdaptador adaptador;
-    private ArrayList<Products> listaproducts;
     SwipeRefreshLayout swipeRefreshLayout;
     ProgressBar progressBar;
 
@@ -94,11 +92,6 @@ public class ProductsFragment extends Fragment implements ProductsListener {
         if(listaproducts != null){
             list_products.setAdapter(new ListaProductsAdaptador(getContext(), listaproducts));
         }
-    }
-
-    @Override
-    public void onRefreshDetalhes() {
-
     }
 
 }

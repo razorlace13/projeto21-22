@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,11 +24,15 @@ public class RecyclerPurchasesAdaptador extends RecyclerView.Adapter<RecyclerPur
         this.listaPurchases = lista;
     }
 
+    @Override
+    public int getItemCount() {
+        return listaPurchases.size();
+    }
+
     @NonNull
     @Override
     public RecyclerPurchasesAdaptador.ViewHolderPurchases onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.purchases_cartao,parent,false);
-        RecyclerPurchasesAdaptador.ViewHolderPurchases vHolder = new RecyclerPurchasesAdaptador.ViewHolderPurchases(view);
         return new ViewHolderPurchases(view);
     }
 
@@ -37,25 +40,20 @@ public class RecyclerPurchasesAdaptador extends RecyclerView.Adapter<RecyclerPur
     public void onBindViewHolder(@NonNull RecyclerPurchasesAdaptador.ViewHolderPurchases holder, int position) {
         Purchases purchases = listaPurchases.get(position);
         holder.update(purchases);
-        //perguntar
     }
 
-    @Override
-    public int getItemCount() {
-        return listaPurchases.size();
-    }
 
     public class ViewHolderPurchases extends RecyclerView.ViewHolder {
         private TextView tv_Data, tv_Mesa, tv_Valor;
-        public ViewHolderPurchases(@NonNull View itemView) {
+        public ViewHolderPurchases(View itemView) {
             super(itemView);
-            tv_Data = itemView.findViewById(R.id.tv_data);
-            tv_Mesa = itemView.findViewById(R.id.tv_mesa);
-            tv_Valor = itemView.findViewById(R.id.tv_valor);
+            tv_Data = itemView.findViewById(R.id.tv_data_cartao);
+            tv_Mesa = itemView.findViewById(R.id.tv_mesa_cartao);
+            tv_Valor = itemView.findViewById(R.id.tv_valor_cartao);
         }
 
         public void update(Purchases purchases){
-            tv_Data.setText("" + purchases.getData());
+            tv_Data.setText(purchases.getData());
             tv_Mesa.setText("" + purchases.getMesa());
             tv_Valor.setText("" + purchases.getValor());
         }

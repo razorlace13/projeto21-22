@@ -16,6 +16,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.controllers.Products.ProductsFragme
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.MainActivity;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.ProfileFragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.LoginSingleton;
 
 
 public class MainMenuActivity extends AppCompatActivity {

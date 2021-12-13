@@ -101,6 +101,7 @@ $config = [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total' ,
+                        'GET purchasesuser/{id}' => 'purchasesuser',
                         'GET set/{limit}' => 'set',
 
                         'POST post' => 'post',
@@ -122,6 +123,7 @@ $config = [
 
                         'POST post' => 'post',
                         'PUT put/{id}'=>'put',
+                        'PUT putsomefields/{id}'=>'putsomefields',
                         'DELETE  delete/{id}' => 'delete'
                     ],
                     'tokens' => [ '{id}'    => '<id:\d+>', '{limit}' => '<limit:\d+>',"{acess}" => "<acess>", ],

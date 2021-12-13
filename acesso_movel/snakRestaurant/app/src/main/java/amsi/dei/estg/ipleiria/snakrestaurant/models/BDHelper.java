@@ -12,12 +12,12 @@ import java.util.LinkedList;
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "projeto21_22";
-    private static final int VERSAO_BD = 2;
+    private static final int VERSAO_BD = 7;
     //dados da tabela
     private static final String TABELA = "products", ID_PRODUCT = "id_product",NAME = "name",PRICE = "price",ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo",ID_PEDIDO = "id_pedido ",QUANTIDADE = "quantidade";
     private static final String TABELA3 = "purchases", ID_PURCHASES = "id_purchase", VALOR = "valor", DATA = "data", MESA = "mesa", ID_USER = "id_user";
-    private static final String TABELA4 = "login", TOKEN = "token", USERNAME = "username", EMAIL = "email";
+    private static final String TABELA4 = "login", ID = "id", TOKEN = "token", USERNAME = "username", EMAIL = "email";
 
     private final SQLiteDatabase basedados;
 
@@ -43,14 +43,15 @@ public class BDHelper extends SQLiteOpenHelper {
 
         db.execSQL(sqlTabela);
         sqlTabela = "CREATE TABLE " + TABELA3 + "(" +
-                ID_PURCHASES + " INTEGER PRIMARY KEY, " +
+                ID_PURCHASES + " INT NOT NULL, " +
                 VALOR + " INTEGER NOT NULL, " +
-                DATA + " INTEGER NOT NULL, " +
+                DATA + " STRING NOT NULL, " +
                 MESA + " INTEGER NOT NULL, " +
                 ID_USER + " INTEGER NOT NULL)";
 
         db.execSQL(sqlTabela);
         sqlTabela = "CREATE TABLE " + TABELA4 + "(" +
+                ID + " INT NOT NULL, " +
                 TOKEN + " TEXT NOT NULL, " +
                 USERNAME + " VARCHAR(100) NOT NULL, " +
                 EMAIL + " VARCHAR(100) NOT NULL)";
@@ -61,6 +62,9 @@ public class BDHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABELA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELA1);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELA3);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELA4);
         this.onCreate(db);
     }
 
@@ -105,15 +109,58 @@ public class BDHelper extends SQLiteOpenHelper {
         }
     }
 
+    public ArrayList<Purchases> getAllPurchases(){
+        ArrayList<Purchases> lista = new ArrayList<>();
+
+        Cursor cursor = this.basedados.query(TABELA3,
+                new String [] {ID_PURCHASES, VALOR, DATA, MESA,ID_USER},
+                null, null, null, null, null, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                Purchases purchases = new Purchases (cursor.getInt(0), cursor.getDouble(1),
+                        cursor.getString(3),cursor.getInt(2),  cursor.getInt(4));
+
+                lista.add(purchases);
+
+            }while(cursor.moveToNext());
+        }
+        return lista;
+    }
+
+    //para adicionar depois de ir ao adicionarProductsBD de baixo
+    public void adicionarPurchasesBD(Purchases purchases){
+        ContentValues valores = new ContentValues();
+
+        valores.put(ID_PURCHASES, purchases.getId_purchase());
+        valores.put(VALOR, purchases.getValor());
+        valores.put(DATA, purchases.getData());
+        valores.put(MESA, purchases.getMesa());
+        valores.put(ID_USER, purchases.getId_user());
+
+        long id = basedados.insert(TABELA3,null, valores);
+
+        if (id != -1){
+            purchases.setId_purchase(id);
+        }
+    }
+    public void adicionarPurchasesBD(ArrayList<Purchases> purchases){
+        basedados.delete(TABELA,ID_PRODUCT, null);
+        for (Purchases p:purchases) {
+            adicionarPurchasesBD(p);
+        }
+    }
+
     public LinkedList<Login> getUser() {
         LinkedList<Login> login = new LinkedList<>();
         Cursor cursor = this.basedados.rawQuery("SELECT * FROM login",
                 null);
         if (cursor.moveToFirst()) {
             do {
-                login.add(new Login(cursor.getString(0),
+                login.add(new Login(cursor.getInt(0),
                         cursor.getString(1),
-                        cursor.getString(2)
+                        cursor.getString(2),
+                        cursor.getString(3)
                 ));
             } while (cursor.moveToNext());
         }
@@ -122,6 +169,7 @@ public class BDHelper extends SQLiteOpenHelper {
 
     public void inserirDadosLogin(Login login) {
         ContentValues values = new ContentValues();
+        values.put("id", login.getId());
         values.put("token", login.getToken());
         values.put("username", login.getUsername());
         values.put("email", login.getEmail());

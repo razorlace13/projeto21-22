@@ -22,6 +22,7 @@ class LoginController extends ActiveController
         if ($loginmodel->load($login) && $loginmodel->login()) {
             $user = Yii::$app->user->getIdentity();
             return [
+                'id'       => $user ->id,
                 'username' => $user ->username,
                 'email'    => $user ->email,
                 'authkey'  => Yii::$app->user->getIdentity()->getAuthKey()];

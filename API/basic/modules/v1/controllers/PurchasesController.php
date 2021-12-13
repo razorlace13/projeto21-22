@@ -101,14 +101,12 @@ class PurchasesController extends ActiveController
         throw new \yii\web\NotFoundHttpException("Client id not found!");
     }
 
-    public function actionCarsuser()
+    public function actionPurchasesuser($id)
     {
-        if (\Yii::$app->user->can('frontendCrudVehicle')) {
-            $CarsModel = new $this->modelClass;
-            $recs = $CarsModel::find()->where('userId = ' . \Yii::$app->user->getId())->all();
+            $Purchasesmodel = new $this->modelClass;
+            $recs = $Purchasesmodel::find()->where('id_user = ' .$id)->all();
             return $recs;
-        } else {
-            return self::noPermission;
-        }
+
     }
+
 }

@@ -70,7 +70,7 @@ class UserController extends ActiveController
         $Usermodel = new $this -> modelClass;
         $sql = "SELECT * FROM user WHERE auth_key = '$acess'";
         $rec = $Usermodel::findBySql($sql) ->one();
-        return ['username' => $rec -> username,'email' => $rec -> email,'numero' => $rec -> numero,  ];
+        return ['id' => $rec -> id,'username' => $rec -> username,'email' => $rec -> email,'numero' => $rec -> numero,  ];
     }
 
     //http://localhost:8888/v1/user/set/3
@@ -135,6 +135,24 @@ class UserController extends ActiveController
         $rec-> updated_at = $updated_at;
         $rec-> numero = $numero;
         $rec-> nif = $nif;
+
+        $rec->save(false);
+        return ['SaveError1' => $rec];
+        //throw new \yii\web\NotFoundHttpException("Client id not found!");
+    }
+
+    public function actionPutsomefields($id){
+
+        $username=\Yii::$app -> request -> post('username');
+        $email=\Yii::$app -> request -> post('email');
+        $numero=\Yii::$app -> request -> post('numero');
+
+        $Usermodel = new $this->modelClass;
+        $rec = $Usermodel::find()->where('id = '.$id)->one();
+
+        $rec-> username = $username;
+        $rec-> email = $email;
+        $rec-> numero = $numero;
 
         $rec->save(false);
         return ['SaveError1' => $rec];

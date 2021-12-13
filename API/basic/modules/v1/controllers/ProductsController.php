@@ -12,25 +12,6 @@ class ProductsController extends ActiveController
     public $modelClass = 'app\models\Products';
     const noPermission = 'Access denied';
 
-    public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => QueryParamAuth::className(),
-        ];
-
-        return $behaviors;
-    }
-    public function auth($token) {
-
-        $user = User::findIdentityByAccessToken($token);
-        if ($user != null)
-        {
-            return $user;
-        } return null;
-
-
-    }
     public function actionIndex()
     {
         return $this->render('index');

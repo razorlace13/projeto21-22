@@ -8,6 +8,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
@@ -33,6 +37,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -132,18 +138,22 @@ public class SignupFragment extends Fragment implements RegisterListener {
             Toast.makeText(getContext(), "A confirmação da password não pode ser vazio!!", Toast.LENGTH_SHORT).show();
         }
         else if (str_phone.length() < 9){
-            //Toast.makeText(getContext(), "Numero de telefone invalido!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Numero de telefone invalido!", Toast.LENGTH_SHORT).show();
             et_phone.setTextColor(Color.RED);
         }
         else if (str_nif.length() < 9){
-            //Toast.makeText(getContext(), "Nif invalido!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Nif invalido!", Toast.LENGTH_SHORT).show();
             et_nif.setTextColor(Color.RED);
         }
         else if (!str_password.equals(str_confirm_password)){
             Toast.makeText(getContext(), "Confirmação da password falhou!", Toast.LENGTH_SHORT).show();
             et_password.setTextColor(Color.RED);
             et_confirm_password.setTextColor(Color.RED);
-        }else{
+        }
+        else if (!isValidPassword(str_password) || !isValidPassword(str_confirm_password) ){
+            Toast.makeText(getContext(), "password não cumpre os requesitos!", Toast.LENGTH_SHORT).show();
+        }
+        else{
             et_username.setTextColor(Color.GREEN);
             et_phone.setTextColor(Color.GREEN);
             et_nif.setTextColor(Color.GREEN);
@@ -158,6 +168,11 @@ public class SignupFragment extends Fragment implements RegisterListener {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_frame, fragmento);
         fragmentTransaction.commit();*/
+    }
+
+    public static boolean isValidPassword(String password) {
+        Matcher matcher = Pattern.compile("((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{4,20})").matcher(password);
+        return matcher.matches();
     }
 
     @Override

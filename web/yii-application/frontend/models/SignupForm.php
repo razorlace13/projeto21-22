@@ -45,7 +45,7 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
-
+            ['password','match', 'pattern' => '/^.*(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/', 'message' => 'New password must contain at least one lower and upper case character and a digit.'],
 
         ];
     }

@@ -1,5 +1,7 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIProducts;
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIUser;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlBASEAPI;
 
 import android.content.Context;
@@ -46,13 +48,6 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
     private User user;
 
 
-
-    public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi";
-
-
-    public static final String UrlAPIUser = UrlBASEAPI + "user/";
-
-
     private ProductsListener productslistener;
     private UserListener userlistener;
 
@@ -89,7 +84,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
         }
         else{
             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                    UrlAPIProducts + LoginSingleton.getInstance(contexto).getLogin().getToken(), null,
+                    UrlAPIProducts, null,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
@@ -121,7 +116,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
          else{
              String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
              JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                     UrlAPIUser + token + "/token?access-token=" + token,
+                     UrlAPIUser,
                      null,
                      new Response.Listener<JSONObject>() {
                  @Override

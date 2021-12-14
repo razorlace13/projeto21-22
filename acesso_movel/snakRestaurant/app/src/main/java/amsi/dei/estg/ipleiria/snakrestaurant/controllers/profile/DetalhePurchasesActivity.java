@@ -1,6 +1,7 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -20,6 +21,7 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
 
     private RecyclerPurchasesAdaptador adaptador;
     private RecyclerView Rv_purchases;
+    private RecyclerView.LayoutManager layoutManager;
     SwipeRefreshLayout swipeRefreshLayout;
     ProgressBar progressBar;
 
@@ -27,9 +29,13 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhe_purchases);
-        Rv_purchases = findViewById(R.id.Rv_purchases);
-        progressBar = findViewById(R.id.Pb_purchases);
         getPurchases();
+        Rv_purchases = findViewById(R.id.Rv_purchases);
+        layoutManager = new LinearLayoutManager(this);
+        Rv_purchases.setLayoutManager(layoutManager);
+        adaptador = new RecyclerPurchasesAdaptador(this, SingletonGestor.getInstance(this).getListapurchasesBD());
+        Rv_purchases.setAdapter(adaptador);
+        progressBar = findViewById(R.id.Pb_purchases);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout_Purchases);
         swipeRefreshLayout.setColorScheme(R.color.md_green_500);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

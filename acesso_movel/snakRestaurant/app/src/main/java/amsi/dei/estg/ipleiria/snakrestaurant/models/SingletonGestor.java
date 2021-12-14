@@ -135,12 +135,11 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
          }
          else{
              JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                     UrlAPIPurchases + "?access-token=" + token, null,
+                     UrlAPIPurchases, null,
                      new Response.Listener<JSONArray>() {
                          @Override
                          public void onResponse(JSONArray response) {
                              listapurchases = JsonParser.parserJsonPurchases(response);
-
                              bd.adicionarPurchasesBD(listapurchases);
 
                              if(purchaseslistener != null){

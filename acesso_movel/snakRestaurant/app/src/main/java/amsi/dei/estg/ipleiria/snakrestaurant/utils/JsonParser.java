@@ -58,7 +58,7 @@ public class JsonParser {
                 long id_purchase = purchasesjson.getLong("id_purchase");
                 int mesa = purchasesjson.getInt("mesa");
                 String data = purchasesjson.getString("data");
-                double valor = purchasesjson.getInt("valor");
+                double valor = purchasesjson.getDouble("valor");
                 int id_user = purchasesjson.getInt("id_user");
 
                 Purchases purchases = new Purchases(id_purchase, valor, data, mesa,id_user);

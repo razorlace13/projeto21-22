@@ -104,7 +104,7 @@ class PurchasesController extends ActiveController
     public function actionPurchasesuser($id)
     {
             $Purchasesmodel = new $this->modelClass;
-            $recs = $Purchasesmodel::find()->where('id_user = ' .$id)->all();
+            $recs = $Purchasesmodel::find()->where('id_user = ' . $id)->all();
             return $recs;
 
     }

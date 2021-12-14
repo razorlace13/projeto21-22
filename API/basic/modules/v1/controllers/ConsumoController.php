@@ -94,4 +94,12 @@ class ConsumoController extends ActiveController
             return ['DelError' => $ret];
         throw new \yii\web\NotFoundHttpException("Client id not found!");
     }
+
+    public function actionConsumopedido($id)
+    {
+        $Consumosmodel = new $this->modelClass;
+        $recs = $Consumosmodel::find()->where('id_pedido = ' . $id)->all();
+        return $recs;
+
+    }
 }

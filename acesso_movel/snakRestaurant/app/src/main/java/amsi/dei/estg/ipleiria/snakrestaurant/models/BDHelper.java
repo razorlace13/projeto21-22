@@ -113,7 +113,7 @@ public class BDHelper extends SQLiteOpenHelper {
         ArrayList<Purchases> lista = new ArrayList<>();
 
         Cursor cursor = this.basedados.query(TABELA3,
-                new String [] {ID_PURCHASES, VALOR, DATA, MESA,ID_USER},
+                new String [] {ID_PURCHASES, VALOR, MESA, DATA,ID_USER},
                 null, null, null, null, null, null);
 
         if(cursor.moveToFirst()){
@@ -132,6 +132,8 @@ public class BDHelper extends SQLiteOpenHelper {
     public void adicionarPurchasesBD(Purchases purchases){
         ContentValues valores = new ContentValues();
 
+        System.out.println(valores);
+
         valores.put(ID_PURCHASES, purchases.getId_purchase());
         valores.put(VALOR, purchases.getValor());
         valores.put(DATA, purchases.getData());
@@ -145,7 +147,7 @@ public class BDHelper extends SQLiteOpenHelper {
         }
     }
     public void adicionarPurchasesBD(ArrayList<Purchases> purchases){
-        basedados.delete(TABELA,ID_PRODUCT, null);
+        basedados.delete(TABELA3,ID_PURCHASES, null);
         for (Purchases p:purchases) {
             adicionarPurchasesBD(p);
         }

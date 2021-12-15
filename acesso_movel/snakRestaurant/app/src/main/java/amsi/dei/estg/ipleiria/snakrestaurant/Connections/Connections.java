@@ -15,6 +15,7 @@ public class Connections {
 
     private static Context contexto;
     private static String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
+    private static int id = LoginSingleton.getInstance(contexto).getLogin().getId();
 
     public static final String UrlAPIProducts = UrlBASEAPI + "products?access-token="+token;
 
@@ -22,6 +23,6 @@ public class Connections {
 
     public static final String UrlAPIUser = UrlBASEAPI + "user/"+ token + "/token?access-token=" + token;
 
-    public static final String UrlAPIPurchases = UrlBASEAPI + "purchases" + "?access-token=" + token;
+    public static final String UrlAPIPurchases = UrlBASEAPI + "purchases" + "/purchasesuser/" + id + "?access-token=" + token;
 
 }

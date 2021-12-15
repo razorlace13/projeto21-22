@@ -98,7 +98,9 @@ class ConsumoController extends ActiveController
     public function actionConsumopedido($id)
     {
         $Consumosmodel = new $this->modelClass;
-        $recs = $Consumosmodel::find()->where('id_pedido = ' . $id)->all();
+        $recs = $Consumosmodel::find()
+            ->where('id_pedido = ' . $id)
+            ->all();
         return $recs;
 
     }

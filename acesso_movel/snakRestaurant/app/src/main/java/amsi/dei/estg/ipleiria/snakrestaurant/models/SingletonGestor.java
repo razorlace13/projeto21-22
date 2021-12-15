@@ -43,6 +43,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
      private BDHelper bd = null;
      private ArrayList<Products> listaproducts;
      private ArrayList<Purchases> listapurchases;
+     private Purchases purchases;
      private User user;
 
 
@@ -74,6 +75,11 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
      public ArrayList<Purchases> getListapurchasesBD() {
          listapurchases = bd.getAllPurchases();
          return listapurchases;
+     }
+
+     public Purchases getOnepurchasesBD(int position) {
+         purchases = bd.getOnePurchases(position);
+         return purchases;
      }
 
     public void setProductslistener(ProductsListener productslistener) {

@@ -128,6 +128,25 @@ public class BDHelper extends SQLiteOpenHelper {
         return lista;
     }
 
+    public Purchases getOnePurchases(int position){
+        int count= 0;
+        Cursor cursor = this.basedados.query(TABELA3,
+                new String [] {ID_PURCHASES, VALOR, MESA, DATA,ID_USER},
+                null, null, null, null, null, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                if (count == position) {
+                    Purchases purchases = new Purchases(cursor.getInt(0), cursor.getDouble(1),
+                            cursor.getString(3), cursor.getInt(2), cursor.getInt(4));
+                    return purchases;
+                }
+                count++;
+            }while(cursor.moveToNext());
+        }
+        return null;
+    }
+
     //para adicionar depois de ir ao adicionarProductsBD de baixo
     public void adicionarPurchasesBD(Purchases purchases){
         ContentValues valores = new ContentValues();

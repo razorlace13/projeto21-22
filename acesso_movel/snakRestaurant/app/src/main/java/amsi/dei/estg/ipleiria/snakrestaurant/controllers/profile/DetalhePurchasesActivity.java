@@ -14,10 +14,11 @@ import java.util.ArrayList;
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
 import amsi.dei.estg.ipleiria.snakrestaurant.adaptadores.RecyclerPurchasesAdaptador;
 import amsi.dei.estg.ipleiria.snakrestaurant.listeners.PurchasesListener;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Purchases;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.SingletonGestor;
 
-public class DetalhePurchasesActivity extends AppCompatActivity implements PurchasesListener {
+public class DetalhePurchasesActivity extends AppCompatActivity implements PurchasesListener, RecyclerPurchasesAdaptador.OnItemListener{
 
     private RecyclerPurchasesAdaptador adaptador;
     private RecyclerView Rv_purchases;
@@ -33,7 +34,7 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
         Rv_purchases = findViewById(R.id.Rv_purchases);
         layoutManager = new LinearLayoutManager(this);
         Rv_purchases.setLayoutManager(layoutManager);
-        adaptador = new RecyclerPurchasesAdaptador(this, SingletonGestor.getInstance(this).getListapurchasesBD());
+        adaptador = new RecyclerPurchasesAdaptador(this,SingletonGestor.getInstance(this).getListapurchasesBD(), this);
         Rv_purchases.setAdapter(adaptador);
         progressBar = findViewById(R.id.Pb_purchases);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout_Purchases);
@@ -45,7 +46,6 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
     }
 
     private void getPurchases() {
@@ -57,7 +57,13 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
     public void onRefreshListaPurchases(ArrayList<Purchases> listapurchases) {
         progressBar.setVisibility(View.INVISIBLE);
         if(listapurchases != null){
-            Rv_purchases.setAdapter(new RecyclerPurchasesAdaptador(this, listapurchases));
+            Rv_purchases.setAdapter(new RecyclerPurchasesAdaptador(this, listapurchases, this));
         }
+    }
+
+
+    @Override
+    public void onItemClick(int position) {
+        Purchases purchases = SingletonGestor.getInstance(this).getOnepurchasesBD(position);
     }
 }

@@ -47,10 +47,11 @@
 
                 <ImageButton
                     android:id="@+id/drinks_btn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="137dp"
+                    android:layout_height="126dp"
+                    android:backgroundTint="#3C3C3B"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/copo"
+                    android:src="@drawable/drink_btn"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/food_btn"
@@ -59,10 +60,11 @@
 
                 <ImageButton
                     android:id="@+id/food_btn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="137dp"
+                    android:layout_height="127dp"
+                    android:backgroundTint="#3C3C3B"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/comida"
+                    android:src="@drawable/food_btn"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/drinks_btn"
                     app:layout_constraintStart_toStartOf="parent"

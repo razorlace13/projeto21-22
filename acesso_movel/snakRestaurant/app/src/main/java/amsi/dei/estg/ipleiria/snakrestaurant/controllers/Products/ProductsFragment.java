@@ -55,6 +55,16 @@ public class ProductsFragment extends Fragment implements ProductsListener {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Escolheu comida"  , Toast.LENGTH_SHORT).show();
+
+                ArrayList<Products> listaFiltro = new ArrayList<>();
+
+                for(Products livro: SingletonGestor.getInstance(getContext()).getListaproductsBD()){
+                    if(livro.getId_category() == 1){
+                        listaFiltro.add(livro);
+                    }
+                }
+                list_products.setAdapter(new ListaProductsAdaptador(getContext(), listaFiltro));
+
             }
         });
         drinks_btn = view.findViewById(R.id.drinks_btn);
@@ -62,6 +72,15 @@ public class ProductsFragment extends Fragment implements ProductsListener {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Escolheu bebidas"  , Toast.LENGTH_SHORT).show();
+
+                ArrayList<Products> listaFiltro = new ArrayList<>();
+
+                for(Products livro: SingletonGestor.getInstance(getContext()).getListaproductsBD()){
+                    if(livro.getId_category() == 2){
+                        listaFiltro.add(livro);
+                    }
+                }
+                list_products.setAdapter(new ListaProductsAdaptador(getContext(), listaFiltro));
             }
         });
 

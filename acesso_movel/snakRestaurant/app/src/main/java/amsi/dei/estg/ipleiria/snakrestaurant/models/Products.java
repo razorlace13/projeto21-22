@@ -5,7 +5,7 @@ public class Products {
     private long id_product ;
     private String name;
     private int price;
-    private int id_category;
+    public int id_category;
     private int capa;
 
     public Products(long id_product, String name, int price, int id_category) {

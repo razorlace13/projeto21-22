@@ -13,8 +13,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.Products.ProductsFragment;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.HomeFragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.MainActivity;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.ProfileFragment;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.shopping_cart.shopping_cart_Fragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.LoginSingleton;
 
@@ -44,7 +46,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     case R.id.home:
                         //fragmento = new EstaticoFragment();
                         //setTitle(item.getTitle());
-
+                        mostrahome();
                         break;
                     case R.id.products:
                        mostraprodutos();
@@ -55,6 +57,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
                         break;
                     case R.id.shop:
+                        mostracarrinho();
                         break;
                     case R.id.logout:
                         bd.removerUserDB();
@@ -79,4 +82,18 @@ public class MainMenuActivity extends AppCompatActivity {
         ProfileFragment fragment = (ProfileFragment) getSupportFragmentManager().findFragmentByTag(fragmento2.getClass().getSimpleName());
                 getSupportFragmentManager().beginTransaction().replace(R.id.MainMenuFL, fragmento2, fragmento2.getClass().getSimpleName()).commit();
     }
+    private void mostracarrinho(){
+        Fragment fragmento2 = new shopping_cart_Fragment();
+        shopping_cart_Fragment fragment = (shopping_cart_Fragment) getSupportFragmentManager().findFragmentByTag(fragmento2.getClass().getSimpleName());
+        getSupportFragmentManager().beginTransaction().replace(R.id.MainMenuFL, fragmento2, fragmento2.getClass().getSimpleName()).commit();
+
+    }
+    private void mostrahome(){
+        Fragment fragmento2 = new HomeFragment();
+        HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(fragmento2.getClass().getSimpleName());
+        getSupportFragmentManager().beginTransaction().replace(R.id.MainMenuFL, fragmento2, fragmento2.getClass().getSimpleName()).commit();
+
+    }
+
+
 }

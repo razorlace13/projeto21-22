@@ -87,6 +87,25 @@ public class BDHelper extends SQLiteOpenHelper {
         return lista;
     }
 
+    public ArrayList<Consumo> getAllConsumo(int id){
+        ArrayList<Consumo> lista = new ArrayList<>();
+
+        Cursor cursor = this.basedados.query(TABELA,
+                new String [] {ID_PRODUCT, NAME, PRICE, ID_CATEGORY},
+                null, null, null, null, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                Products products = new Products (cursor.getInt(0), cursor.getString(1),
+                        cursor.getInt(2), cursor.getInt(3));
+
+                lista.add(products);
+
+            }while(cursor.moveToNext());
+        }
+        return lista;
+    }
+
     //para adicionar depois de ir ao adicionarProductsBD de baixo
     public void adicionarProductsBD(Products products){
         ContentValues valores = new ContentValues();

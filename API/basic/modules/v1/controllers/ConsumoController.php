@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use app\models\Consumo;
 use app\models\User;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
@@ -97,9 +98,12 @@ class ConsumoController extends ActiveController
 
     public function actionConsumopedido($id)
     {
-        $Consumosmodel = new $this->modelClass;
-        $recs = $Consumosmodel::find()
-            ->where('id_pedido = ' . $id)
+
+        $recs = (new \yii\db\Query())
+            ->select(['consumo.id_consumo','consumo.id_pedido', 'products.name','consumo.quantidade'])
+            ->from('consumo')
+            ->innerjoin('products',"products.id_product = consumo.id_product")
+            ->where(['id_pedido' => 4])
             ->all();
         return $recs;
 

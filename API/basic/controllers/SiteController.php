@@ -2,8 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\Consumo;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -123,6 +125,20 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        /*$recs = Consumo::find()
+            ->select('consumo.*, products.name')
+            ->innerjoin('products',"products.id_product = consumo.id_product")
+            ->where('id_pedido = 4')
+            ->all();*/
+        $recs = (new \yii\db\Query())
+            ->select(['consumo.*', 'products.name'])
+            ->from('consumo')
+            ->innerjoin('products',"products.id_product = consumo.id_product")
+            ->where(['id_pedido' => 4])
+            ->all();
+        VarDumper::dump($recs);
+        return $this->render('about', [
+            'model' => $recs,
+        ]);
     }
 }

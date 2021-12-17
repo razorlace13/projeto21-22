@@ -12,11 +12,13 @@
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable-v24/item_selector.xml" value="0.2703125" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable/buttonshape.xml" value="0.26614583333333336" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable/dynamic_rv_bg.xml" value="0.2703125" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable/ic_baseline_ballot_24.xml" value="0.26614583333333336" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable/ic_menu_camera.xml" value="0.2703125" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable/static_rv_bg.xml" value="0.2703125" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable/static_rv_selected.xml" value="0.2703125" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable/static_rv_selected_bg.xml" value="0.2703125" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/Consumo_cartao.xml" value="0.11730072463768115" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/activity_detalhe_produto.xml" value="0.25416666666666665" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/activity_detalhe_purchases.xml" value="0.1933876811594203" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/activity_list_pagamentos.xml" value="0.2" />
@@ -35,10 +37,11 @@
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/dynamic_rv_item_layout.xml" value="0.21965579710144928" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/dynamic_rv_progress_bar.xml" value="0.21965579710144928" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_detalhes_purchases.xml" value="0.25" />
-        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_products.xml" value="0.264" />
-        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_profile.xml" value="0.2396694214876033" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_profile.xml" value="0.176" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_signup.xml" value="0.25416666666666665" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/item_lista_consumo.xml" value="0.23809523809523808" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/item_lista_products.xml" value="0.264" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/products_choise.xml" value="0.22916666666666666" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/productschoise.xml" value="0.152" />

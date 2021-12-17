@@ -67,7 +67,7 @@ public class ListaProductsAdaptador extends BaseAdapter {
         private ImageView ivCapa;
 
         public ViewHolderProducts(View view) {
-            tvName = view.findViewById(R.id.tvName);
+            tvName = view.findViewById(R.id.tv_product);
             tvPrice = view.findViewById(R.id.tvPrice);
             ivCapa = view.findViewById(R.id.ivCapa);
             //tvid_category = view.findViewById(R.id.tvid_category);

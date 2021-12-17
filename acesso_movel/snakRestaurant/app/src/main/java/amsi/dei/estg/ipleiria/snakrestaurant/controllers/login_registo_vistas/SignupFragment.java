@@ -178,17 +178,10 @@ public class SignupFragment extends Fragment implements RegisterListener {
     @Override
     public void onValidateRegister() {
 
-        Bundle bundle = new Bundle();
-        bundle.putString("username",str_username);
-        bundle.putString("password",str_password);
-
         Toast.makeText(getContext(), R.string.Register_Message, Toast.LENGTH_SHORT).show();
-        Fragment fragmento = new LoginFragment();
+        Fragment fragmento = LoginFragment.newInstance(et_username.getText().toString(),et_password.getText().toString());
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        LoginFragment loginFragement = new LoginFragment();
-        loginFragement.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.fragment_frame, fragmento);
         fragmentTransaction.commit();

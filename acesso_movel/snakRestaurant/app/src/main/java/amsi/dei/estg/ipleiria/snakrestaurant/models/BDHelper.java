@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class BDHelper extends SQLiteOpenHelper {
 
@@ -18,8 +19,8 @@ public class BDHelper extends SQLiteOpenHelper {
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo",ID_PEDIDO = "id_pedido ",QUANTIDADE = "quantidade";
     private static final String TABELA3 = "purchases", ID_PURCHASES = "id_purchase", VALOR = "valor", DATA = "data", MESA = "mesa", ID_USER = "id_user";
     private static final String TABELA4 = "login", ID = "id", TOKEN = "token", USERNAME = "username", EMAIL = "email";
-    private static final String TABELA5 = "shopping_cart", ID_PRODUCT_SHOPPING = "id_product",NAME_SHOPPING = "name",PRICE_SHOPPING = "price",ID_CATEGORY_SHOPPING = "id_category";
-    private final SQLiteDatabase basedados;
+    private static final String TABELA5 = "shopping_cart",ID_SHOPPING= "id_product_shopping", ID_PRODUCT_SHOPPING = "id_product_shopping",NAME_SHOPPING = "name_shopping",PRICE_SHOPPING = "price_shopping",ID_CATEGORY_SHOPPING = "id_category_shopping";
+    private SQLiteDatabase basedados;
 
     public BDHelper(Context context) {
         super(context, NOME_BD, null, VERSAO_BD);
@@ -58,10 +59,11 @@ public class BDHelper extends SQLiteOpenHelper {
 
         db.execSQL(sqlTabela);
          sqlTabela = "CREATE TABLE " + TABELA5 + "(" +
-                ID_PRODUCT + " INTEGER PRIMARY KEY, " +
-                NAME + " TEXT NOT NULL, " +
-                PRICE + " INTEGER NOT NULL, " +
-                ID_CATEGORY + " INTEGER NOT NULL," +
+                 ID_SHOPPING + " INTEGER PRIMARY KEY, " +
+                 ID_PRODUCT_SHOPPING + " INTEGER NOT NULL," +
+                 NAME_SHOPPING + " TEXT NOT NULL, " +
+                 PRICE_SHOPPING + " INTEGER NOT NULL, " +
+                 ID_CATEGORY_SHOPPING + " INTEGER NOT NULL," +
                  QUANTIDADE + " INTEGER NOT NULL)";
 
         db.execSQL(sqlTabela);
@@ -235,5 +237,29 @@ public class BDHelper extends SQLiteOpenHelper {
 
     public boolean removerUserDB(){
         return basedados.delete(TABELA4,null, null) == 1;
+    }
+
+
+
+    public List<Shopping_card> getAllCard() {
+        String sql = "select * from " + TABELA5;
+        basedados = this.getReadableDatabase();
+        List<Shopping_card> store = new ArrayList<>();
+
+        Cursor cursor = basedados.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                int id_product_shopping = Integer.parseInt(String.valueOf(cursor.getInt(0)));
+                int id_shopping = Integer.parseInt(String.valueOf(cursor.getInt(1)));
+                String name_shopping = cursor.getString(2);
+                int price_shopping = Integer.parseInt(String.valueOf(cursor.getInt(3)));
+                int id_category_shopping = Integer.parseInt(String.valueOf(cursor.getInt(4)));
+                int quantidade_shopping = Integer.parseInt(String.valueOf(cursor.getInt(4)));
+
+                store.add(new Shopping_card(id_shopping,id_product_shopping, name_shopping, price_shopping,id_category_shopping,quantidade_shopping));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return store;
     }
 }

@@ -45,33 +45,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="114dp">
 
-                <ImageButton
-                    android:id="@+id/drinks_btn"
-                    android:layout_width="137dp"
-                    android:layout_height="126dp"
-                    android:backgroundTint="#3C3C3B"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/drink_btn"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/food_btn"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-                <ImageButton
+                <Button
                     android:id="@+id/food_btn"
-                    android:layout_width="137dp"
-                    android:layout_height="127dp"
-                    android:backgroundTint="#3C3C3B"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/food_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Food"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/drinks_btn"
+                    app:layout_constraintEnd_toStartOf="@+id/drink_btn"
+                    app:layout_constraintHorizontal_bias="0.91"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/drink_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="112dp"
+                    android:text="Drinks"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="406dp"
+                    android:layout_height="53dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.448"
-                    tools:ignore="SpeakableTextPresentCheck"
-                    tools:visibility="visible" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

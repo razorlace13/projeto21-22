@@ -36,8 +36,21 @@ public class LoginFragment extends Fragment implements LoginListener {
         super.onCreate(savedInstanceState);
         LoginSingleton.getInstance(getContext()).setLoginListener(this);
         bd = new BDHelper(getContext());
+        if(getArguments() != null) {
+            user = getArguments().getString("username");
+            pass = getArguments().getString("pass");
+        }
         verificarutilizador();
 
+    }
+
+    public static LoginFragment newInstance(String username, String pass){
+        LoginFragment loginFragment = new LoginFragment();
+        Bundle args = new Bundle();
+        args.putString("username", username);
+        args.putString("pass", pass);
+        loginFragment.setArguments(args);
+        return loginFragment;
     }
 
     @Override
@@ -52,16 +65,19 @@ public class LoginFragment extends Fragment implements LoginListener {
         button_signup = view.findViewById(R.id.button_signup);
         button_signin.setOnClickListener(mCorkyListener);
         button_signup.setOnClickListener(mCorkyListener);
+        if (user != null || pass != null){
+            et_username.setText(user);
+            et_password.setText(pass);
+        }
 
-
-        Bundle bundle = getArguments();
+        /*Bundle bundle = getArguments();
         
         if (bundle != null){
             String username = bundle.getString("username");
             String password = bundle.getString("password");
             et_username.setText(username);
             et_password.setText(password);
-    }
+    }*/
         return view;
     }
 

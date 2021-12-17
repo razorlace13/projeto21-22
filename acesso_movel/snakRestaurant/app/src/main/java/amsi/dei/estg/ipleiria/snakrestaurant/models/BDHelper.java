@@ -12,13 +12,13 @@ import java.util.LinkedList;
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "projeto21_22";
-    private static final int VERSAO_BD = 7;
+    private static final int VERSAO_BD = 8;
     //dados da tabela
     private static final String TABELA = "products", ID_PRODUCT = "id_product",NAME = "name",PRICE = "price",ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo",ID_PEDIDO = "id_pedido ",QUANTIDADE = "quantidade";
     private static final String TABELA3 = "purchases", ID_PURCHASES = "id_purchase", VALOR = "valor", DATA = "data", MESA = "mesa", ID_USER = "id_user";
     private static final String TABELA4 = "login", ID = "id", TOKEN = "token", USERNAME = "username", EMAIL = "email";
-
+    private static final String TABELA5 = "shopping_cart", ID_PRODUCT_SHOPPING = "id_product",NAME_SHOPPING = "name",PRICE_SHOPPING = "price",ID_CATEGORY_SHOPPING = "id_category";
     private final SQLiteDatabase basedados;
 
     public BDHelper(Context context) {
@@ -57,6 +57,14 @@ public class BDHelper extends SQLiteOpenHelper {
                 EMAIL + " VARCHAR(100) NOT NULL)";
 
         db.execSQL(sqlTabela);
+         sqlTabela = "CREATE TABLE " + TABELA5 + "(" +
+                ID_PRODUCT + " INTEGER PRIMARY KEY, " +
+                NAME + " TEXT NOT NULL, " +
+                PRICE + " INTEGER NOT NULL, " +
+                ID_CATEGORY + " INTEGER NOT NULL," +
+                 QUANTIDADE + " INTEGER NOT NULL)";
+
+        db.execSQL(sqlTabela);
     }
 
     @Override
@@ -65,6 +73,7 @@ public class BDHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABELA1);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA3);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA4);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELA5);
         this.onCreate(db);
     }
 
@@ -110,7 +119,7 @@ public class BDHelper extends SQLiteOpenHelper {
     public void adicionarProductsBD(Products products){
         ContentValues valores = new ContentValues();
 
-        valores.put(ID_CATEGORY, products.getId_product());
+        valores.put(ID_PRODUCT, products.getId_product());
         valores.put(NAME, products.getName());
         valores.put(PRICE, products.getPrice());
         valores.put(ID_CATEGORY, products.getId_category());

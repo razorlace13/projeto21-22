@@ -38,15 +38,4 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="amsi.dei.estg.ipleiria.snakrestaurant.controllers.Products.DetalhesPurchasesFragment"
-        android:layout_width="350dp"
-        android:layout_height="600dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutProfile2"
-        app:layout_constraintEnd_toEndOf="@+id/Pb_purchases"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayoutProfile2" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@ import java.util.List;
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "projeto21_22";
-    private static final int VERSAO_BD = 8;
+    private static final int VERSAO_BD = 9;
     //dados da tabela
     private static final String TABELA = "products", ID_PRODUCT = "id_product",NAME = "name",PRICE = "price",ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo",ID_PEDIDO = "id_pedido ",QUANTIDADE = "quantidade";
@@ -29,6 +29,7 @@ public class BDHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //Produtos
         String sqlTabela = "CREATE TABLE " + TABELA + "(" +
                 ID_PRODUCT + " INTEGER PRIMARY KEY, " +
                 NAME + " TEXT NOT NULL, " +
@@ -36,13 +37,15 @@ public class BDHelper extends SQLiteOpenHelper {
                 ID_CATEGORY + " INTEGER NOT NULL)";
 
         db.execSQL(sqlTabela);
+        //Consumo
         sqlTabela = "CREATE TABLE " + TABELA1 + "(" +
                 ID_CONSUMO + " INTEGER PRIMARY KEY, " +
                 ID_PEDIDO + " INTEGER NOT NULL, " +
-                ID_PRODUCT + " INTEGER NOT NULL, " +
+                NAME + " String NOT NULL, " +
                 QUANTIDADE + " INTEGER NOT NULL)";
 
         db.execSQL(sqlTabela);
+        //Purchases
         sqlTabela = "CREATE TABLE " + TABELA3 + "(" +
                 ID_PURCHASES + " INT NOT NULL, " +
                 VALOR + " INTEGER NOT NULL, " +
@@ -51,6 +54,7 @@ public class BDHelper extends SQLiteOpenHelper {
                 ID_USER + " INTEGER NOT NULL)";
 
         db.execSQL(sqlTabela);
+        //login
         sqlTabela = "CREATE TABLE " + TABELA4 + "(" +
                 ID + " INT NOT NULL, " +
                 TOKEN + " TEXT NOT NULL, " +
@@ -58,6 +62,7 @@ public class BDHelper extends SQLiteOpenHelper {
                 EMAIL + " VARCHAR(100) NOT NULL)";
 
         db.execSQL(sqlTabela);
+        //Shopping Cart
          sqlTabela = "CREATE TABLE " + TABELA5 + "(" +
                  ID_SHOPPING + " INTEGER PRIMARY KEY, " +
                  ID_PRODUCT_SHOPPING + " INTEGER NOT NULL," +
@@ -101,16 +106,18 @@ public class BDHelper extends SQLiteOpenHelper {
     public ArrayList<Consumo> getAllConsumo(int id){
         ArrayList<Consumo> lista = new ArrayList<>();
 
-        Cursor cursor = this.basedados.query(TABELA,
-                new String [] {ID_PRODUCT, NAME, PRICE, ID_CATEGORY},
+        //perguntar ao stor em qual deles é o where
+
+        Cursor cursor = this.basedados.query(TABELA1,
+                new String [] {ID_CONSUMO, ID_PEDIDO, NAME, QUANTIDADE},
                 null, null, null, null, null);
 
         if(cursor.moveToFirst()){
             do{
-                Products products = new Products (cursor.getInt(0), cursor.getString(1),
-                        cursor.getInt(2), cursor.getInt(3));
+                Consumo consumo = new Consumo (cursor.getInt(0), cursor.getInt(1),
+                        cursor.getString(2), cursor.getInt(3));
 
-                lista.add(products);
+                lista.add(consumo);
 
             }while(cursor.moveToNext());
         }
@@ -136,6 +143,28 @@ public class BDHelper extends SQLiteOpenHelper {
         basedados.delete(TABELA,ID_PRODUCT, null);
         for (Products p:productos) {
             adicionarProductsBD(p);
+        }
+    }
+
+    //para adicionar depois de ir ao adicionarProductsBD de baixo
+    public void adicionarConsumoBD(Consumo consumo){
+        ContentValues valores = new ContentValues();
+
+        valores.put(ID_CONSUMO, consumo.getId_consumo());
+        valores.put(ID_PEDIDO, consumo.getId_pedido());
+        valores.put(NAME, consumo.getProduct());
+        valores.put(QUANTIDADE, consumo.getQuantidade());
+
+        long id = basedados.insert(TABELA1,null, valores);
+
+        if (id != -1){
+            consumo.setId_consumo(id);
+        }
+    }
+    public void adicionarConsumoBD(ArrayList<Consumo> consumo){
+        basedados.delete(TABELA1,ID_CONSUMO, null);
+        for (Consumo p:consumo) {
+            adicionarConsumoBD(p);
         }
     }
 
@@ -180,8 +209,6 @@ public class BDHelper extends SQLiteOpenHelper {
     //para adicionar depois de ir ao adicionarProductsBD de baixo
     public void adicionarPurchasesBD(Purchases purchases){
         ContentValues valores = new ContentValues();
-
-        System.out.println(valores);
 
         valores.put(ID_PURCHASES, purchases.getId_purchase());
         valores.put(VALOR, purchases.getValor());

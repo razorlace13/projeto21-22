@@ -103,7 +103,7 @@ class ConsumoController extends ActiveController
             ->select(['consumo.id_consumo','consumo.id_pedido', 'products.name','consumo.quantidade'])
             ->from('consumo')
             ->innerjoin('products',"products.id_product = consumo.id_product")
-            ->where(['id_pedido' => 4])
+            ->where(['id_pedido' => $id])
             ->all();
         return $recs;
 

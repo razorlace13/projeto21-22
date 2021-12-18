@@ -20,6 +20,7 @@ public class ListaConsumoAdaptador extends BaseAdapter{
     private ArrayList<Consumo> listaConsumo;
 
     public ListaConsumoAdaptador(Context contexto, ArrayList<Consumo> listapro) {
+
         this.contexto = contexto;
         this.listaConsumo = listapro;
 
@@ -27,17 +28,17 @@ public class ListaConsumoAdaptador extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return 0;
+        return this.listaConsumo.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return this.listaConsumo.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return this.listaConsumo.get(i).getId_consumo();
     }
 
     @Override
@@ -52,9 +53,9 @@ public class ListaConsumoAdaptador extends BaseAdapter{
         }
 
         //preencher o item através de um ViewHolder
-        ListaConsumoAdaptador.ViewHolderConsumo vHolder = (ListaConsumoAdaptador.ViewHolderConsumo) view.getTag();
+        ViewHolderConsumo vHolder = (ViewHolderConsumo) view.getTag();
         if(vHolder == null){
-            vHolder = new ListaConsumoAdaptador.ViewHolderConsumo(view);
+            vHolder = new ViewHolderConsumo(view);
             view.setTag(vHolder);
         }
 
@@ -72,7 +73,10 @@ public class ListaConsumoAdaptador extends BaseAdapter{
         }
 
         public void update(Consumo consumo) {
+
+            System.out.println("dentro do updadte");
             this.tv_product.setText(consumo.getProduct());
         }
+
     }
 }

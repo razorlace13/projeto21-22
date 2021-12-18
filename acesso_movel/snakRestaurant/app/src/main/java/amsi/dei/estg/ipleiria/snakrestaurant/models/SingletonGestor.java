@@ -1,5 +1,7 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.AccessToken;
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIConsumo;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIProducts;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIPurchases;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIUser;
@@ -142,34 +144,33 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
         }
     }
 
-     public void getAllConsumoAPI(final Context contexto){
+     public void getAllConsumoAPI(final Context contexto,int id_purchase){
          if(!JsonParser.isConnectionInternet(contexto)){
              Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
 
              if(consumoListener != null){
-                 consumoListener.onRefreshListaConsumo(getListaconsumoBD());
+                 consumoListener.onRefreshListaConsumo(getListaconsumoBD(id_purchase));
              }
          }
          else{
              JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                     UrlAPIProducts, null,
+                     UrlAPIConsumo + id_purchase + AccessToken, null,
                      new Response.Listener<JSONArray>() {
                          @Override
                          public void onResponse(JSONArray response) {
-                             listaproducts = JsonParser.parserJsonProducts(response);
+                             listaconsumo = JsonParser.parserJsonConsumo(response);
+                             bd.adicionarConsumoBD(listaconsumo);
 
-                             bd.adicionarProductsBD(listaproducts);
-
-                             if (productslistener != null) {
-                                 productslistener.onRefreshListaProducts(listaproducts);
+                             if(consumoListener != null){
+                                 consumoListener.onRefreshListaConsumo(getListaconsumoBD(id_purchase));
                              }
                          }
                      },
                      new Response.ErrorListener() {
                          @Override
                          public void onErrorResponse(VolleyError error) {
-                             if(productslistener != null){
-                                 productslistener.onRefreshListaProducts(getListaproductsBD());
+                             if(consumoListener != null){
+                                 consumoListener.onRefreshListaConsumo(getListaconsumoBD(id_purchase));
                              }
                              Toast.makeText(contexto,"sem acesso api", Toast.LENGTH_SHORT).show();
                          }

@@ -2,21 +2,22 @@ package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
 public class Consumo {
 
-    private int id_consumo,id_pedido, id_product,quantidade;
+    private long id_consumo;
+    private int id_pedido, id_product,quantidade;
     private String product;
 
-    public Consumo(int id_consumo,int id_pedido,String product, int quantidade ) {
+    public Consumo(long id_consumo,int id_pedido,String product, int quantidade ) {
         this.id_consumo = id_consumo;
         this.id_pedido = id_pedido;
         this.product = product;
         this.quantidade = quantidade;
     }
 
-    public int getId_consumo() {
+    public long getId_consumo() {
         return id_consumo;
     }
 
-    public void setId_consumo(int id_consumo) {
+    public void setId_consumo(long id_consumo) {
         this.id_consumo = id_consumo;
     }
 
@@ -42,5 +43,12 @@ public class Consumo {
 
     public void setProduct(String product) {
         this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return "Consumo{" +
+                "product='" + product + '\'' +
+                '}';
     }
 }

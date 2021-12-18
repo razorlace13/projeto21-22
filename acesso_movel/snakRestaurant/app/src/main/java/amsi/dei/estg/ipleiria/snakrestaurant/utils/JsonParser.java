@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
+import amsi.dei.estg.ipleiria.snakrestaurant.models.Consumo;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Products;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Purchases;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.User;
@@ -71,6 +72,33 @@ public class JsonParser {
         }
 
         return listapurchases;
+    }
+
+    public static ArrayList<Consumo> parserJsonConsumo(JSONArray resposta){
+        //Criar o ArrayList
+        ArrayList<Consumo> listaconsumo = new ArrayList<>();
+
+        //percorrer o array de objectos
+
+        try {
+            for(int i = 0; i < resposta.length(); i++){
+                JSONObject consumojson = (JSONObject) resposta.get(i);
+
+                long id_consumo = consumojson.getLong("id_consumo");
+                int id_pedido = consumojson.getInt("id_pedido");
+                String product = consumojson.getString("name");
+                int quantidade = consumojson.getInt("quantidade");
+
+                Consumo consumo = new Consumo(id_consumo, id_pedido, product, quantidade);
+                listaconsumo.add(consumo);
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return listaconsumo;
     }
 
     public static boolean isConnectionInternet(Context contexto){

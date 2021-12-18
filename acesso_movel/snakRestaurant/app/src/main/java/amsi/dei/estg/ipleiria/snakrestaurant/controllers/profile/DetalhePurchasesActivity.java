@@ -1,12 +1,19 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -29,6 +36,9 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
     private RecyclerView Rv_purchases;
     private RecyclerView.LayoutManager layoutManager;
     private ListView lista_Consumo;
+    private Dialog dialog;
+    private Button bt_close;
+    private ImageView iv_close;
     SwipeRefreshLayout swipeRefreshLayout;
     ProgressBar progressBar;
 
@@ -38,7 +48,9 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
         setContentView(R.layout.activity_detalhe_purchases);
         getPurchases();
         Rv_purchases = findViewById(R.id.Rv_purchases);
-        lista_Consumo = findViewById(R.id.lista_consumo);
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.fragment_detalhes_purchases);
+        lista_Consumo = dialog.findViewById(R.id.lista_consumo);
         layoutManager = new LinearLayoutManager(this);
         Rv_purchases.setLayoutManager(layoutManager);
         adaptador = new RecyclerPurchasesAdaptador(this,SingletonGestor.getInstance(this).getListapurchasesBD(), this);
@@ -72,12 +84,34 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
     @Override
     public void onItemClick(int position) {
         Purchases purchases = SingletonGestor.getInstance(this).getOnepurchasesBD(position);
+        openDialog(purchases);
+    }
 
+    private void openDialog(Purchases purchases) {
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        iv_close = dialog.findViewById(R.id.iv_close);
+        bt_close = dialog.findViewById(R.id.bt_close);
+        SingletonGestor.getInstance(this).setConsumolistener(this);
+        SingletonGestor.getInstance(this).getAllConsumoAPI(this, (int) purchases.getId_purchase());
+        iv_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        bt_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     @Override
     public void onRefreshListaConsumo(ArrayList<Consumo> consumo) {
         if(consumo != null){
+            System.out.println("onRefresh");
             lista_Consumo.setAdapter(new ListaConsumoAdaptador(this, consumo));
         }
     }

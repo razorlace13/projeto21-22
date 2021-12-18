@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,12 +67,14 @@ public class ListaProductsAdaptador extends BaseAdapter {
     private class ViewHolderProducts {
         private TextView tvName, tvPrice, tvid_category;
         private ImageView ivCapa;
+        ImageButton button_add_card;
 
         public ViewHolderProducts(View view) {
             tvName = view.findViewById(R.id.tv_product);
             tvPrice = view.findViewById(R.id.tvPrice);
             ivCapa = view.findViewById(R.id.ivCapa);
             //tvid_category = view.findViewById(R.id.tvid_category);
+            //button_add_card = View.findViewById(R.id.imageButton);
         }
 
         public void update(Products products) {
@@ -82,6 +86,7 @@ public class ListaProductsAdaptador extends BaseAdapter {
             }else if (id_category == 2){
                 this.ivCapa.setImageResource(R.drawable.copo);
             }
+
             //this.tvid_category.setText(""+products.getId_category());
 
         }

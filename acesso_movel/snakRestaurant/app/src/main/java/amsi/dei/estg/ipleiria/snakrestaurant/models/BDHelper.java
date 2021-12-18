@@ -19,7 +19,7 @@ public class BDHelper extends SQLiteOpenHelper {
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo",ID_PEDIDO = "id_pedido ",QUANTIDADE = "quantidade";
     private static final String TABELA3 = "purchases", ID_PURCHASES = "id_purchase", VALOR = "valor", DATA = "data", MESA = "mesa", ID_USER = "id_user";
     private static final String TABELA4 = "login", ID = "id", TOKEN = "token", USERNAME = "username", EMAIL = "email";
-    private static final String TABELA5 = "shopping_cart",ID_SHOPPING= "id_product_shopping", ID_PRODUCT_SHOPPING = "id_product_shopping",NAME_SHOPPING = "name_shopping",PRICE_SHOPPING = "price_shopping",ID_CATEGORY_SHOPPING = "id_category_shopping";
+    private static final String TABELA5 = "shopping_cart",ID_SHOPPING= "id_shopping", ID_PRODUCT_SHOPPING = "id_product_shopping",NAME_SHOPPING = "name_shopping",PRICE_SHOPPING = "price_shopping",ID_CATEGORY_SHOPPING = "id_category_shopping";
     private SQLiteDatabase basedados;
 
     public BDHelper(Context context) {
@@ -117,7 +117,9 @@ public class BDHelper extends SQLiteOpenHelper {
                 Consumo consumo = new Consumo (cursor.getInt(0), cursor.getInt(1),
                         cursor.getString(2), cursor.getInt(3));
 
+
                 lista.add(consumo);
+
 
             }while(cursor.moveToNext());
         }
@@ -267,7 +269,8 @@ public class BDHelper extends SQLiteOpenHelper {
     }
 
 
-
+// Carrinho de compras
+    // em andamento
     public List<Shopping_card> getAllCard() {
         String sql = "select * from " + TABELA5;
         basedados = this.getReadableDatabase();
@@ -288,5 +291,20 @@ public class BDHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return store;
+    }
+
+    public Shopping_card add_to_card(Shopping_card shopping_card){
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(BDHelper.ID_SHOPPING, shopping_card.getId_product_shopping());
+        contentValues.put(BDHelper.ID_PRODUCT_SHOPPING, shopping_card.getId_product_shopping());
+        contentValues.put(BDHelper.NAME_SHOPPING, shopping_card.getName_shopping());
+        contentValues.put(BDHelper.PRICE_SHOPPING, shopping_card.getPrice_shopping());
+        contentValues.put(BDHelper.ID_CATEGORY_SHOPPING, shopping_card.getId_category_shopping());
+        contentValues.put(BDHelper.QUANTIDADE, shopping_card.getQuantidade_shopping());
+
+        basedados = this.getWritableDatabase();
+        basedados.insert(BDHelper.TABELA5,null,contentValues);
+        return shopping_card;
     }
 }

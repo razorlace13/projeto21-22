@@ -40,4 +40,12 @@
     <string name="Register_Message">Registo efetuado com sucesso</string>
     <string name="id_purchases">Numero: </string>
 
+    <!--Carrinho de compras-->
+    <string name="id_product_shopping">id_product:</string>
+    <string name="id_shopping">id_shopping:  </string>
+    <string name="name_shopping">name:  </string>
+    <string name="price_shopping">price:  </string>
+    <string name="id_categoria">id_categoria:  </string>
+    <string name="quantidade_shopping">quantidade:  </string>
+
 </resources>

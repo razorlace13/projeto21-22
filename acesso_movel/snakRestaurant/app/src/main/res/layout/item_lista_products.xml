@@ -94,18 +94,19 @@
                 android:layout_height="40dp"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="#F1EDED"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/card"
-                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
             </LinearLayout>
 
 
         </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="82dp"
+            android:layout_height="78dp"
+            android:backgroundTint="#F1EDED"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/card"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </LinearLayout>
 

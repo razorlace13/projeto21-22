@@ -13,7 +13,7 @@ import java.util.List;
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "projeto21_22";
-    private static final int VERSAO_BD = 9;
+    private static final int VERSAO_BD = 10;
     //dados da tabela
     private static final String TABELA = "products", ID_PRODUCT = "id_product",NAME = "name",PRICE = "price",ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo",ID_PEDIDO = "id_pedido ",QUANTIDADE = "quantidade";
@@ -279,8 +279,8 @@ public class BDHelper extends SQLiteOpenHelper {
         Cursor cursor = basedados.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-                int id_product_shopping = Integer.parseInt(String.valueOf(cursor.getInt(0)));
-                int id_shopping = Integer.parseInt(String.valueOf(cursor.getInt(1)));
+                int id_shopping = Integer.parseInt(String.valueOf(cursor.getInt(0)));
+                long id_product_shopping = Integer.parseInt(String.valueOf(cursor.getInt(1)));
                 String name_shopping = cursor.getString(2);
                 int price_shopping = Integer.parseInt(String.valueOf(cursor.getInt(3)));
                 int id_category_shopping = Integer.parseInt(String.valueOf(cursor.getInt(4)));
@@ -296,7 +296,7 @@ public class BDHelper extends SQLiteOpenHelper {
     public Shopping_card add_to_card(Shopping_card shopping_card){
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(BDHelper.ID_SHOPPING, shopping_card.getId_product_shopping());
+        contentValues.put(BDHelper.ID_SHOPPING, shopping_card.getId_shopping());
         contentValues.put(BDHelper.ID_PRODUCT_SHOPPING, shopping_card.getId_product_shopping());
         contentValues.put(BDHelper.NAME_SHOPPING, shopping_card.getName_shopping());
         contentValues.put(BDHelper.PRICE_SHOPPING, shopping_card.getPrice_shopping());
@@ -306,5 +306,11 @@ public class BDHelper extends SQLiteOpenHelper {
         basedados = this.getWritableDatabase();
         basedados.insert(BDHelper.TABELA5,null,contentValues);
         return shopping_card;
+    }
+    public void delete_from_card(int id){
+        basedados = this.getWritableDatabase();
+        basedados.delete(TABELA5,ID_SHOPPING + " = ?", new String[]
+                {String.valueOf(id)});
+
     }
 }

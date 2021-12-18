@@ -50,12 +50,22 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
 
         final Shopping_card shopping_card = shopping.get(position);
 
-        holder.id_shopping.setText(Integer.toString(shopping_card.getId_product_shopping()));
-        holder.id_product_shopping.setText(Integer.toString(shopping_card.getId_product_shopping()));
+        holder.id_shopping.setText(Integer.toString(shopping_card.getId_shopping()));
+        holder.id_product_shopping.setText(Long.toString(shopping_card.getId_product_shopping()));
         holder.name_shopping.setText(shopping_card.getName_shopping());
         holder.price_shopping.setText(Integer.toString(shopping_card.getPrice_shopping()));
         holder.id_category_shopping.setText(Integer.toString(shopping_card.getId_category_shopping()));
         holder.quantidade_shopping.setText(Integer.toString(shopping_card.getQuantidade_shopping()));
+
+        holder.button_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseHelper.delete_from_card(shopping_card.getId_shopping());
+                shopping.remove(position);
+                notifyDataSetChanged();
+
+            }
+        });
 
     }
 
@@ -63,6 +73,8 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
     public int getItemCount() {
         return shopping.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -77,8 +89,8 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            id_shopping = itemView.findViewById(R.id.text_id_product);
-            id_product_shopping = itemView.findViewById(R.id.text_id_shopping);
+            id_shopping = itemView.findViewById(R.id.text_id_shopping);
+            id_product_shopping = itemView.findViewById(R.id.text_id_product);
             name_shopping = itemView.findViewById(R.id.edit_name_shopping);
             price_shopping = itemView.findViewById(R.id.edit_price_shopping);
             id_category_shopping = itemView.findViewById(R.id.edit_id_category_shopping);

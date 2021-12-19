@@ -52,7 +52,7 @@ public class ProductsFragment extends Fragment implements ProductsListener {
 
         list_products = view.findViewById(R.id.list_products);
         progressBar = view.findViewById(R.id.PB_Products);
-        getProducts();
+        getProducts(false);
         food_btn = view.findViewById(R.id.food_btn);
         food_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +92,7 @@ public class ProductsFragment extends Fragment implements ProductsListener {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getProducts();
+                getProducts(true);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -121,9 +121,9 @@ public class ProductsFragment extends Fragment implements ProductsListener {
         return view;
     }
 
-    private void getProducts() {
+    private void getProducts(boolean resp) {
         SingletonGestor.getInstance(getContext()).setProductslistener(this);
-        SingletonGestor.getInstance(getContext()).getAllProductsAPI(getContext());
+        SingletonGestor.getInstance(getContext()).getAllProductsAPI(getContext(), resp);
     }
 
 

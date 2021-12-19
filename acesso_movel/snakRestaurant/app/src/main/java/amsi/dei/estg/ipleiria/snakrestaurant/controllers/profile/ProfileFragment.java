@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.SignupFragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.listeners.UserListener;
@@ -25,8 +27,8 @@ import amsi.dei.estg.ipleiria.snakrestaurant.models.User;
 public class ProfileFragment extends Fragment implements UserListener {
 
     public TextView username, email, numero;
-    private Button bt_alterar, bt_compras;
-    private int id;
+    private FloatingActionButton bt_alterar, bt_compras, bt_reload;
+    private long id;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -37,7 +39,6 @@ public class ProfileFragment extends Fragment implements UserListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SingletonGestor.getInstance(getContext()).setUserlistener(this);
-        getUser();
     }
 
     @Override
@@ -47,7 +48,8 @@ public class ProfileFragment extends Fragment implements UserListener {
         username = (TextView) view.findViewById(R.id.tv_username);
         email = (TextView) view.findViewById(R.id.tv_mail);
         numero = (TextView) view.findViewById(R.id.tv_numero);
-        bt_alterar = (Button)view.findViewById(R.id.bt_Alterar_p2);
+        getUser(false);
+        bt_alterar = (FloatingActionButton)view.findViewById(R.id.FAB_Change);
         bt_alterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +57,7 @@ public class ProfileFragment extends Fragment implements UserListener {
                 SingletonGestor.getInstance(getActivity()).updateUserAPI(getActivity(), id, user);
             }
         });
-        bt_compras = (Button)view.findViewById(R.id.bt_Compras_p2);
+        bt_compras = (FloatingActionButton)view.findViewById(R.id.FAB_Compras);
         bt_compras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,10 +65,17 @@ public class ProfileFragment extends Fragment implements UserListener {
                 startActivity(menu);
             }
         });
+        bt_reload = (FloatingActionButton)view.findViewById(R.id.FAB_Reload);
+        bt_reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getUser(true);
+            }
+        });
         return view;
     }
-    private void getUser() {
-        SingletonGestor.getInstance(getContext()).getUserAPI(getContext());
+    private void getUser(boolean resp) {
+        SingletonGestor.getInstance(getContext()).getUserAPI(getContext(),resp);
     }
 
     @Override

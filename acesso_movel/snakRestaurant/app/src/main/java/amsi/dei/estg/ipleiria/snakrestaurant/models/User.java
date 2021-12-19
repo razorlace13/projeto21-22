@@ -2,25 +2,25 @@ package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
 public class User {
 
+    private long id;
     private String username,email;
     private int numero;
 
-    private int id;
 
 
 
-    public User(int id,String username, String email, int numero) {
+    public User(long id,String username, String email, int numero) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.numero = numero;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

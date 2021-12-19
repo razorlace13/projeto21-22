@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
@@ -46,7 +48,7 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhe_purchases);
-        getPurchases();
+        getSupportActionBar().hide();
         Rv_purchases = findViewById(R.id.Rv_purchases);
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.fragment_detalhes_purchases);
@@ -56,20 +58,21 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
         adaptador = new RecyclerPurchasesAdaptador(this,SingletonGestor.getInstance(this).getListapurchasesBD(), this);
         Rv_purchases.setAdapter(adaptador);
         progressBar = findViewById(R.id.Pb_purchases);
+        getPurchases(false);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout_Purchases);
         swipeRefreshLayout.setColorScheme(R.color.md_green_500);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getPurchases();
+                getPurchases(true);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
-    private void getPurchases() {
+    private void getPurchases(Boolean resp) {
         SingletonGestor.getInstance(this).setPurchaseslistener(this);
-        SingletonGestor.getInstance(this).getAllPurchasesAPI(this);
+        SingletonGestor.getInstance(this).getAllPurchasesAPI(this, resp);
     }
 
     @Override
@@ -111,7 +114,6 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
     @Override
     public void onRefreshListaConsumo(ArrayList<Consumo> consumo) {
         if(consumo != null){
-            System.out.println("onRefresh");
             lista_Consumo.setAdapter(new ListaConsumoAdaptador(this, consumo));
         }
     }

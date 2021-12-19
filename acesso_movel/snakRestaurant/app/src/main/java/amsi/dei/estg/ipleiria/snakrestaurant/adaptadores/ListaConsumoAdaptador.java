@@ -73,8 +73,6 @@ public class ListaConsumoAdaptador extends BaseAdapter{
         }
 
         public void update(Consumo consumo) {
-
-            System.out.println("dentro do updadte");
             this.tv_product.setText(consumo.getProduct());
         }
 

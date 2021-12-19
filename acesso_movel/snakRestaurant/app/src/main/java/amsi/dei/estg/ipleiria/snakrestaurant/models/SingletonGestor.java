@@ -108,7 +108,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
          this.userlistener = profileFragment;
      }
 
-    public void getAllProductsAPI(final Context contexto){
+    public void getAllProductsAPI(final Context contexto, boolean Resp){
         if(!JsonParser.isConnectionInternet(contexto)){
             Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
 
@@ -116,71 +116,83 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
                 productslistener.onRefreshListaProducts(getListaproductsBD());
             }
         }
-        else{
-            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                    UrlAPIProducts, null,
-                    new Response.Listener<JSONArray>() {
-                        @Override
-                        public void onResponse(JSONArray response) {
-                            listaproducts = JsonParser.parserJsonProducts(response);
+        else {
+            if (!bd.getProductsCheck() || Resp) {
+                JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
+                        UrlAPIProducts, null,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                listaproducts = JsonParser.parserJsonProducts(response);
 
-                            bd.adicionarProductsBD(listaproducts);
+                                bd.adicionarProductsBD(listaproducts);
 
-                            if (productslistener != null) {
-                                productslistener.onRefreshListaProducts(listaproducts);
+                                if (productslistener != null) {
+                                    productslistener.onRefreshListaProducts(listaproducts);
+                                }
                             }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            if(productslistener != null){
-                                productslistener.onRefreshListaProducts(getListaproductsBD());
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                if (productslistener != null) {
+                                    productslistener.onRefreshListaProducts(getListaproductsBD());
+                                }
+                                Toast.makeText(contexto, "sem acesso api", Toast.LENGTH_SHORT).show();
                             }
-                            Toast.makeText(contexto,"sem acesso api", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-            volleyQueue.add(request);
+                        });
+                volleyQueue.add(request);
+            } else {
+                System.out.println("SQL");
+                if (productslistener != null) {
+                    productslistener.onRefreshListaProducts(getListaproductsBD());
+                }
+            }
         }
     }
 
-     public void getAllConsumoAPI(final Context contexto,int id_purchase){
-         if(!JsonParser.isConnectionInternet(contexto)){
+     public void getAllConsumoAPI(final Context contexto,int id_purchase) {
+         if (!JsonParser.isConnectionInternet(contexto)) {
              Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
 
-             if(consumoListener != null){
+             if (consumoListener != null) {
                  consumoListener.onRefreshListaConsumo(getListaconsumoBD(id_purchase));
              }
-         }
-         else{
-             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                     UrlAPIConsumo + id_purchase + AccessToken, null,
-                     new Response.Listener<JSONArray>() {
-                         @Override
-                         public void onResponse(JSONArray response) {
-                             listaconsumo = JsonParser.parserJsonConsumo(response);
-                             bd.adicionarConsumoBD(listaconsumo);
+         } else {
+             if (!bd.getConsumoCheck(id_purchase)) {
+                 JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
+                         UrlAPIConsumo + id_purchase + AccessToken, null,
+                         new Response.Listener<JSONArray>() {
+                             @Override
+                             public void onResponse(JSONArray response) {
+                                 listaconsumo = JsonParser.parserJsonConsumo(response);
+                                 bd.adicionarConsumoBD(listaconsumo);
 
-                             if(consumoListener != null){
-                                 consumoListener.onRefreshListaConsumo(getListaconsumoBD(id_purchase));
+                                 if (consumoListener != null) {
+                                     consumoListener.onRefreshListaConsumo(getListaconsumoBD(id_purchase));
+                                 }
                              }
-                         }
-                     },
-                     new Response.ErrorListener() {
-                         @Override
-                         public void onErrorResponse(VolleyError error) {
-                             if(consumoListener != null){
-                                 consumoListener.onRefreshListaConsumo(getListaconsumoBD(id_purchase));
+                         },
+                         new Response.ErrorListener() {
+                             @Override
+                             public void onErrorResponse(VolleyError error) {
+                                 if (consumoListener != null) {
+                                     consumoListener.onRefreshListaConsumo(getListaconsumoBD(id_purchase));
+                                 }
+                                 Toast.makeText(contexto, "sem acesso api", Toast.LENGTH_SHORT).show();
                              }
-                             Toast.makeText(contexto,"sem acesso api", Toast.LENGTH_SHORT).show();
-                         }
-                     });
-             volleyQueue.add(request);
+                         });
+                 volleyQueue.add(request);
+             }else{
+
+                 if (consumoListener != null) {
+                     consumoListener.onRefreshListaConsumo(getListaconsumoBD(id_purchase));
+                 }
+             }
          }
      }
 
-     public void getAllPurchasesAPI(final Context contexto){
-         String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
+     public void getAllPurchasesAPI(final Context contexto, Boolean Resp){
          if(!JsonParser.isConnectionInternet(contexto)){
              Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
 
@@ -189,6 +201,8 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
              }
          }
          else{
+
+             if (!bd.getPurchasesCheck() || Resp) {
              JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
                      UrlAPIPurchases, null,
                      new Response.Listener<JSONArray>() {
@@ -212,37 +226,48 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
                          }
                      });
              volleyQueue.add(request);
+             }else{
+                 if (purchaseslistener != null) {
+                     purchaseslistener.onRefreshListaPurchases(getListapurchasesBD());
+                 }
+             }
          }
      }
 
-    public void getUserAPI(final Context contexto){
+    public void getUserAPI(final Context contexto, boolean resp){
          if(!JsonParser.isConnectionInternet(contexto)){
              Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
          }
          else{
-             String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
-             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                     UrlAPIUser,
-                     null,
-                     new Response.Listener<JSONObject>() {
-                 @Override
-                 public void onResponse(JSONObject response) {
-                     user = JsonParser.parserJsonUser(response);
-                     if (user != null) {
-                         userlistener.onUser(user);
+             if (!bd.getUserProfileCheck() || resp) {
+                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
+                         UrlAPIUser,
+                         null,
+                         new Response.Listener<JSONObject>() {
+                     @Override
+                     public void onResponse(JSONObject response) {
+                         user = JsonParser.parserJsonUser(response);
+                         bd.adicionarUserProfileBD(user);
+                        if (user != null) {
+                             userlistener.onUser(user);
+                         }
                      }
-                 }
-             }, new Response.ErrorListener() {
-                 @Override
-                 public void onErrorResponse(VolleyError error) {
-                     Toast.makeText(contexto,"sem acesso api", Toast.LENGTH_SHORT).show();
-                 }
-             });
-             volleyQueue.add(request);
+                 }, new Response.ErrorListener() {
+                     @Override
+                     public void onErrorResponse(VolleyError error) {
+                         Toast.makeText(contexto,"sem acesso api", Toast.LENGTH_SHORT).show();
+                     }
+                 });
+                 volleyQueue.add(request);
+             }else{
+                if (userlistener != null) {
+                    userlistener.onUser(bd.getUserProfile());
+                }
+            }
          }
      }
 
-     public void updateUserAPI(final Context contexto, int id, User user){
+     public void updateUserAPI(final Context contexto, long id, User user){
 
          if(!JsonParser.isConnectionInternet(contexto)){
              Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
@@ -253,6 +278,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
                      new Response.Listener<String>() {
                          @Override
                          public void onResponse(String response) {
+                             bd.adicionarUserProfileBD(user);
                              userlistener.onPutuser();
                          }
                      },

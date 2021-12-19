@@ -17,6 +17,7 @@ public class BDHelper extends SQLiteOpenHelper {
     //dados da tabela
     private static final String TABELA = "products", ID_PRODUCT = "id_product",NAME = "name",PRICE = "price",ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo",ID_PEDIDO = "id_pedido ",QUANTIDADE = "quantidade";
+    private static final String TABELA2 = "user", NUMERO = "numero";
     private static final String TABELA3 = "purchases", ID_PURCHASES = "id_purchase", VALOR = "valor", DATA = "data", MESA = "mesa", ID_USER = "id_user";
     private static final String TABELA4 = "login", ID = "id", TOKEN = "token", USERNAME = "username", EMAIL = "email";
     private static final String TABELA5 = "shopping_cart",ID_SHOPPING= "id_shopping", ID_PRODUCT_SHOPPING = "id_product_shopping",NAME_SHOPPING = "name_shopping",PRICE_SHOPPING = "price_shopping",ID_CATEGORY_SHOPPING = "id_category_shopping";
@@ -26,7 +27,6 @@ public class BDHelper extends SQLiteOpenHelper {
         super(context, NOME_BD, null, VERSAO_BD);
         basedados = this.getWritableDatabase();
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Produtos
@@ -43,6 +43,14 @@ public class BDHelper extends SQLiteOpenHelper {
                 ID_PEDIDO + " INTEGER NOT NULL, " +
                 NAME + " String NOT NULL, " +
                 QUANTIDADE + " INTEGER NOT NULL)";
+
+        db.execSQL(sqlTabela);
+        //User
+        sqlTabela = "CREATE TABLE " + TABELA2 + "(" +
+                ID + " INTEGER PRIMARY KEY, " +
+                USERNAME + " TEXT NOT NULL, " +
+                EMAIL + " INTEGER NOT NULL, " +
+                NUMERO + " INTEGER NOT NULL)";
 
         db.execSQL(sqlTabela);
         //Purchases
@@ -73,17 +81,48 @@ public class BDHelper extends SQLiteOpenHelper {
 
         db.execSQL(sqlTabela);
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABELA);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA1);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELA2);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA3);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA4);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA5);
         this.onCreate(db);
     }
+    public boolean getUserProfileCheck(){
+        Cursor cursor = this.basedados.query(TABELA2,
+                new String [] {ID, USERNAME, EMAIL, NUMERO},
+                null, null, null, null, null);
+        if (cursor.moveToFirst()){
+            return true;
+        }
+        return false;
+    }
+    public User getUserProfile(){
+        Cursor cursor = this.basedados.query(TABELA2,
+                new String [] {ID, USERNAME, EMAIL, NUMERO},
+                null, null, null, null, null);
 
+        if(cursor.moveToFirst()){
+            do{
+                User user = new User (cursor.getInt(0), cursor.getString(1),
+                        cursor.getString(2), cursor.getInt(3));
+                return user;
+            }while(cursor.moveToNext());
+        }
+        return null;
+    }
+    public boolean getProductsCheck(){
+        Cursor cursor = this.basedados.query(TABELA,
+                new String [] {ID_PRODUCT, NAME, PRICE, ID_CATEGORY},
+                null, null, null, null, null);
+        if (cursor.moveToFirst()){
+            return true;
+        }
+        return false;
+    }
     public ArrayList<Products> getAllProducts(){
         ArrayList<Products> lista = new ArrayList<>();
 
@@ -102,15 +141,21 @@ public class BDHelper extends SQLiteOpenHelper {
         }
         return lista;
     }
-
+    public boolean getConsumoCheck(int id){
+        Cursor cursor = this.basedados.query(TABELA1,
+                new String [] {ID_CONSUMO, ID_PEDIDO, NAME, QUANTIDADE},
+                ID_PEDIDO + "=" + id, null, null, null, null);
+        if (cursor.moveToFirst()){
+            return true;
+        }
+        return false;
+    }
     public ArrayList<Consumo> getAllConsumo(int id){
         ArrayList<Consumo> lista = new ArrayList<>();
 
-        //perguntar ao stor em qual deles é o where
-
         Cursor cursor = this.basedados.query(TABELA1,
                 new String [] {ID_CONSUMO, ID_PEDIDO, NAME, QUANTIDADE},
-                null, null, null, null, null);
+                ID_PEDIDO + "=" + id, null, null, null, null);
 
         if(cursor.moveToFirst()){
             do{
@@ -125,8 +170,66 @@ public class BDHelper extends SQLiteOpenHelper {
         }
         return lista;
     }
+    public boolean getPurchasesCheck(){
+        Cursor cursor = this.basedados.query(TABELA3,
+                new String [] {ID_PURCHASES, VALOR, MESA, DATA,ID_USER},
+                null, null, null, null, null, null);
 
-    //para adicionar depois de ir ao adicionarProductsBD de baixo
+        if (cursor.moveToFirst()){
+            return true;
+        }
+        return false;
+    }
+    public ArrayList<Purchases> getAllPurchases(){
+        ArrayList<Purchases> lista = new ArrayList<>();
+
+        Cursor cursor = this.basedados.query(TABELA3,
+                new String [] {ID_PURCHASES, VALOR, MESA, DATA,ID_USER},
+                null, null, null, null, null, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                Purchases purchases = new Purchases (cursor.getInt(0), cursor.getDouble(1),
+                        cursor.getString(3),cursor.getInt(2),  cursor.getInt(4));
+
+                lista.add(purchases);
+
+            }while(cursor.moveToNext());
+        }
+        return lista;
+    }
+    public Purchases getOnePurchases(int position){
+        int count= 0;
+        Cursor cursor = this.basedados.query(TABELA3,
+                new String [] {ID_PURCHASES, VALOR, MESA, DATA,ID_USER},
+                null, null, null, null, null, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                if (count == position) {
+                    Purchases purchases = new Purchases(cursor.getInt(0), cursor.getDouble(1),
+                            cursor.getString(3), cursor.getInt(2), cursor.getInt(4));
+                    return purchases;
+                }
+                count++;
+            }while(cursor.moveToNext());
+        }
+        return null;
+    }
+    public void adicionarUserProfileBD(User user){
+        basedados.delete(TABELA2,ID, null);
+        ContentValues valores = new ContentValues();
+
+        valores.put(USERNAME, user.getUsername());
+        valores.put(EMAIL, user.getEmail());
+        valores.put(NUMERO, user.getNumero());
+        valores.put(ID, user.getId());
+        long id = basedados.insert(TABELA2,null, valores);
+
+        if (id != -1){
+            user.setId((int) id);
+        }
+    }
     public void adicionarProductsBD(Products products){
         ContentValues valores = new ContentValues();
 
@@ -147,8 +250,6 @@ public class BDHelper extends SQLiteOpenHelper {
             adicionarProductsBD(p);
         }
     }
-
-    //para adicionar depois de ir ao adicionarProductsBD de baixo
     public void adicionarConsumoBD(Consumo consumo){
         ContentValues valores = new ContentValues();
 
@@ -164,51 +265,10 @@ public class BDHelper extends SQLiteOpenHelper {
         }
     }
     public void adicionarConsumoBD(ArrayList<Consumo> consumo){
-        basedados.delete(TABELA1,ID_CONSUMO, null);
         for (Consumo p:consumo) {
             adicionarConsumoBD(p);
         }
     }
-
-    public ArrayList<Purchases> getAllPurchases(){
-        ArrayList<Purchases> lista = new ArrayList<>();
-
-        Cursor cursor = this.basedados.query(TABELA3,
-                new String [] {ID_PURCHASES, VALOR, MESA, DATA,ID_USER},
-                null, null, null, null, null, null);
-
-        if(cursor.moveToFirst()){
-            do{
-                Purchases purchases = new Purchases (cursor.getInt(0), cursor.getDouble(1),
-                        cursor.getString(3),cursor.getInt(2),  cursor.getInt(4));
-
-                lista.add(purchases);
-
-            }while(cursor.moveToNext());
-        }
-        return lista;
-    }
-
-    public Purchases getOnePurchases(int position){
-        int count= 0;
-        Cursor cursor = this.basedados.query(TABELA3,
-                new String [] {ID_PURCHASES, VALOR, MESA, DATA,ID_USER},
-                null, null, null, null, null, null);
-
-        if(cursor.moveToFirst()){
-            do{
-                if (count == position) {
-                    Purchases purchases = new Purchases(cursor.getInt(0), cursor.getDouble(1),
-                            cursor.getString(3), cursor.getInt(2), cursor.getInt(4));
-                    return purchases;
-                }
-                count++;
-            }while(cursor.moveToNext());
-        }
-        return null;
-    }
-
-    //para adicionar depois de ir ao adicionarProductsBD de baixo
     public void adicionarPurchasesBD(Purchases purchases){
         ContentValues valores = new ContentValues();
 
@@ -230,7 +290,6 @@ public class BDHelper extends SQLiteOpenHelper {
             adicionarPurchasesBD(p);
         }
     }
-
     public LinkedList<Login> getUser() {
         LinkedList<Login> login = new LinkedList<>();
         Cursor cursor = this.basedados.rawQuery("SELECT * FROM login",
@@ -246,7 +305,6 @@ public class BDHelper extends SQLiteOpenHelper {
         }
         return login;
     }
-
     public void inserirDadosLogin(Login login) {
         ContentValues values = new ContentValues();
         values.put("id", login.getId());
@@ -259,18 +317,13 @@ public class BDHelper extends SQLiteOpenHelper {
         }
 
     }
-
     private boolean verificarLogin(Login login, ContentValues values) {
         return this.basedados.update("login",values, "token = ?", new String[]{"" + login.getToken()}) > 0;
     }
-
     public boolean removerUserDB(){
         return basedados.delete(TABELA4,null, null) == 1;
     }
 
-
-// Carrinho de compras
-    // em andamento
     public List<Shopping_card> getAllCard() {
         String sql = "select * from " + TABELA5;
         basedados = this.getReadableDatabase();

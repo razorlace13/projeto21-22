@@ -1,5 +1,7 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.adaptadores;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +11,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Products;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.Shopping_card;
 
 public class ListaProductsAdaptador extends BaseAdapter {
 
@@ -61,13 +67,43 @@ public class ListaProductsAdaptador extends BaseAdapter {
 
         vHolder.update(this.listaProducts.get(position));
 
+        vHolder.imageButton = convertView.findViewById(R.id.imageButton);
+        vHolder.imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "Botão"+position, Toast.LENGTH_SHORT).show();
+                //$teste = Products.getId_product(position).getName;
+                //long id_product_shopping = listaProducts.get(position).getId_product();
+                //String name_product_shopping = listaProducts.get(position).getName();
+                //int price_product_shopping = listaProducts.get(position).getPrice();
+                //int id_category_product_shopping = listaProducts.get(position).getId_category();
+
+                try {
+                long id_product_shopping = listaProducts.get(position).getId_product();
+                String name_shopping = listaProducts.get(position).getName();
+                int price_shopping  = listaProducts.get(position).getPrice();
+                int id_category_shopping= listaProducts.get(position).getId_category();
+                int quantidade_shopping=1;
+
+                    BDHelper bdHelper = new BDHelper(view.getContext());
+                    Shopping_card shopping_card = new Shopping_card(id_product_shopping,  name_shopping,  price_shopping, id_category_shopping, quantidade_shopping);
+                    bdHelper.add_to_card(shopping_card);
+
+                }catch (Exception e){
+
+                }
+
+            }
+        });
+
+
         return convertView;
     }
 
     private class ViewHolderProducts {
         private TextView tvName, tvPrice, tvid_category;
         private ImageView ivCapa;
-        ImageButton button_add_card;
+        ImageButton imageButton;
 
         public ViewHolderProducts(View view) {
             tvName = view.findViewById(R.id.tv_product);

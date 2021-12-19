@@ -11,15 +11,14 @@ public class Shopping_card {
 
     //ID_PRODUCT_SHOPPING, NAME_SHOPPING, PRICE_SHOPPING, ID_CATEGORY_SHOPPING, QUANTIDADE
 
-    public Shopping_card(int id_shopping, long id_product_shopping, String name_shopping, int price_shopping, int id_category_shopping, int quantidade_shopping) {
-        this.id_shopping = id_shopping;
+    public Shopping_card( long id_product_shopping, String name_shopping, int price_shopping, int id_category_shopping, int quantidade_shopping) {
+
         this.id_product_shopping = id_product_shopping;
         this.name_shopping = name_shopping;
         this.price_shopping = price_shopping;
         this.id_category_shopping = id_category_shopping;
         this.quantidade_shopping = quantidade_shopping;
     }
-
 
     public int getId_shopping() {
         return id_shopping;

@@ -255,7 +255,8 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
                     android:onClick="onClick"
-                    android:text="@string/button_sign_up" />
+                    android:text="@string/button_sign_up"
+                    app:backgroundTint="@color/md_light_blue_800" />
 
                 <LinearLayout
                     android:id="@+id/social_layout"

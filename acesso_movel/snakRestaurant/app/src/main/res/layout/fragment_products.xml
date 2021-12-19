@@ -53,7 +53,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/drink_btn"
                     app:layout_constraintHorizontal_bias="0.91"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:backgroundTint="@color/md_light_green_900"/>
 
                 <Button
                     android:id="@+id/drink_btn"
@@ -62,7 +63,8 @@
                     android:layout_marginEnd="112dp"
                     android:text="Drinks"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:backgroundTint="@color/md_green_900"/>
 
                 <SearchView
                     android:id="@+id/search_view"

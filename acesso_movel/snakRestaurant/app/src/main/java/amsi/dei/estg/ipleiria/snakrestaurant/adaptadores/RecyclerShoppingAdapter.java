@@ -50,7 +50,6 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
 
         final Shopping_card shopping_card = shopping.get(position);
 
-        holder.id_shopping.setText(Integer.toString(shopping_card.getId_shopping()));
         holder.id_product_shopping.setText(Long.toString(shopping_card.getId_product_shopping()));
         holder.name_shopping.setText(shopping_card.getName_shopping());
         holder.price_shopping.setText(Integer.toString(shopping_card.getPrice_shopping()));

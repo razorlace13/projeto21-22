@@ -248,7 +248,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
                      public void onResponse(JSONObject response) {
                          user = JsonParser.parserJsonUser(response);
                          bd.adicionarUserProfileBD(user);
-                        if (user != null) {
+                         if (user != null) {
                              userlistener.onUser(user);
                          }
                      }

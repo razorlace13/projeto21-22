@@ -39,6 +39,8 @@ public class PresentationActivity extends AppCompatActivity {
         appName.animate().translationY(-1000).setDuration(1000).setStartDelay(1500);
         lottieAnimationView.animate().translationY(1400).setDuration(1000).setStartDelay(1500);
         bd = new BDHelper(this);
+        //SingletonGestor.getInstance(getApplicationContext()).getUserAPI(getApplicationContext(),true);
+
 
 
         new Handler().postDelayed(new Runnable() {

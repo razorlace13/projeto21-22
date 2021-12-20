@@ -10,25 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@color/md_grey_200"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20sp"
             android:fontFamily="sans-serif-black"
-            android:text="TextView"
-            android:textSize="24sp" />
+            android:text="Home"
+            android:textColor="@color/black"
+            android:textSize="40sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="20dp"
-            />
     </LinearLayout>
 
     <ScrollView

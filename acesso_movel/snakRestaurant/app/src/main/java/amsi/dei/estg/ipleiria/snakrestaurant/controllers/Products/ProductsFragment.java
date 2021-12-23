@@ -61,9 +61,9 @@ public class ProductsFragment extends Fragment implements ProductsListener {
 
                 ArrayList<Products> listaFiltro = new ArrayList<>();
 
-                for(Products livro: SingletonGestor.getInstance(getContext()).getListaproductsBD()){
-                    if(livro.getId_category() == 1){
-                        listaFiltro.add(livro);
+                for(Products products: SingletonGestor.getInstance(getContext()).getListaproductsBD()){
+                    if(products.getId_category() == 1){
+                        listaFiltro.add(products);
                     }
                 }
                 list_products.setAdapter(new ListaProductsAdaptador(getContext(), listaFiltro));

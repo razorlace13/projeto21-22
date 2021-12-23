@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,15 +15,15 @@ import java.util.List;
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "projeto21_22";
-    private static final int VERSAO_BD = 11;
+    private static final int VERSAO_BD = 18;
     //dados da tabela
     private static final String TABELA = "products", ID_PRODUCT = "id_product",NAME = "name",PRICE = "price",ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo",ID_PEDIDO = "id_pedido ",QUANTIDADE = "quantidade";
     private static final String TABELA2 = "user", NUMERO = "numero";
     private static final String TABELA3 = "purchases", ID_PURCHASES = "id_purchase", VALOR = "valor", DATA = "data", MESA = "mesa", ID_USER = "id_user";
     private static final String TABELA4 = "login", ID = "id", TOKEN = "token", USERNAME = "username", EMAIL = "email";
-    private static final String TABELA5 = "shopping_cart",ID_SHOPPING= "id_shopping", ID_PRODUCT_SHOPPING = "id_product_shopping",NAME_SHOPPING = "name_shopping",PRICE_SHOPPING = "price_shopping",ID_CATEGORY_SHOPPING = "id_category_shopping";
-    private SQLiteDatabase basedados;
+    public static final String TABELA5 = "shopping_cart",ID_SHOPPING= "id_shopping", ID_PRODUCT_SHOPPING = "id_product_shopping",NAME_SHOPPING = "name_shopping",PRICE_SHOPPING = "price_shopping",ID_CATEGORY_SHOPPING = "id_category_shopping", QUANTIDADE_SHOPPING = "quantidade_shopping";
+    public SQLiteDatabase basedados;
 
     public BDHelper(Context context) {
         super(context, NOME_BD, null, VERSAO_BD);
@@ -72,12 +74,12 @@ public class BDHelper extends SQLiteOpenHelper {
         db.execSQL(sqlTabela);
         //Shopping Cart
          sqlTabela = "CREATE TABLE " + TABELA5 + "(" +
-                 ID_SHOPPING + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
+                 ID_SHOPPING + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                  ID_PRODUCT_SHOPPING + " INTEGER NOT NULL," +
                  NAME_SHOPPING + " TEXT NOT NULL, " +
                  PRICE_SHOPPING + " INTEGER NOT NULL, " +
                  ID_CATEGORY_SHOPPING + " INTEGER NOT NULL," +
-                 QUANTIDADE + " INTEGER NOT NULL)";
+                 QUANTIDADE_SHOPPING + " INTEGER NOT NULL)";
 
         db.execSQL(sqlTabela);
     }
@@ -332,14 +334,14 @@ public class BDHelper extends SQLiteOpenHelper {
         Cursor cursor = basedados.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
+                Integer id_shopping = Integer.parseInt(String.valueOf(cursor.getInt(0)));
+                long id_product_shopping = Integer.parseInt(String.valueOf(cursor.getInt(1)));
+                String name_shopping = cursor.getString(2);
+                int price_shopping = Integer.parseInt(String.valueOf(cursor.getInt(3)));
+                int id_category_shopping = Integer.parseInt(String.valueOf(cursor.getInt(4)));
+                int quantidade_shopping = Integer.parseInt(String.valueOf(cursor.getInt(5)));
 
-                long id_product_shopping = Integer.parseInt(String.valueOf(cursor.getInt(0)));
-                String name_shopping = cursor.getString(1);
-                int price_shopping = Integer.parseInt(String.valueOf(cursor.getInt(2)));
-                int id_category_shopping = Integer.parseInt(String.valueOf(cursor.getInt(3)));
-                int quantidade_shopping = Integer.parseInt(String.valueOf(cursor.getInt(4)));
-
-                store.add(new Shopping_card(id_product_shopping, name_shopping, price_shopping,id_category_shopping,quantidade_shopping));
+                store.add(new Shopping_card(id_shopping,id_product_shopping, name_shopping, price_shopping,id_category_shopping,quantidade_shopping));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -347,9 +349,36 @@ public class BDHelper extends SQLiteOpenHelper {
     }
 
     public Shopping_card add_to_card(Shopping_card shopping_card){
-        ContentValues contentValues = new ContentValues();
 
-        //contentValues.put(BDHelper.ID_SHOPPING, shopping_card.getId_shopping());
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(BDHelper.ID_PRODUCT_SHOPPING, shopping_card.getId_product_shopping());
+            contentValues.put(BDHelper.NAME_SHOPPING, shopping_card.getName_shopping());
+            contentValues.put(BDHelper.PRICE_SHOPPING, shopping_card.getPrice_shopping());
+            contentValues.put(BDHelper.ID_CATEGORY_SHOPPING, shopping_card.getId_category_shopping());
+            contentValues.put(BDHelper.QUANTIDADE_SHOPPING, shopping_card.getQuantidade_shopping());
+
+            basedados = this.getWritableDatabase();
+            basedados.insert(BDHelper.TABELA5,null,contentValues);
+            return shopping_card;
+
+    }
+
+    public void delete_from_card(int id_shopping){
+        basedados = this.getWritableDatabase();
+        basedados.delete(TABELA5,ID_SHOPPING + " = ?", new String[]
+                {String.valueOf(id_shopping)});
+    }
+
+    public void update_card(Shopping_card shopping_card){
+
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(QUANTIDADE,shopping_card.getQuantidade_shopping());
+        basedados.update(TABELA5, contentValues, ID_SHOPPING + " = ? " ,
+                new String[]{String.valueOf(shopping_card.getId_shopping())});
+
+        /*ContentValues contentValues = new ContentValues();
+
         contentValues.put(BDHelper.ID_PRODUCT_SHOPPING, shopping_card.getId_product_shopping());
         contentValues.put(BDHelper.NAME_SHOPPING, shopping_card.getName_shopping());
         contentValues.put(BDHelper.PRICE_SHOPPING, shopping_card.getPrice_shopping());
@@ -357,13 +386,8 @@ public class BDHelper extends SQLiteOpenHelper {
         contentValues.put(BDHelper.QUANTIDADE, shopping_card.getQuantidade_shopping());
 
         basedados = this.getWritableDatabase();
-        basedados.insert(BDHelper.TABELA5,null,contentValues);
-        return shopping_card;
+        basedados.update(TABELA5,contentValues,ID_SHOPPING +" = ?", new String[]
+                {String.valueOf(shopping_card.getId_shopping())});*/
     }
-    public void delete_from_card(int id){
-        basedados = this.getWritableDatabase();
-        basedados.delete(TABELA5,ID_SHOPPING + " = ?", new String[]
-                {String.valueOf(id)});
 
-    }
 }

@@ -2,7 +2,14 @@ package amsi.dei.estg.ipleiria.snakrestaurant.adaptadores;
 
 import static java.security.AccessController.getContext;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Fragment;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +30,10 @@ import amsi.dei.estg.ipleiria.snakrestaurant.models.Shopping_card;
 
 public class ListaProductsAdaptador extends BaseAdapter {
 
-    private Context contexto;
+
+    private final Context contexto;
     private LayoutInflater inflater;
-    private ArrayList<Products> listaProducts;
+    private final ArrayList<Products> listaProducts;
 
     public ListaProductsAdaptador(Context contexto, ArrayList<Products> lista){
         this.contexto = contexto;
@@ -72,25 +80,49 @@ public class ListaProductsAdaptador extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Botão"+position, Toast.LENGTH_SHORT).show();
-                //$teste = Products.getId_product(position).getName;
-                //long id_product_shopping = listaProducts.get(position).getId_product();
-                //String name_product_shopping = listaProducts.get(position).getName();
-                //int price_product_shopping = listaProducts.get(position).getPrice();
-                //int id_category_product_shopping = listaProducts.get(position).getId_category();
 
                 try {
-                long id_product_shopping = listaProducts.get(position).getId_product();
-                String name_shopping = listaProducts.get(position).getName();
-                int price_shopping  = listaProducts.get(position).getPrice();
-                int id_category_shopping= listaProducts.get(position).getId_category();
-                int quantidade_shopping=1;
+
+                    long id_product_shopp = listaProducts.get(position).getId_product();
 
                     BDHelper bdHelper = new BDHelper(view.getContext());
-                    Shopping_card shopping_card = new Shopping_card(id_product_shopping,  name_shopping,  price_shopping, id_category_shopping, quantidade_shopping);
-                    bdHelper.add_to_card(shopping_card);
 
+                    String sql = "SELECT EXISTS (SELECT * FROM '"+ BDHelper.TABELA5 +"' WHERE ID_PRODUCT_SHOPPING='"+id_product_shopp+"' LIMIT 1)";
+                    Cursor cursor = bdHelper.basedados.rawQuery(sql, null);
+                    cursor.moveToFirst();
+
+                    if (cursor.getInt(0) == 1) {
+
+                        Toast.makeText(view.getContext(), "não", Toast.LENGTH_SHORT).show();
+
+                       // String sql_find_quantidade = "SELECT quantidade_shopping FROM '"+ BDHelper.TABELA5 +"' WHERE ID_PRODUCT_SHOPPING='"+id_product_shopp+"'";
+                        //Cursor cursor2 = bdHelper.basedados.rawQuery(sql_find_quantidade, null);
+                        //cursor2.moveToFirst();
+
+                        //Shopping_card shopping_card = new Shopping_card(cursor.getInt(0), cursor.getString(1), cursor.getInt(3),cursor.getInt(2),  cursor.getInt(4));
+
+                       // Toast.makeText(view.getContext(), data, Toast.LENGTH_SHORT).show();
+
+                        String strSQL = "UPDATE shopping_cart SET quantidade_shopping = "+2+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
+
+                        bdHelper.basedados.execSQL(strSQL);
+
+
+                    } else {
+
+                        Toast.makeText(view.getContext(), "sim", Toast.LENGTH_SHORT).show();
+
+                        long id_product_shopping = listaProducts.get(position).getId_product();
+                        String name_shopping = listaProducts.get(position).getName();
+                        int price_shopping  = listaProducts.get(position).getPrice();
+                        int id_category_shopping= listaProducts.get(position).getId_category();
+                        int quantidade_shopping=1;
+
+                        Shopping_card shopping_card = new Shopping_card(id_product_shopping,  name_shopping,  price_shopping, id_category_shopping, quantidade_shopping);
+                        bdHelper.add_to_card(shopping_card);
+                    }
                 }catch (Exception e){
-
+                    Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -101,8 +133,10 @@ public class ListaProductsAdaptador extends BaseAdapter {
     }
 
     private class ViewHolderProducts {
-        private TextView tvName, tvPrice, tvid_category;
-        private ImageView ivCapa;
+        private final TextView tvName;
+        private final TextView tvPrice;
+        private TextView tvid_category;
+        private final ImageView ivCapa;
         ImageButton imageButton;
 
         public ViewHolderProducts(View view) {

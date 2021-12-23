@@ -18,6 +18,10 @@ public class Purchases {
         this.mesa = mesa;
         this.valor = valor;
     }
+    
+    public Purchases() {
+        
+    }
 
     public int getId_purchase() {
         return id_purchase;
@@ -45,7 +49,7 @@ public class Purchases {
    
     public String toString()
     {
-        return "Purchases [ id_purchases: "+id_purchase+", mesa: "+ mesa+", valor: "+ valor+ "]";
+        return "id_purchases: "+id_purchase+", mesa: "+ mesa+", valor: "+ valor;
     }
     
 }

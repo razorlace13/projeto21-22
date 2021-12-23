@@ -36,6 +36,7 @@ class CategoryController extends ActiveController
     {
         return $this->render('index');
     }
+
     public function actionTotal(){
         $Categorysmodel = new $this -> modelClass;
         $recs = $Categorysmodel::find() -> all();

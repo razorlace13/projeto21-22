@@ -9,6 +9,9 @@ class LoginController extends ActiveController
 {
     public $modelClass = 'app\models\LoginForm';
 
+    //CUSTOM
+    //METHOD GET
+    //http://192.168.1.189:1884/v1/login/get?username=teste&password=password
     public function actionGet($username, $password)
     {
 

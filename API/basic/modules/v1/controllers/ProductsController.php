@@ -29,7 +29,6 @@ class ProductsController extends ActiveController
         return ['limite' => $limit, 'Records' => $rec ];
     }
 
-    //http://localhost:8888/v1/produto/set/3
 
     public function actionSet($limit){
         $Productsmodel = new $this -> modelClass;
@@ -37,8 +36,18 @@ class ProductsController extends ActiveController
         return ['limite' => $limit, 'Records' => $rec ];
     }
 
-// http://localhost:8888/v1/produto/post
+    //GET
+    //http://192.168.1.189:1884/v1/products?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
 
+    //POST
+    //http://192.168.1.189:1884/v1/products/post?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //PUT
+    //http://192.168.1.189:1884/v1/products/put/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //DELETE
+    //http://192.168.1.189:1884/v1/products/delete/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+    
     public function actionPost() {
 
         $name=\Yii::$app -> request -> post('name');
@@ -72,7 +81,6 @@ class ProductsController extends ActiveController
             //throw new \yii\web\NotFoundHttpException("Client id not found!");
     }
 
-    //http://localhost:8888/v1/produto/delete/id
 
     public function actionDelete($id_product)
     {

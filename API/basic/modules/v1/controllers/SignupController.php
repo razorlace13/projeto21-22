@@ -12,15 +12,15 @@ class SignupController extends ActiveController
 {
     public $modelClass = 'app\models\User';
 
+    //CUSTOM
+    //METHOD POST
+    //http://192.168.1.189:1884/v1/signup/post
+
     public function actionPost()
     {
         $username=\Yii::$app -> request -> post('username');
-        $auth_key=\Yii::$app -> request -> post('auth_key');
-        $status=\Yii::$app -> request -> post('status');
         $password=\Yii::$app -> request -> post('password_hash');
         $email=\Yii::$app -> request -> post('email');
-        $created_at=\Yii::$app -> request -> post('created_at');
-        $updated_at=\Yii::$app -> request -> post('updated_at');
         $numero=\Yii::$app -> request -> post('numero');
         $nif=\Yii::$app -> request -> post('nif');
 

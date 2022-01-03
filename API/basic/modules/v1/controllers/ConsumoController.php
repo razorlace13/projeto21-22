@@ -43,7 +43,21 @@ class ConsumoController extends ActiveController
         return ['total' => count($recs)];
     }
 
-    //http://localhost:8888/v1/consumo/set/3
+    //GET
+    //http://192.168.1.189:1884/v1/consumo?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //POST
+    //http://192.168.1.189:1884/v1/consumo/post?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //PUT
+    //http://192.168.1.189:1884/v1/consumo/put/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //DELETE
+    //http://192.168.1.189:1884/v1/consumo/delete/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //CUSTOM
+    //METHOD GET
+    //http://192.168.1.189:1884/v1/consumo/consumopedido/4?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
 
     public function actionSet($limit){
         $Consumosmodel = new $this -> modelClass;
@@ -51,7 +65,7 @@ class ConsumoController extends ActiveController
         return ['limite' => $limit, 'Records' => $rec ];
     }
 
-// http://localhost:8888/v1/consumo/post
+    
 
     public function actionPost() {
 
@@ -84,8 +98,6 @@ class ConsumoController extends ActiveController
         return ['SaveError1' => $rec];
         //throw new \yii\web\NotFoundHttpException("Client id not found!");
     }
-
-    //http://localhost:8888/v1/consumo/delete/id
 
     public function actionDelete($id_consumo)
     {

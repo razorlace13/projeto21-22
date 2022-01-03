@@ -52,45 +52,56 @@ class PurchasesController extends ActiveController
         return ['limite' => $limit, 'Records' => $rec ];
     }
 
-    // http://localhost:8888/v1/purchases/post
+    //GET
+    //http://192.168.1.189:1884/v1/purchases?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //POST
+    //http://192.168.1.189:1884/v1/purchases/post?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //PUT
+    //http://192.168.1.189:1884/v1/purchases/put/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //DELETE
+    //http://192.168.1.189:1884/v1/purchases/delete/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //CUSTOM
+    //METHOD GET
+    //http://192.168.1.189:1884/v1/purchases/purchasesuser/4?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
 
     public function actionPost() {
-        //mudar
-        $id_product =\Yii::$app -> request -> post('id_product');
-        $id_user=\Yii::$app -> request -> post('id_user');
+        $valor =\Yii::$app -> request -> post('valor');
+        $data =\Yii::$app -> request -> post('data');
         $mesa=\Yii::$app -> request -> post('mesa');
+        $id_user=\Yii::$app -> request -> post('id_user');
 
         $Purchasesmodel = new $this -> modelClass;
-        $Purchasesmodel -> id_product = $id_product;
-        $Purchasesmodel -> price = $id_user;
+        $Purchasesmodel -> valor  = $valor;
+        $Purchasesmodel -> data = $data;
         $Purchasesmodel -> mesa = $mesa;
+        $Purchasesmodel -> id_user = $id_user;
 
         $ret = $Purchasesmodel -> save(false);
         return ['SaveError' => $ret];
     }
     public function actionPut($id_purchase){
 
-        $valor =\Yii::$app -> request -> post('valor ');
-        $data =\Yii::$app -> request -> post('data ');
-        $id_product =\Yii::$app -> request -> post('id_product ');
-        $id_user=\Yii::$app -> request -> post('id_user');
+        $valor =\Yii::$app -> request -> post('valor');
+        $data =\Yii::$app -> request -> post('data');
         $mesa=\Yii::$app -> request -> post('mesa');
+        $id_user=\Yii::$app -> request -> post('id_user');
 
         $Purchasesmodel = new $this->modelClass;
         $rec = $Purchasesmodel::find()->where('id_purchase = '.$id_purchase)->one();
 
-        $rec -> valor  = $valor ;
+        $rec -> valor  = $valor;
         $rec -> data = $data;
-        $rec -> id_product  = $id_product ;
-        $rec -> id_user = $id_user;
         $rec -> mesa = $mesa;
+        $rec -> id_user = $id_user;
 
         $rec->save(false);
         return ['SaveError1' => $rec];
         //throw new \yii\web\NotFoundHttpException("Client id not found!");
     }
-
-    //http://localhost:8888/v1/purchases/delete/id
 
     public function actionDelete($id_purchase)
     {

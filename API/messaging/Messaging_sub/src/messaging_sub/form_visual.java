@@ -103,33 +103,32 @@ public class form_visual extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextAreaMsg)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bt_ligar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bt_remover)))
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                        .addComponent(bt_ligar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextAreaMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bt_remover))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_ligar)
-                    .addComponent(bt_remover))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextAreaMsg)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bt_ligar)
+                        .addComponent(bt_remover))
+                    .addComponent(jTextAreaMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -164,6 +163,7 @@ public class form_visual extends javax.swing.JFrame {
                 private void addtoList(Purchases purchases) {
                     m_arrListaPurchases.add(purchases);
                     cModel.clear();
+                    listPurchases.setModel(cModel);
                     Purchases purc = new Purchases();
                     for (int i = 0; i < m_arrListaPurchases.size(); i++)
                     {
@@ -187,7 +187,7 @@ public class form_visual extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_ligarMouseClicked
 
     private void getProducts(int id_purchase) throws MalformedURLException, IOException {
-                    String url = "http://192.168.1.174:1884/v1/consumo/consumopedido/" + id_purchase + "?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi";
+                    String url = "http://192.168.1.189:1884/v1/consumo/consumopedido/" + id_purchase + "?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi";
                     URL obj = new URL(url);
                     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
                     con.setRequestMethod("GET");
@@ -242,10 +242,16 @@ public class form_visual extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_removerActionPerformed
 
     private void bt_removerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_removerMouseClicked
-        cModelConsumo.clear();
-        cModel.clear();
-        m_arrListaPurchases.clear();
-        
+       if (listPurchases.getSelectedIndex()!= -1)
+        {
+            int index = listPurchases.getSelectedIndex();
+            System.out.println("index: " + index);
+            m_arrListaPurchases.remove(index);
+            cModel.remove(index);
+            listPurchases.setModel(cModel);
+            cModelConsumo.clear();
+            cModelConsumo.clear();
+        }
     }//GEN-LAST:event_bt_removerMouseClicked
 
     /**

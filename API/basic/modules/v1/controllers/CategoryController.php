@@ -51,7 +51,17 @@ class CategoryController extends ActiveController
         return ['limite' => $limit, 'Records' => $rec ];
     }
 
-// http://localhost:8888/v1/category/post
+    //GET
+    //http://192.168.1.189:1884/v1/category?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //POST
+    //http://192.168.1.189:1884/v1/category/post?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //PUT
+    //http://192.168.1.189:1884/v1/category/put/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //DELETE
+    //http://192.168.1.189:1884/v1/category/delete/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
 
     public function actionPost() {
 
@@ -63,6 +73,7 @@ class CategoryController extends ActiveController
         $ret = $Categorysmodel -> save(false);
         return ['SaveError' => $ret];
     }
+
     public function actionPut($id){
 
         $name=\Yii::$app -> request -> post('name');
@@ -74,10 +85,8 @@ class CategoryController extends ActiveController
 
         $rec->save(false);
         return ['SaveError1' => $rec];
-        //throw new \yii\web\NotFoundHttpException("Client id not found!");
     }
 
-    //http://localhost:8888/v1/category/delete/id
 
     public function actionDelete($id_category)
     {

@@ -35,15 +35,11 @@ class UserController extends ActiveController
         return $this->render('index');
     }
 
-    //http://localhost:8888/v1/user/total
     public function actionTotal(){
         $Usermodel = new $this -> modelClass;
         $recs = $Usermodel::find() -> all();
         return ['total' => count($recs)];
     }
-
-
-    //http://localhost:8888/v1/user/8/nif
 
     public function actionNif($id){
         $Usermodel = new $this -> modelClass;
@@ -54,8 +50,6 @@ class UserController extends ActiveController
         return ['id' => $id, 'nif' => "null" ];
     }
 
-    //http://localhost:8888/v1/user/8/username
-
     public function actionUsername($id){
         $Usermodel = new $this -> modelClass;
         $rec = $Usermodel::find() -> where("id=".$id) -> one();
@@ -64,7 +58,12 @@ class UserController extends ActiveController
         return ['id' => $id, 'username' => "null" ];
     }
 
- //http://192.168.1.153:1884/v1/user/XBl8WxAMXzp4ftkZSsN55OfJsEEAf2LA/token?username=Claudio%20Martins&password=password
+    //CUSTOM
+    //METHOD GET
+    //http://192.168.1.189:1884/v1/user/F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi/token?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+    //METHOD PUT
+    //http://192.168.1.189:1884/v1/user/putsomefields/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
 
     public function actionToken($acess){
         $Usermodel = new $this -> modelClass;
@@ -73,15 +72,11 @@ class UserController extends ActiveController
         return ['id' => $rec -> id,'username' => $rec -> username,'email' => $rec -> email,'numero' => $rec -> numero,  ];
     }
 
-    //http://localhost:8888/v1/user/set/3
-
     public function actionSet($limit){
         $Usermodel = new $this -> modelClass;
         $rec = $Usermodel::find() -> limit($limit) -> all();
         return ['limite' => $limit, 'Records' => $rec ];
     }
-
-// http://localhost:8888/v1/user/post
 
     public function actionPost() {
 
@@ -158,8 +153,6 @@ class UserController extends ActiveController
         return ['SaveError1' => $rec];
         //throw new \yii\web\NotFoundHttpException("Client id not found!");
     }
-
-    //http://localhost:8888/v1/user/delete/id
 
     public function actionDelete($id)
     {

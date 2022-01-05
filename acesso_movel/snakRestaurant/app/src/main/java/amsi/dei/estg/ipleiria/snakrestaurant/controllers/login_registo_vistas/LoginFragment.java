@@ -70,14 +70,6 @@ public class LoginFragment extends Fragment implements LoginListener {
             et_password.setText(pass);
         }
 
-        /*Bundle bundle = getArguments();
-        
-        if (bundle != null){
-            String username = bundle.getString("username");
-            String password = bundle.getString("password");
-            et_username.setText(username);
-            et_password.setText(password);
-    }*/
         return view;
     }
 

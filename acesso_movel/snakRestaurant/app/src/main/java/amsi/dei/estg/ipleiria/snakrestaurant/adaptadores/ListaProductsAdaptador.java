@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.shopping_cart.shopping_cart_Fragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Products;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Shopping_card;
@@ -79,46 +80,58 @@ public class ListaProductsAdaptador extends BaseAdapter {
         vHolder.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Botão"+position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(view.getContext(), "Botão"+position, Toast.LENGTH_SHORT).show();
 
                 try {
 
                     long id_product_shopp = listaProducts.get(position).getId_product();
 
+                    double price = listaProducts.get(position).getPrice();
+
                     BDHelper bdHelper = new BDHelper(view.getContext());
 
-                    String sql = "SELECT EXISTS (SELECT * FROM '"+ BDHelper.TABELA5 +"' WHERE ID_PRODUCT_SHOPPING='"+id_product_shopp+"' LIMIT 1)";
+                    String sql = "SELECT EXISTS (SELECT * FROM '" + BDHelper.TABELA5 + "' WHERE ID_PRODUCT_SHOPPING='" + id_product_shopp + "' LIMIT 1)";
                     Cursor cursor = bdHelper.basedados.rawQuery(sql, null);
                     cursor.moveToFirst();
 
+
                     if (cursor.getInt(0) == 1) {
 
-                        Toast.makeText(view.getContext(), "não", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), "Adicionado so carrinho de compras", Toast.LENGTH_SHORT).show();
+                        String qry = "select quantidade_shopping from '" + BDHelper.TABELA5 + "' WHERE ID_PRODUCT_SHOPPING='" + id_product_shopp + "'";
+                        String sql_query_preco = "select price_shopping from '" + BDHelper.TABELA5 + "' WHERE ID_PRODUCT_SHOPPING='" + id_product_shopp + "'";
 
-                       // String sql_find_quantidade = "SELECT quantidade_shopping FROM '"+ BDHelper.TABELA5 +"' WHERE ID_PRODUCT_SHOPPING='"+id_product_shopp+"'";
-                        //Cursor cursor2 = bdHelper.basedados.rawQuery(sql_find_quantidade, null);
-                        //cursor2.moveToFirst();
+                        Cursor cursor1 = bdHelper.basedados.rawQuery(qry, null);
+                        cursor1.moveToFirst();
+                        int quantidade = cursor1.getInt(0);
 
-                        //Shopping_card shopping_card = new Shopping_card(cursor.getInt(0), cursor.getString(1), cursor.getInt(3),cursor.getInt(2),  cursor.getInt(4));
+                        int quantidade1 = quantidade + 1;
 
-                       // Toast.makeText(view.getContext(), data, Toast.LENGTH_SHORT).show();
+                        Cursor cursor2 = bdHelper.basedados.rawQuery(sql_query_preco, null);
+                        cursor2.moveToFirst();
+                        double preco = cursor2.getInt(0);
 
-                        String strSQL = "UPDATE shopping_cart SET quantidade_shopping = "+2+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
+
+                        double preco1 = preco + price;
+
+                        String strSQL = "UPDATE shopping_cart SET quantidade_shopping = "+quantidade1+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
+                        String strSQL_preco = "UPDATE shopping_cart SET price_shopping = "+preco1+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
+
 
                         bdHelper.basedados.execSQL(strSQL);
-
+                        bdHelper.basedados.execSQL(strSQL_preco);
 
                     } else {
 
-                        Toast.makeText(view.getContext(), "sim", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), "Adicionado so carrinho de compras", Toast.LENGTH_SHORT).show();
 
                         long id_product_shopping = listaProducts.get(position).getId_product();
                         String name_shopping = listaProducts.get(position).getName();
-                        int price_shopping  = listaProducts.get(position).getPrice();
-                        int id_category_shopping= listaProducts.get(position).getId_category();
-                        int quantidade_shopping=1;
+                        double price_shopping = listaProducts.get(position).getPrice();
+                        int id_category_shopping = listaProducts.get(position).getId_category();
+                        int quantidade_shopping = 1;
 
-                        Shopping_card shopping_card = new Shopping_card(id_product_shopping,  name_shopping,  price_shopping, id_category_shopping, quantidade_shopping);
+                        Shopping_card shopping_card = new Shopping_card(id_product_shopping, name_shopping, price_shopping, id_category_shopping, quantidade_shopping);
                         bdHelper.add_to_card(shopping_card);
                     }
                 }catch (Exception e){

@@ -31,7 +31,7 @@ public class JsonParser {
 
                 long id_product = productsjson.getLong("id_product");
                 String name = productsjson.getString("name");
-                int price = productsjson.getInt("price");
+                double price = productsjson.getDouble("price");
                 int id_category = productsjson.getInt("id_category");
 
                 Products products = new Products(id_product, name, price, id_category);

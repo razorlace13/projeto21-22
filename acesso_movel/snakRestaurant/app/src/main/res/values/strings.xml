@@ -44,9 +44,14 @@
     <!--Carrinho de compras-->
     <string name="id_product_shopping">id_product:</string>
     <string name="id_shopping">id_shopping:  </string>
-    <string name="name_shopping">name:  </string>
-    <string name="price_shopping">price:  </string>
+    <string name="name_shopping">Name:  </string>
+    <string name="price_shopping">Price:  </string>
     <string name="id_categoria">id_categoria:  </string>
-    <string name="quantidade_shopping">quantidade:  </string>
+    <string name="quantidade_shopping">Quantidade:  </string>
+
+    <string name="informacao">Informações do pedido:  </string>
+    <string name="informacao_pagamento">Informações do pagamento:  </string>
+    <string name="numero_conta">Numero conta:  </string>
+
 
 </resources>

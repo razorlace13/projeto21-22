@@ -2,11 +2,14 @@ package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.AccessToken;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIConsumo;
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIPostConsumo;
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIPostPurchases;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIProducts;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIPurchases;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIUser;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIUserPost;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlBASEAPI;
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlResgister;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -301,11 +304,36 @@ import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
          }
      }
 
+
+     public void PostPurchase(Context context,String str_valor, String str_data, String str_id_user, String str_mesa) {
+
+         StringRequest request = new StringRequest(Request.Method.POST, UrlAPIPostPurchases, new Response.Listener<String>() {
+             @Override
+             public void onResponse(String response) {
+                 //Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                 //registerListener.onValidateRegister();
+             }
+         }, new Response.ErrorListener() {
+             @Override
+             public void onErrorResponse(VolleyError error) {
+                 Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+             }
+         }
+         ) {
+             @Nullable
+             @Override
+             protected Map<String, String> getParams() throws AuthFailureError {
+
+                 Map<String, String> params = new HashMap<String, String>();
+                 params.put("valor", String.valueOf(str_valor));
+                 params.put("data", String.valueOf(str_data));
+                 params.put("id_user", String.valueOf(str_id_user));
+                 params.put("mesa", String.valueOf(str_mesa));
+
+                 return params;
+             }
+         };
+         RequestQueue requestQueue = Volley.newRequestQueue(context);
+         requestQueue.add(request);
+     }
  }
-
-
-
-
-
-
-

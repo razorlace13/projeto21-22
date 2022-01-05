@@ -15,9 +15,9 @@ import java.util.List;
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "projeto21_22";
-    private static final int VERSAO_BD = 18;
+    private static final int VERSAO_BD = 22;
     //dados da tabela
-    private static final String TABELA = "products", ID_PRODUCT = "id_product",NAME = "name",PRICE = "price",ID_CATEGORY = "id_category";
+    public static final String TABELA = "products", ID_PRODUCT = "id_product",NAME = "name ",PRICE = "price",ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo",ID_PEDIDO = "id_pedido ",QUANTIDADE = "quantidade";
     private static final String TABELA2 = "user", NUMERO = "numero";
     private static final String TABELA3 = "purchases", ID_PURCHASES = "id_purchase", VALOR = "valor", DATA = "data", MESA = "mesa", ID_USER = "id_user";
@@ -35,7 +35,7 @@ public class BDHelper extends SQLiteOpenHelper {
         String sqlTabela = "CREATE TABLE " + TABELA + "(" +
                 ID_PRODUCT + " INTEGER PRIMARY KEY, " +
                 NAME + " TEXT NOT NULL, " +
-                PRICE + " INTEGER NOT NULL, " +
+                PRICE + " DOUBLE NOT NULL, " +
                 ID_CATEGORY + " INTEGER NOT NULL)";
 
         db.execSQL(sqlTabela);
@@ -77,7 +77,7 @@ public class BDHelper extends SQLiteOpenHelper {
                  ID_SHOPPING + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                  ID_PRODUCT_SHOPPING + " INTEGER NOT NULL," +
                  NAME_SHOPPING + " TEXT NOT NULL, " +
-                 PRICE_SHOPPING + " INTEGER NOT NULL, " +
+                 PRICE_SHOPPING + " DOUBLE NOT NULL, " +
                  ID_CATEGORY_SHOPPING + " INTEGER NOT NULL," +
                  QUANTIDADE_SHOPPING + " INTEGER NOT NULL)";
 
@@ -135,7 +135,7 @@ public class BDHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             do{
                 Products products = new Products (cursor.getInt(0), cursor.getString(1),
-                        cursor.getInt(2), cursor.getInt(3));
+                        cursor.getDouble(2), cursor.getInt(3));
 
                 lista.add(products);
 
@@ -337,7 +337,7 @@ public class BDHelper extends SQLiteOpenHelper {
                 Integer id_shopping = Integer.parseInt(String.valueOf(cursor.getInt(0)));
                 long id_product_shopping = Integer.parseInt(String.valueOf(cursor.getInt(1)));
                 String name_shopping = cursor.getString(2);
-                int price_shopping = Integer.parseInt(String.valueOf(cursor.getInt(3)));
+                double price_shopping = Double.parseDouble(String.valueOf(cursor.getDouble(3)));
                 int id_category_shopping = Integer.parseInt(String.valueOf(cursor.getInt(4)));
                 int quantidade_shopping = Integer.parseInt(String.valueOf(cursor.getInt(5)));
 
@@ -367,27 +367,6 @@ public class BDHelper extends SQLiteOpenHelper {
         basedados = this.getWritableDatabase();
         basedados.delete(TABELA5,ID_SHOPPING + " = ?", new String[]
                 {String.valueOf(id_shopping)});
-    }
-
-    public void update_card(Shopping_card shopping_card){
-
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(QUANTIDADE,shopping_card.getQuantidade_shopping());
-        basedados.update(TABELA5, contentValues, ID_SHOPPING + " = ? " ,
-                new String[]{String.valueOf(shopping_card.getId_shopping())});
-
-        /*ContentValues contentValues = new ContentValues();
-
-        contentValues.put(BDHelper.ID_PRODUCT_SHOPPING, shopping_card.getId_product_shopping());
-        contentValues.put(BDHelper.NAME_SHOPPING, shopping_card.getName_shopping());
-        contentValues.put(BDHelper.PRICE_SHOPPING, shopping_card.getPrice_shopping());
-        contentValues.put(BDHelper.ID_CATEGORY_SHOPPING, shopping_card.getId_category_shopping());
-        contentValues.put(BDHelper.QUANTIDADE, shopping_card.getQuantidade_shopping());
-
-        basedados = this.getWritableDatabase();
-        basedados.update(TABELA5,contentValues,ID_SHOPPING +" = ?", new String[]
-                {String.valueOf(shopping_card.getId_shopping())});*/
     }
 
 }

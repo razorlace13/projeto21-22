@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id_product
  * @property string $name
- * @property int $price
+ * @property double $price
  * @property int $id_category
  *
  * @property Category $category
@@ -32,7 +32,8 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'price', 'id_category'], 'required'],
-            [['price', 'id_category'], 'integer'],
+            [['id_category'], 'integer'],
+            [['price'], 'double'],
             [['name'], 'string', 'max' => 11],
             [['id_category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['id_category' => 'id_category']],
         ];

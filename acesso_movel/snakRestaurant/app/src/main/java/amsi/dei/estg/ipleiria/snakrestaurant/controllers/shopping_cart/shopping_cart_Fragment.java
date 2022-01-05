@@ -5,11 +5,15 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -20,7 +24,8 @@ import amsi.dei.estg.ipleiria.snakrestaurant.models.Shopping_card;
 
 public class shopping_cart_Fragment extends Fragment {
 
-    RecyclerView recyclerView;
+    public static RecyclerView recyclerView;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     public shopping_cart_Fragment() {
 
@@ -29,7 +34,6 @@ public class shopping_cart_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -42,16 +46,30 @@ public class shopping_cart_Fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
+        get_Shopping_Card();
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setColorScheme(R.color.md_green_500);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                get_Shopping_Card();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        return view;
+        }
+
+    public void get_Shopping_Card() {
         BDHelper bdHelper = new BDHelper(getContext());
         List<Shopping_card> shopping_card = bdHelper.getAllCard();
 
         if (shopping_card.size() > 0){
-             RecyclerShoppingAdapter recyclerShoppingAdapter = new RecyclerShoppingAdapter(shopping_card,getContext());
+            RecyclerShoppingAdapter recyclerShoppingAdapter = new RecyclerShoppingAdapter(shopping_card,getContext());
             recyclerView.setAdapter(recyclerShoppingAdapter);
             //return;
         }else{
             Toast.makeText(getContext(), "sem dados ainda", Toast.LENGTH_SHORT).show();
         }
-        return view;
-        }
     }
+}

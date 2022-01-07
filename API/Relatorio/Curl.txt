@@ -1,0 +1,43 @@
+Os curl's encontram se pela seguinte ordem, GET->POST->PUT->DELETE->CUSTOM
+
+Category:
+
+Curl -H "Content-Type: application/json" -X GET http://192.168.1.189:1884/v1/category?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -d “{\"name\": \”comida\”}” -H "Content-Type: application/json" -X POST http://192.168.1.189:1884/v1/category/post?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -d “{\"name\": \”comida\”}” -H "Content-Type: application/json" -X PUT http://192.168.1.189:1884/v1/category/put/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -H "Content-Type: application/json" -X DELETE http://192.168.1.189:1884/v1/category/delete/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+Consumo:
+
+Curl -H "Content-Type: application/json" -X GET http://192.168.1.189:1884/v1/consumo?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -d “{\"id_pedido\": 4,\”id_product\”:1,\”quantidade\”:1}” -H "Content-Type: application/json" -X POST http://192.168.1.189:1884/v1/consumo/post?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -d “{\"id_pedido\": 4,\”id_product\”:1,\”quantidade\”:1}” -H "Content-Type: application/json" -X PUT http://192.168.1.189:1884/v1/consumo/put/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -H "Content-Type: application/json" -X DELETE http://192.168.1.189:1884/v1/consumo/delete/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -H "Content-Type: application/json" -X GET http://192.168.1.189:1884/v1/consumo/consumopedido/4?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+ 
+Login:
+
+Curl -H "Content-Type: application/json" -X GET http://192.168.1.189:1884/v1/login/get?username=teste&password=password
+
+Products:
+
+Curl -H "Content-Type: application/json" -X GET http://192.168.1.189:1884/v1/products?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -d “{\"name\": \"teste\",\”price\”:10.80,\”id_category\”:1}” -H "Content-Type: application/json" -X POST http://192.168.1.189:1884/v1/products/post?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -d “{\"name\": \"teste\",\”price\”:10.80,\”id_category\”:1}” -H "Content-Type: application/json" -X PUT http://192.168.1.189:1884/v1/products/put/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -H "Content-Type: application/json" -X DELETE http://192.168.1.189:1884/v1/products/delete/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+Purchases:
+
+Curl -H "Content-Type: application/json" -X GET http://192.168.1.189:1884/v1/purchases?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -d “{\"valor\": 10.80,\”data\”:\"2020-12-15\",\”mesa\”:1,\”id_user\”:1}” -H "Content-Type: application/json" -X POST http://192.168.1.189:1884/v1/purchases/post?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -H "Content-Type: application/json" -X DELETE http://192.168.1.189:1884/v1/purchases/delete/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -H "Content-Type: application/json" -X GET http://192.168.1.189:1884/v1/purchases/purchasesuser/4?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+
+Signup:
+
+Curl -d “{\"username\":\”teste\”,\”password_hash\”:\"password\",\”email\”:\"teste@gmail.com\",\”numero\”:911111222,\”nif\”:123456789}” -H "Content-Type: application/json" -X POST http://192.168.1.189:1884/v1/signup/post
+
+User:
+
+Curl -H "Content-Type: application/json" -X GET http://192.168.1.189:1884/v1/user/F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi/token?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -d “{\"username\":\”teste1\”,\”email\”:\”teste1@hotmail.com\”,\”numero\”:123456789}” -H "Content-Type: application/json" -X PUT http://192.168.1.189:1884/v1/user/putsomefields/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi

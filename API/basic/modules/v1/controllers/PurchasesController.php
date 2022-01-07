@@ -100,7 +100,6 @@ class PurchasesController extends ActiveController
 
         $rec->save(false);
         return ['SaveError1' => $rec];
-        //throw new \yii\web\NotFoundHttpException("Client id not found!");
     }
 
     public function actionDelete($id_purchase)

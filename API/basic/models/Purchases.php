@@ -97,15 +97,6 @@ class Purchases extends \yii\db\ActiveRecord
             $this->FazPublish("UPDATE",$myJSON);
     }
 
-    public function afterDelete()
-    {
-        parent::afterDelete();
-        $purchase_id= $this->id_purchase;
-        $myObj=new \stdClass();
-        $myObj->id_product=$purchase_id;
-        $myJSON = json_encode($myObj);
-        $this->FazPublish("DELETE",$myJSON);
-    }
     public function FazPublish($canal,$msg)
     {
         $server = "127.0.0.1";

@@ -81,7 +81,7 @@ class PurchasesController extends ActiveController
         $Purchasesmodel -> id_user = $id_user;
 
         $ret = $Purchasesmodel -> save(false);
-        return ['SaveError' => $ret];
+        return [$Purchasesmodel -> id_purchase];
     }
     public function actionPut($id_purchase){
 
@@ -118,5 +118,4 @@ class PurchasesController extends ActiveController
             return $recs;
 
     }
-
 }

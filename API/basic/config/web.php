@@ -103,12 +103,13 @@ $config = [
                         'GET total' => 'total' ,
                         'GET purchasesuser/{id_user}' => 'purchasesuser',
                         'GET set/{limit}' => 'set',
+                        'GET consumo/{id_user}' => 'consumo',
 
                         'POST post' => 'post',
-                        'PUT put/{id_purchases}'=>'put',
+                        'PUT put/{id_purchase}'=>'put',
                         'DELETE  delete/{id_purchase}' => 'delete'
                     ],
-                    'tokens' => [ '{id_purchase}'    => '<id:\d+>','{id_user}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                    'tokens' => ['{id_purchase}'    => '<id_purchase:\d+>', '{limit}' => '<limit:\d+>','{id_user}'    => '<id:\d+>' ,],
                 ],
 
                 ['class' => 'yii\rest\UrlRule',
@@ -135,12 +136,11 @@ $config = [
                         'GET consumopedido/{id_pedido}' => 'consumopedido',
                         'GET total' => 'total' ,
                         'GET set/{limit}' => 'set',
-
                         'POST post' => 'post',
                         'PUT put/{id_consumo}'=>'put',
                         'DELETE  delete/{id_consumo}' => 'delete'
                     ],
-                    'tokens' => [ '{id_consumo}'    => '<id:\d+>','{id_pedido}'    => '<id:\d+>', '{limit}' => '<limit:\d+>', ],
+                    'tokens' => [ '{id_consumo}'    => '<id:\d+>','{id_pedido}'    => '<id:\d+>', '{limit}' => '<limit:\d+>' ],
                 ],
                 ['class' => 'yii\rest\UrlRule',
                     'controller' => 'v1/signup',

@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use app\models\Purchases;
 use app\models\User;
 //use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
@@ -69,19 +70,35 @@ class PurchasesController extends ActiveController
     //http://192.168.1.189:1884/v1/purchases/purchasesuser/4?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
 
     public function actionPost() {
+
+        /*$Purchasesmodel2 = new $this -> modelClass;
+        $sql = "SELECT id_purchase FROM purchases ORDER BY id_purchase DESC LIMIT 1";
+        $rec = $Purchasesmodel2::findBySql($sql) ->one();
+        */
+
         $valor =\Yii::$app -> request -> post('valor');
         $data =\Yii::$app -> request -> post('data');
         $mesa=\Yii::$app -> request -> post('mesa');
         $id_user=\Yii::$app -> request -> post('id_user');
+
+
 
         $Purchasesmodel = new $this -> modelClass;
         $Purchasesmodel -> valor  = $valor;
         $Purchasesmodel -> data = $data;
         $Purchasesmodel -> mesa = $mesa;
         $Purchasesmodel -> id_user = $id_user;
+        $Purchasesmodel -> save();
 
-        $ret = $Purchasesmodel -> save(false);
-        return [$Purchasesmodel -> id_purchase];
+        if($Purchasesmodel->save())
+        {
+            $id = $Purchasesmodel -> getPrimaryKey() + 1;
+        }
+        //
+
+        return $id;
+
+
     }
     public function actionPut($id_purchase){
 

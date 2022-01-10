@@ -4,6 +4,7 @@ import static java.security.AccessController.getContext;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -14,7 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import java.net.CacheResponse;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +27,9 @@ import java.util.Locale;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections;
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
+import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.LoginFragment;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.Consumo;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.LoginSingleton;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.SingletonGestor;
 
@@ -30,7 +38,10 @@ public class PopupShopping extends Activity {
     TextView price;
     EditText edit_Mesa;
     Button buy_btn;
+    // String para a compra(purchases)
     String str_valor, str_data,str_id_user, str_mesa;
+    // String para o consumo
+    String str_id_pedido, str_id_product, str_quantidade;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +57,8 @@ public class PopupShopping extends Activity {
         getWindow().setLayout((int)(width*.8),(int)(height*.8));
 
         String price_from_fragment = getIntent().getStringExtra("price");
+        String quantidade_from_fragment = getIntent().getStringExtra("quantidade");
+        String id_product_from_fragment = getIntent().getStringExtra("id_product");
 
         edit_Mesa = findViewById(R.id.edit_Mesa);
 
@@ -63,21 +76,42 @@ public class PopupShopping extends Activity {
     }
     public void buy(){
 
-        if(str_mesa.equals("")){
+        /*if(str_mesa.equals("")){
             Toast.makeText(this, "A mesa não pode estar vazia!", Toast.LENGTH_SHORT).show();
         }
-        else {
+        else {*/
             str_valor = this.price.getText().toString().trim();
             str_data = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
             str_id_user = String.valueOf(Connections.id);
             str_mesa = this.edit_Mesa.getText().toString().trim();
-            /*   new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-            Toast.makeText(this, str_valor+"/", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, str_data+"/", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, str_id_user+"/", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, str_mesa+"/", Toast.LENGTH_SHORT).show();
-            */
+
             SingletonGestor.getInstance(getApplicationContext()).PostPurchase(getApplicationContext(), str_valor, str_data, str_id_user, str_mesa);
-        }
+
+            buyConsumo();
+            }
+        //}
+
+    private void buyConsumo() {
+        SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_MULTI_PROCESS);
+        str_id_pedido = String.valueOf(sharedPreferences.getString("value",""));
+
+
+            Toast.makeText(this, str_id_pedido, Toast.LENGTH_SHORT).show();
+            str_id_product = getIntent().getStringExtra("id_product");
+            str_quantidade = getIntent().getStringExtra("quantidade");
+            SingletonGestor.getInstance(getApplicationContext()).PostConsumo(getApplicationContext(), str_id_pedido, str_id_product, str_quantidade);
+
+        delete();
+        //int resposta = Integer.parseInt(str_id_pedido) + 1;
+        //String res = String.valueOf(resposta);
+    }
+    public void delete(){
+        String id_product_from_fragment = getIntent().getStringExtra("id_product");
+        BDHelper bdHelper = new BDHelper(getApplicationContext());
+        String str = "DELETE FROM '" + BDHelper.TABELA5 + "' WHERE id_product_shopping = '" + id_product_from_fragment + "'" ;
+        bdHelper.basedados.execSQL(str);
+
+        finish();
+
     }
 }

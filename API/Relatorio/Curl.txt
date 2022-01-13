@@ -30,6 +30,7 @@ Purchases:
 
 Curl -H "Content-Type: application/json" -X GET http://192.168.1.189:1884/v1/purchases?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
 Curl -d “{\"valor\": 10.80,\”data\”:\"2020-12-15\",\”mesa\”:1,\”id_user\”:1}” -H "Content-Type: application/json" -X POST http://192.168.1.189:1884/v1/purchases/post?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
+Curl -d “{\"valor\": 10.80,\”data\”:\"2020-12-15\",\”mesa\”:1,\”id_user\”:1}” -H "Content-Type: application/json" -X PUT http://192.168.1.189:1884/v1/purchases/put/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
 Curl -H "Content-Type: application/json" -X DELETE http://192.168.1.189:1884/v1/purchases/delete/1?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
 Curl -H "Content-Type: application/json" -X GET http://192.168.1.189:1884/v1/purchases/purchasesuser/4?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi
 

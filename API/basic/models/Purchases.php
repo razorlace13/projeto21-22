@@ -93,8 +93,6 @@ class Purchases extends \yii\db\ActiveRecord
         $myJSON = json_encode($myObj);
         if($insert)
             $this->FazPublish("INSERT",$myJSON);
-        else
-            $this->FazPublish("UPDATE",$myJSON);
     }
 
     public function FazPublish($canal,$msg)

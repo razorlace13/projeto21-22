@@ -137,6 +137,7 @@ $config = [
                         'GET total' => 'total' ,
                         'GET set/{limit}' => 'set',
                         'POST post' => 'post',
+                        'POST consumocompleto' => 'consumocompleto',
                         'PUT put/{id_consumo}'=>'put',
                         'DELETE  delete/{id_consumo}' => 'delete'
                     ],

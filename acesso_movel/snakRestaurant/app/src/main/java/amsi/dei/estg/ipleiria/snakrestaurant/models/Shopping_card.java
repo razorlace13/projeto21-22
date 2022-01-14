@@ -77,4 +77,15 @@ public class Shopping_card {
     public void setQuantidade_shopping(int quantidade_shopping) {
         this.quantidade_shopping = quantidade_shopping;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id_product_shopping=" + id_product_shopping +
+                ",name_shopping=" + name_shopping +
+                ",price_shopping=" + price_shopping +
+                ",id_category_shopping=" + id_category_shopping +
+                ",quantidade_shopping=" + quantidade_shopping +
+                '}';
+    }
 }

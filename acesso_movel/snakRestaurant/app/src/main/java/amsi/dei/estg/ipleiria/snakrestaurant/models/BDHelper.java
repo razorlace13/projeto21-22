@@ -15,7 +15,7 @@ import java.util.List;
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "projeto21_22";
-    private static final int VERSAO_BD = 22;
+    private static final int VERSAO_BD = 24;
     //dados da tabela
     public static final String TABELA = "products", ID_PRODUCT = "id_product", NAME = "name ", PRICE = "price", ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo", ID_PEDIDO = "id_pedido ", QUANTIDADE = "quantidade";
@@ -368,6 +368,25 @@ public class BDHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return store;
+    }
+
+    public ArrayList<Shopping_card> getAllShopingCard() {
+        ArrayList<Shopping_card> lista = new ArrayList<>();
+
+        Cursor cursor = this.basedados.query(TABELA5,
+                new String[]{ID_SHOPPING, ID_PRODUCT_SHOPPING, NAME_SHOPPING, PRICE_SHOPPING,ID_CATEGORY_SHOPPING,QUANTIDADE_SHOPPING},
+                null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Shopping_card shopping_card = new Shopping_card(cursor.getInt(1), cursor.getString(2),
+                        cursor.getDouble(3), cursor.getInt(4), cursor.getInt(5));
+
+                lista.add(shopping_card);
+
+            } while (cursor.moveToNext());
+        }
+        return lista;
     }
 
     public Shopping_card add_to_card(Shopping_card shopping_card) {

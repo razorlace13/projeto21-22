@@ -4,9 +4,13 @@ namespace app\modules\v1\controllers;
 
 use app\models\Consumo;
 use app\models\User;
+use phpDocumentor\Reflection\Types\Array_;
+use Yii;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
+use yii\helpers\Console;
 use yii\rest\ActiveController;
+use function MongoDB\BSON\toJSON;
 
 class ConsumoController extends ActiveController
 {
@@ -106,6 +110,30 @@ class ConsumoController extends ActiveController
         if($ret)
             return ['DelError' => $ret];
         throw new \yii\web\NotFoundHttpException("Client id not found!");
+    }
+
+    public function actionConsumocompleto()
+    {
+
+        $consuomArray = \Yii::$app -> request -> post('array');
+
+        $consuomArray = json_decode($consuomArray);
+
+        foreach($consuomArray as $consumo)
+        {
+            $consumoObject = json_decode(json_encode($consumo), FALSE);
+            $id_pedido=$consumoObject->id_pedido;
+            $id_product=$consumoObject->id_product;
+            $quantidade=$consumoObject->quantidade;
+
+            $Consumosmodel = new $this -> modelClass;
+            $Consumosmodel -> id_pedido = $id_pedido;
+            $Consumosmodel -> id_product = $id_product;
+            $Consumosmodel -> quantidade = $quantidade;
+
+            $Consumosmodel -> save(false);
+        }
+        return ['teste' => $consuomArray];
     }
 
     public function actionConsumopedido($id)

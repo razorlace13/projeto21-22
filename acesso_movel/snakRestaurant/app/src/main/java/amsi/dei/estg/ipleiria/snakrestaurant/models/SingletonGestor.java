@@ -1,20 +1,20 @@
 package amsi.dei.estg.ipleiria.snakrestaurant.models;
 
 import static android.content.Context.MODE_MULTI_PROCESS;
-import static android.content.Context.MODE_PRIVATE;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.AccessToken;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIConsumo;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIPostConsumo;
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIPostConsumoCompleto;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIPostPurchases;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIProducts;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIPurchases;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIUser;
 import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlAPIUserPost;
-import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlBASEAPI;
-import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.UrlResgister;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -31,8 +31,10 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -366,6 +368,41 @@ public class SingletonGestor {
                 params.put("id_product", String.valueOf(id_product));
                 params.put("quantidade", String.valueOf(quantidade));
 
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(request);
+    }
+
+    public void PostConsumo2(Context context,String id_pedido, ArrayList<Shopping_card> shopping_cards) {
+        ArrayList<ConsumoPost> consumoArray= new ArrayList<>();
+        for (int i=0;shopping_cards.size() != i; i++){
+            int id_product = (int) shopping_cards.get(i).getId_product_shopping();
+            int quantidade = (int) shopping_cards.get(i).getQuantidade_shopping();
+            ConsumoPost consumoPost = new ConsumoPost(id_pedido, id_product,quantidade);
+            consumoArray.add(consumoPost);
+        }
+        StringRequest request = new StringRequest(Request.Method.POST, UrlAPIPostConsumoCompleto, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                System.out.println(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("aqui " + error.getMessage());
+            }
+        }
+        ) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+                System.out.println(consumoArray);
+                params.put("array", String.valueOf(consumoArray));
                 return params;
             }
         };

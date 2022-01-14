@@ -10,22 +10,30 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
 import amsi.dei.estg.ipleiria.snakrestaurant.adaptadores.RecyclerShoppingAdapter;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.Consumo;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.Products;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.Purchases;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Shopping_card;
 
 public class shopping_cart_Fragment extends Fragment {
 
     public static RecyclerView recyclerView;
+    TextView teste;
     SwipeRefreshLayout swipeRefreshLayout;
+    Button btn_buy;
 
     public shopping_cart_Fragment() {
 
@@ -45,7 +53,7 @@ public class shopping_cart_Fragment extends Fragment {
         recyclerView = view.findViewById(R.id.Recycler_shopping_card);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-
+        btn_buy = view.findViewById(R.id.Btn_buy);
         get_Shopping_Card();
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setColorScheme(R.color.md_green_500);
@@ -56,6 +64,13 @@ public class shopping_cart_Fragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+        teste = view.findViewById(R.id.textView12);
+        btn_buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         return view;
         }
@@ -63,7 +78,6 @@ public class shopping_cart_Fragment extends Fragment {
     public void get_Shopping_Card() {
         BDHelper bdHelper = new BDHelper(getContext());
         List<Shopping_card> shopping_card = bdHelper.getAllCard();
-
         if (shopping_card.size() > 0){
             RecyclerShoppingAdapter recyclerShoppingAdapter = new RecyclerShoppingAdapter(shopping_card,getContext());
             recyclerView.setAdapter(recyclerShoppingAdapter);
@@ -72,4 +86,5 @@ public class shopping_cart_Fragment extends Fragment {
             Toast.makeText(getContext(), "sem dados ainda", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

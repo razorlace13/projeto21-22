@@ -33,6 +33,8 @@ public class Connections {
 
     public static final String UrlAPIPostConsumo = UrlBASEAPI + "consumo/post"+ AccessToken;
 
+    public static final String UrlAPIPostConsumoCompleto = UrlBASEAPI + "consumo/consumocompleto"+ AccessToken;
+
     public static final String UrlAPIPostPurchases = UrlBASEAPI + "purchases/post"+ AccessToken;
 
 }

@@ -5,6 +5,7 @@ import static java.security.AccessController.getContext;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -22,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction;
 import java.net.CacheResponse;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -31,6 +33,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.controllers.login_registo_vistas.Lo
 import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Consumo;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.LoginSingleton;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.Shopping_card;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.SingletonGestor;
 
 public class PopupShopping extends Activity {
@@ -92,14 +95,16 @@ public class PopupShopping extends Activity {
         //}
 
     private void buyConsumo() {
+        BDHelper databaseHelper;
+        databaseHelper = new BDHelper(getApplicationContext());
         SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_MULTI_PROCESS);
         str_id_pedido = String.valueOf(sharedPreferences.getString("value",""));
 
-
+            ArrayList<Shopping_card> shopping_cards = databaseHelper.getAllShopingCard();
             Toast.makeText(this, str_id_pedido, Toast.LENGTH_SHORT).show();
             str_id_product = getIntent().getStringExtra("id_product");
             str_quantidade = getIntent().getStringExtra("quantidade");
-            SingletonGestor.getInstance(getApplicationContext()).PostConsumo(getApplicationContext(), str_id_pedido, str_id_product, str_quantidade);
+            SingletonGestor.getInstance(getApplicationContext()).PostConsumo2(getApplicationContext(),str_id_pedido, shopping_cards);
 
         delete();
         //int resposta = Integer.parseInt(str_id_pedido) + 1;

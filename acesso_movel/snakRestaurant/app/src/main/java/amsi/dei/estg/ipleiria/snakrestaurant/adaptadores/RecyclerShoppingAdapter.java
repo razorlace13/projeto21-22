@@ -74,6 +74,7 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
                // context.startActivity(new Intent(view.getContext(), PopupShopping.class));
 
                 Intent intent = new Intent(view.getContext(), PopupShopping.class);
+                intent.putExtra("type", "0");
                 intent.putExtra("price", price);
                 intent.putExtra("quantidade", quantidade);
                 intent.putExtra("id_product", id_product);

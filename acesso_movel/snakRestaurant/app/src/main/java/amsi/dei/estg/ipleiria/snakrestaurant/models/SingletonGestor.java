@@ -41,6 +41,7 @@ import java.util.Map;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.profile.ProfileFragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.listeners.ConsumoListener;
 import amsi.dei.estg.ipleiria.snakrestaurant.listeners.ProductsListener;
+import amsi.dei.estg.ipleiria.snakrestaurant.listeners.PurchasePayListener;
 import amsi.dei.estg.ipleiria.snakrestaurant.listeners.PurchasesListener;
 import amsi.dei.estg.ipleiria.snakrestaurant.listeners.UserListener;
 import amsi.dei.estg.ipleiria.snakrestaurant.utils.JsonParser;
@@ -64,6 +65,7 @@ public class SingletonGestor {
     private ConsumoListener consumoListener;
     private PurchasesListener purchaseslistener;
     private UserListener userlistener;
+    private PurchasePayListener purchasePayListener;
 
     private SingletonGestor(Context contexto) {
         this.listaproducts = new ArrayList<>();
@@ -110,6 +112,10 @@ public class SingletonGestor {
 
     public void setPurchaseslistener(PurchasesListener purchaseslistener) {
         this.purchaseslistener = purchaseslistener;
+    }
+
+    public void setPurchasePayListener(PurchasePayListener purchasePayListener) {
+        this.purchasePayListener = purchasePayListener;
     }
 
     public void setUserlistener(ProfileFragment profileFragment) {
@@ -306,19 +312,18 @@ public class SingletonGestor {
     }
 
 
-    public void PostPurchase(Context context, String str_valor, String str_data, String str_id_user, String str_mesa) {
+    public void PostPurchase(Context context, String str_valor, String str_data, String str_id_user, String str_mesa, String type) {
 
         StringRequest request = new StringRequest(Request.Method.POST, UrlAPIPostPurchases, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
-                //registerListener.onValidateRegister();
-
                 SharedPreferences sharedPref = context.getSharedPreferences("myKey",MODE_MULTI_PROCESS);
                 SharedPreferences.Editor editor = sharedPref.edit();
+                System.out.println(response);
                 editor.putString("value", response);
                 editor.apply();
-
+                System.out.println(type);
+                purchasePayListener.onPayListener(type);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -346,6 +351,7 @@ public class SingletonGestor {
 
     public void PostConsumo(Context context, String id_pedido, String id_product, String quantidade) {
 
+        System.out.println(id_pedido + " " +id_product + " " + quantidade);
         StringRequest request = new StringRequest(Request.Method.POST, UrlAPIPostConsumo, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -375,7 +381,7 @@ public class SingletonGestor {
         requestQueue.add(request);
     }
 
-    public void PostConsumo2(Context context,String id_pedido, ArrayList<Shopping_card> shopping_cards) {
+    public void PostConsumoall(Context context,String id_pedido, ArrayList<Shopping_card> shopping_cards) {
         ArrayList<ConsumoPost> consumoArray= new ArrayList<>();
         for (int i=0;shopping_cards.size() != i; i++){
             int id_product = (int) shopping_cards.get(i).getId_product_shopping();

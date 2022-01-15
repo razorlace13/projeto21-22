@@ -92,7 +92,7 @@ class PurchasesController extends ActiveController
 
         if($Purchasesmodel->save())
         {
-            $id = $Purchasesmodel -> getPrimaryKey() + 1;
+            $id = $Purchasesmodel -> getPrimaryKey();
         }
         //
 

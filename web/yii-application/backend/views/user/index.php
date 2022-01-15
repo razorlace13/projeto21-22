@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -31,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'password_reset_token',
             //'auth_key',
             'status',
+
             'nif',
             'numero',
             //'created_at',

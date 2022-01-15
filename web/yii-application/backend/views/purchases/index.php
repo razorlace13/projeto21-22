@@ -25,8 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'valor',
             'data',
             'mesa',
+            [
+                'attribute' => 'id_user',
+                'label' => 'name user',
+                'value'     => 'user.username'
+            ],
             'id_user',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

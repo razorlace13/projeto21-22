@@ -10,7 +10,7 @@
     <string name="text_signin_message">Hello, sign in to your account</string>
     <string name="text_signin_social_media">Or Sign in using social media</string>
     <string name="text_signup_social_media">Or Sign up using social media</string>
-    <string name="text_signin_signup">Ainda não tem conta? <b>Faça já o seu Registo</b></string>
+    <string name="text_signin_signup">Don\'t have an account yet?<b>Register now</b></string>
     <string name="text_signup_terms">By signing up, you agree to our <b>terms and conditions</b></string>
     <string name="text_signup_message">Hello, let\'s set up your account</string>
 
@@ -22,7 +22,7 @@
     <string name="hint_confirm_password">Confirm Password</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="txt_signin">Ja tem conta? Faça o Login</string>
+        <string name="txt_signin">Already have an account? Login</string>
 
     <string name="txt_name_detalhes">nome</string>
     <string name="txt_price_detalhes">preço</string>
@@ -42,6 +42,7 @@
     <string name="Purchases_title">Compras</string>
 
     <!--Carrinho de compras-->
+    <string name="shopping_card">Shopping card</string>
     <string name="id_product_shopping">id_product:</string>
     <string name="id_shopping">id_shopping:  </string>
     <string name="name_shopping">Name:  </string>
@@ -50,7 +51,7 @@
     <string name="quantidade_shopping">Quantidade:  </string>
 
     <string name="informacao">Informações do pedido:  </string>
-    <string name="informacao_pagamento">Informações do pagamento:  </string>
+    <string name="mesa">Insira a mesa:  </string>
     <string name="numero_conta">Numero conta:  </string>
 
 

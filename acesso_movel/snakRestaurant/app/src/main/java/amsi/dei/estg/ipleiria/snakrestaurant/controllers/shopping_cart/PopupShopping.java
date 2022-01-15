@@ -63,7 +63,7 @@ public class PopupShopping extends Activity implements PurchasePayListener {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.7),(int)(height*.5));
+        getWindow().setLayout((int)(width*.7),(int)(height*.4));
         edit_Mesa = findViewById(R.id.edit_Mesa);
         price = findViewById(R.id.txtPrice);
         String typeofbuy = getIntent().getStringExtra("type");

@@ -18,6 +18,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'quantidade')->textInput() ?>
 
+    <?= $form->field($model, 'status')->dropDownList
+    (array('1'=>'Pedido Pago','2'=>'Pedido Cancelado','3'=>'Pedido em Execução','4'=>'Pedido Entregue'),
+        ['promp'=>'select status'])?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

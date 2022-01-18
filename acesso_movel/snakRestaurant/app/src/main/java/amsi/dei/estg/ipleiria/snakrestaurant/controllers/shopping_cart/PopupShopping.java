@@ -48,7 +48,7 @@ public class PopupShopping extends Activity implements PurchasePayListener {
     // String para a compra(purchases)
     String str_valor, str_data,str_id_user, str_mesa;
     // String para o consumo
-    String str_id_pedido, str_id_product, str_quantidade;
+    String str_id_pedido, str_id_product, str_quantidade,str_status;
     BDHelper databaseHelper;
 
     @Override
@@ -104,13 +104,14 @@ public class PopupShopping extends Activity implements PurchasePayListener {
     private void buyConsumo(String type) {
         SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_MULTI_PROCESS);
         str_id_pedido = String.valueOf(sharedPreferences.getString("value",""));
+        str_status = "Pedido Pago";
         if (type.equals("0")){
             str_id_product = getIntent().getStringExtra("id_product");
             str_quantidade = getIntent().getStringExtra("quantidade");
-            SingletonGestor.getInstance(getApplicationContext()).PostConsumo(getApplicationContext(), str_id_pedido, str_id_product, str_quantidade);
+            SingletonGestor.getInstance(getApplicationContext()).PostConsumo(getApplicationContext(), str_id_pedido, str_id_product, str_quantidade,str_status);
         }else{
             ArrayList<Shopping_card> shopping_cards = databaseHelper.getAllShopingCard();
-            SingletonGestor.getInstance(getApplicationContext()).PostConsumoall(getApplicationContext(),str_id_pedido, shopping_cards);
+            SingletonGestor.getInstance(getApplicationContext()).PostConsumoall(getApplicationContext(),str_id_pedido, shopping_cards,str_status);
         }
 
         delete(type);

@@ -11,6 +11,7 @@ use Yii;
  * @property int $id_pedido
  * @property int $id_product
  * @property int $quantidade
+ * @property string $status
  *
  * @property Purchases $pedido
  * @property Products $product
@@ -31,8 +32,9 @@ class Consumo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_pedido', 'id_product', 'quantidade'], 'required'],
+            [['id_pedido', 'id_product', 'quantidade', 'status'], 'required'],
             [['id_pedido', 'id_product', 'quantidade'], 'integer'],
+            [['status'], 'string'],
             [['id_pedido'], 'exist', 'skipOnError' => true, 'targetClass' => Purchases::className(), 'targetAttribute' => ['id_pedido' => 'id_purchase']],
             [['id_product'], 'exist', 'skipOnError' => true, 'targetClass' => Products::className(), 'targetAttribute' => ['id_product' => 'id_product']],
         ];
@@ -48,6 +50,7 @@ class Consumo extends \yii\db\ActiveRecord
             'id_pedido' => 'Id Pedido',
             'id_product' => 'Id Product',
             'quantidade' => 'Quantidade',
+            'status' => 'Status',
         ];
     }
 
@@ -69,20 +72,5 @@ class Consumo extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Products::className(), ['id_product' => 'id_product']);
-    }
-
-    // nomes para os testes
-    public function setid_pedido($id_pedido)
-    {
-        $this->id_pedido=$id_pedido;
-    }
-    public function setid_product($id_product)
-    {
-        $this->id_product=$id_product;
-    }
-
-    public function setquantidade($quantidade)
-    {
-        $this->quantidade=$quantidade;
     }
 }

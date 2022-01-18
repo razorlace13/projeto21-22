@@ -349,7 +349,7 @@ public class SingletonGestor {
         requestQueue.add(request);
     }
 
-    public void PostConsumo(Context context, String id_pedido, String id_product, String quantidade) {
+    public void PostConsumo(Context context, String id_pedido, String id_product, String quantidade, String status) {
 
         System.out.println(id_pedido + " " +id_product + " " + quantidade);
         StringRequest request = new StringRequest(Request.Method.POST, UrlAPIPostConsumo, new Response.Listener<String>() {
@@ -373,6 +373,7 @@ public class SingletonGestor {
                 params.put("id_pedido", String.valueOf(id_pedido));
                 params.put("id_product", String.valueOf(id_product));
                 params.put("quantidade", String.valueOf(quantidade));
+                params.put("status", String.valueOf(status));
 
                 return params;
             }
@@ -381,7 +382,7 @@ public class SingletonGestor {
         requestQueue.add(request);
     }
 
-    public void PostConsumoall(Context context,String id_pedido, ArrayList<Shopping_card> shopping_cards) {
+    public void PostConsumoall(Context context,String id_pedido, ArrayList<Shopping_card> shopping_cards,String status) {
         ArrayList<ConsumoPost> consumoArray= new ArrayList<>();
         for (int i=0;shopping_cards.size() != i; i++){
             int id_product = (int) shopping_cards.get(i).getId_product_shopping();

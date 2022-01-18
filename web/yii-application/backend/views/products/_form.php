@@ -16,7 +16,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'id_category')->textInput() ?>
+    <?= $form->field($model, 'id_category')->dropDownList(
+        \yii\helpers\ArrayHelper::map(\backend\models\Category::find()->all(),'id_category','name'),
+        ['promp'=>'select status'])?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -100,7 +100,7 @@ class PurchasesController extends ActiveController
 
 
     }
-    public function actionPut($id_purchase){
+    public function actionPut($id){
 
         $valor =\Yii::$app -> request -> post('valor');
         $data =\Yii::$app -> request -> post('data');
@@ -108,7 +108,7 @@ class PurchasesController extends ActiveController
         $id_user=\Yii::$app -> request -> post('id_user');
 
         $Purchasesmodel = new $this->modelClass;
-        $rec = $Purchasesmodel::find()->where('id_purchase = '.$id_purchase)->one();
+        $rec = $Purchasesmodel::find()->where('id_purchase = '.$id)->one();
 
         $rec -> valor  = $valor;
         $rec -> data = $data;

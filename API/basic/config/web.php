@@ -109,7 +109,7 @@ $config = [
                         'PUT put/{id_purchase}'=>'put',
                         'DELETE  delete/{id_purchase}' => 'delete'
                     ],
-                    'tokens' => ['{id_purchase}'    => '<id_purchase:\d+>', '{limit}' => '<limit:\d+>','{id_user}'    => '<id:\d+>' ,],
+                    'tokens' => ['{id_purchase}'    => '<id:\d+>', '{limit}' => '<limit:\d+>','{id_user}'    => '<id:\d+>' ,],
                 ],
 
                 ['class' => 'yii\rest\UrlRule',

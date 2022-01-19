@@ -87,37 +87,25 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
             @Override
             public void onClick(View view) {
 
+                BDHelper bdHelper = new BDHelper(view.getContext());
+
                 long id_product_shopp = shopping.get(position).getId_product_shopping();
 
                 int quantidade = shopping.get(position).getQuantidade_shopping();
 
                 double price = shopping.get(position).getPrice_shopping();
 
-                BDHelper bdHelper = new BDHelper(view.getContext());
-
-                String sql_query_preco_original = "select price from '" + BDHelper.TABELA + "' WHERE ID_PRODUCT='" + id_product_shopp + "'";
+                double preco_original = bdHelper.preco_original(id_product_shopp);
 
                 int quantidade1 = quantidade + 1;
-
-                Cursor cursor = bdHelper.basedados.rawQuery(sql_query_preco_original, null);
-                cursor.moveToFirst();
-                double preco_original = cursor.getDouble(0);
 
                 double preco1 = price + preco_original;
 
                 DecimalFormat decimalFormat = new DecimalFormat("#.##");
                 preco1 = Double.valueOf(decimalFormat.format(preco1));
 
-
-                String strSQL_quantidade = "UPDATE shopping_cart SET quantidade_shopping = "+quantidade1+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
-                String strSQL_preco = "UPDATE shopping_cart SET price_shopping = "+preco1+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
-
-                bdHelper.basedados.execSQL(strSQL_quantidade);
-                bdHelper.basedados.execSQL(strSQL_preco);
-                //Toast.makeText(view.getContext(), "não", Toast.LENGTH_SHORT).show();
+                bdHelper.adicionar_ao_carrinho(quantidade1,preco1,id_product_shopp);
                 notifyDataSetChanged();
-
-
 
                 List<Shopping_card> shopping_card = bdHelper.getAllCard();
 
@@ -128,8 +116,6 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
                 }else{
                     Toast.makeText(view.getContext(), "sem dados ainda", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
         holder.remove_btn.setOnClickListener(new View.OnClickListener() {
@@ -144,13 +130,9 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
 
                 BDHelper bdHelper = new BDHelper(view.getContext());
 
-                String sql_query_preco_original = "select price from '" + BDHelper.TABELA + "' WHERE ID_PRODUCT='" + id_product_shopp + "'";
+                double preco_original = bdHelper.preco_original(id_product_shopp);
 
-                Cursor cursor = bdHelper.basedados.rawQuery(sql_query_preco_original, null);
-                cursor.moveToFirst();
-                double preco_original = cursor.getDouble(0);
-
-                double quantidade1 = quantidade - 1;
+                int quantidade1 = quantidade - 1;
                 double preco1 = price - preco_original;
 
                 DecimalFormat decimalFormat = new DecimalFormat("#.##");
@@ -161,12 +143,8 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
                     shopping.remove(position);
                     notifyDataSetChanged();
                 }else {
-                    String strSQL_quantidade = "UPDATE shopping_cart SET quantidade_shopping = "+quantidade1+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
-                    String strSQL_preco = "UPDATE shopping_cart SET price_shopping = "+preco1+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
 
-                    bdHelper.basedados.execSQL(strSQL_quantidade);
-                    bdHelper.basedados.execSQL(strSQL_preco);
-                    //Toast.makeText(view.getContext(), "não", Toast.LENGTH_SHORT).show();
+                    bdHelper.remover_ao_carrinho(quantidade1,preco1,id_product_shopp);
                     notifyDataSetChanged();
 
                     List<Shopping_card> shopping_card = bdHelper.getAllCard();
@@ -178,9 +156,7 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
                     }else{
                         Toast.makeText(view.getContext(), "sem dados ainda", Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
             }
         });
     }

@@ -410,4 +410,34 @@ public class BDHelper extends SQLiteOpenHelper {
                 {String.valueOf(id_shopping)});
     }
 
+    public void adicionar_ao_carrinho(int quantidade1,double preco1, long id_product_shopp){
+
+        basedados = this.getWritableDatabase();
+        String strSQL_quantidade = "UPDATE shopping_cart SET quantidade_shopping = "+quantidade1+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
+        String strSQL_preco = "UPDATE shopping_cart SET price_shopping = "+preco1+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
+        basedados.execSQL(strSQL_quantidade);
+        basedados.execSQL(strSQL_preco);
+
+    }
+
+    public void remover_ao_carrinho(int quantidade1,double preco1, long id_product_shopp){
+
+        basedados = this.getWritableDatabase();
+        String strSQL_quantidade = "UPDATE shopping_cart SET quantidade_shopping = "+quantidade1+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
+        String strSQL_preco = "UPDATE shopping_cart SET price_shopping = "+preco1+" WHERE ID_PRODUCT_SHOPPING = "+id_product_shopp;
+        basedados.execSQL(strSQL_quantidade);
+        basedados.execSQL(strSQL_preco);
+
+    }
+
+    public double preco_original(long id_product_shopp){
+
+        String sql_query_preco_original = "select price from '" + BDHelper.TABELA + "' WHERE ID_PRODUCT='" + id_product_shopp + "'";
+
+        Cursor cursor = basedados.rawQuery(sql_query_preco_original, null);
+        cursor.moveToFirst();
+        double preco_original = cursor.getDouble(0);
+
+        return preco_original;
+    }
 }

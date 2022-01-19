@@ -85,7 +85,7 @@ public class shopping_cart_Fragment extends Fragment {
             recyclerView.setAdapter(recyclerShoppingAdapter);
             //return;
         }else{
-            Toast.makeText(getContext(), "sem dados ainda", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Sem Produtos", Toast.LENGTH_SHORT).show();
         }
     }
 

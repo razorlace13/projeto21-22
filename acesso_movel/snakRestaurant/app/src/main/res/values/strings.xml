@@ -42,7 +42,7 @@
     <string name="Purchases_title">Compras</string>
 
     <!--Carrinho de compras-->
-    <string name="shopping_card">Shopping card</string>
+    <string name="shopping_card">Carrinho</string>
     <string name="id_product_shopping">id_product:</string>
     <string name="id_shopping">id_shopping:  </string>
     <string name="name_shopping">Name:  </string>

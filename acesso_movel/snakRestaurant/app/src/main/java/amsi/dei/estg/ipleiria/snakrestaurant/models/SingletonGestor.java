@@ -322,7 +322,8 @@ public class SingletonGestor {
                 System.out.println(response);
                 editor.putString("value", response);
                 editor.apply();
-                System.out.println(type);
+                Toast.makeText(context, "Pagamento em Andamento", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Pago", Toast.LENGTH_SHORT).show();
                 purchasePayListener.onPayListener(type);
             }
         }, new Response.ErrorListener() {

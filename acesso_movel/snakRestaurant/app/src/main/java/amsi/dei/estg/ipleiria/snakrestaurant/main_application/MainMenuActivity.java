@@ -59,17 +59,19 @@ public class MainMenuActivity extends AppCompatActivity {
                         mostracarrinho();
                         break;
                     case R.id.logout:
-                        //bd.removerUserDB();
-                        bd.remover();
-
-                        Intent login = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(login);
+                        logout();
                         break;
                 }
                 return true;
             }
         });
 
+    }
+
+    private void logout() {
+        bd.remover();
+        this.deleteDatabase("projeto21_22");
+        this.finish();
     }
 
     private void mostraprodutos() {

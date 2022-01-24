@@ -58,21 +58,21 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
         adaptador = new RecyclerPurchasesAdaptador(this,SingletonGestor.getInstance(this).getListapurchasesBD(), this);
         Rv_purchases.setAdapter(adaptador);
         progressBar = findViewById(R.id.Pb_purchases);
-        getPurchases(false);
+        getPurchases();
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout_Purchases);
         swipeRefreshLayout.setColorScheme(R.color.md_green_500);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getPurchases(true);
+                getPurchases();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
-    private void getPurchases(Boolean resp) {
+    private void getPurchases() {
         SingletonGestor.getInstance(this).setPurchaseslistener(this);
-        SingletonGestor.getInstance(this).getAllPurchasesAPI(this, resp);
+        SingletonGestor.getInstance(this).getAllPurchasesAPI(this);
     }
 
     @Override

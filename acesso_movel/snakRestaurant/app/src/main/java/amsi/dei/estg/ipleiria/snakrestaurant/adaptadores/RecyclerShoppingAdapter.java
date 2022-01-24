@@ -107,7 +107,7 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
                 bdHelper.adicionar_ao_carrinho(quantidade1,preco1,id_product_shopp);
                 notifyDataSetChanged();
 
-                List<Shopping_card> shopping_card = bdHelper.getAllCard();
+                List<Shopping_card> shopping_card = bdHelper.getAllCard(view.getContext());
 
                 if (shopping_card.size() > 0){
                     RecyclerShoppingAdapter recyclerShoppingAdapter = new RecyclerShoppingAdapter(shopping_card, view.getContext());
@@ -147,7 +147,7 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
                     bdHelper.remover_ao_carrinho(quantidade1,preco1,id_product_shopp);
                     notifyDataSetChanged();
 
-                    List<Shopping_card> shopping_card = bdHelper.getAllCard();
+                    List<Shopping_card> shopping_card = bdHelper.getAllCard(view.getContext());
 
                     if (shopping_card.size() > 0){
                         RecyclerShoppingAdapter recyclerShoppingAdapter = new RecyclerShoppingAdapter(shopping_card, view.getContext());

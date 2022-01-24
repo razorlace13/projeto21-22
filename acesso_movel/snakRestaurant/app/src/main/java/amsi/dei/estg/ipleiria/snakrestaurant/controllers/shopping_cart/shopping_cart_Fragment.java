@@ -79,7 +79,7 @@ public class shopping_cart_Fragment extends Fragment {
 
     public void get_Shopping_Card() {
         BDHelper bdHelper = new BDHelper(getContext());
-        List<Shopping_card> shopping_card = bdHelper.getAllCard();
+        List<Shopping_card> shopping_card = bdHelper.getAllCard(getContext());
         if (shopping_card.size() > 0){
             RecyclerShoppingAdapter recyclerShoppingAdapter = new RecyclerShoppingAdapter(shopping_card,getContext());
             recyclerView.setAdapter(recyclerShoppingAdapter);

@@ -131,8 +131,9 @@ public class SingletonGestor {
             }
         } else {
             if (!bd.getProductsCheck() || Resp) {
+                String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
                 JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                        UrlAPIProducts, null,
+                        UrlAPIProducts + token, null,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
@@ -156,7 +157,6 @@ public class SingletonGestor {
                         });
                 volleyQueue.add(request);
             } else {
-                System.out.println("SQL");
                 if (productslistener != null) {
                     productslistener.onRefreshListaProducts(getListaproductsBD());
                 }
@@ -173,8 +173,9 @@ public class SingletonGestor {
             }
         } else {
             if (!bd.getConsumoCheck(id_purchase)) {
+                String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
                 JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                        UrlAPIConsumo + id_purchase + AccessToken, null,
+                        UrlAPIConsumo + id_purchase + AccessToken + token, null,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
@@ -205,7 +206,7 @@ public class SingletonGestor {
         }
     }
 
-    public void getAllPurchasesAPI(final Context contexto, Boolean Resp) {
+    public void getAllPurchasesAPI(final Context contexto) {
         if (!JsonParser.isConnectionInternet(contexto)) {
             Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
 
@@ -214,9 +215,11 @@ public class SingletonGestor {
             }
         } else {
 
-            if (!bd.getPurchasesCheck() || Resp) {
+            if (!bd.getPurchasesCheck()) {
+                int id = LoginSingleton.getInstance(contexto).getLogin().getId();
+                String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
                 JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                        UrlAPIPurchases, null,
+                        UrlAPIPurchases + id + AccessToken + token, null,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
@@ -246,13 +249,14 @@ public class SingletonGestor {
         }
     }
 
-    public void getUserAPI(final Context contexto, boolean resp) {
+    public void getUserAPI(final Context contexto) {
         if (!JsonParser.isConnectionInternet(contexto)) {
             Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
         } else {
-            if (!bd.getUserProfileCheck() || resp) {
+            if (!bd.getUserProfileCheck()) {
+                String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                        UrlAPIUser,
+                        UrlAPIUser + token + "/token" + AccessToken + token,
                         null,
                         new Response.Listener<JSONObject>() {
                             @Override
@@ -283,8 +287,9 @@ public class SingletonGestor {
         if (!JsonParser.isConnectionInternet(contexto)) {
             Toast.makeText(contexto, "Não tem ligação à internet", Toast.LENGTH_SHORT).show();
         } else {
+            String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
             StringRequest request = new StringRequest(Request.Method.PUT,
-                    UrlAPIUserPost,
+                    UrlAPIUserPost + id + AccessToken + token,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -313,19 +318,18 @@ public class SingletonGestor {
 
 
     public void PostPurchase(Context context, String str_valor, String str_data, String str_id_user, String str_mesa, String type) {
-
-        StringRequest request = new StringRequest(Request.Method.POST, UrlAPIPostPurchases, new Response.Listener<String>() {
+        String token = LoginSingleton.getInstance(context).getLogin().getToken();
+        StringRequest request = new StringRequest(Request.Method.POST, UrlAPIPostPurchases + token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 SharedPreferences sharedPref = context.getSharedPreferences("myKey",MODE_MULTI_PROCESS);
                 SharedPreferences.Editor editor = sharedPref.edit();
-                System.out.println(response);
                 editor.putString("value", response);
                 editor.apply();
                 Toast.makeText(context, "Pagamento em Andamento", Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "Pago", Toast.LENGTH_SHORT).show();
                 purchasePayListener.onPayListener(type);
-                getAllPurchasesAPI(context, true);
+                getAllPurchasesAPI(context);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -352,9 +356,8 @@ public class SingletonGestor {
     }
 
     public void PostConsumo(Context context, String id_pedido, String id_product, String quantidade, String status) {
-
-        System.out.println(id_pedido + " " +id_product + " " + quantidade);
-        StringRequest request = new StringRequest(Request.Method.POST, UrlAPIPostConsumo, new Response.Listener<String>() {
+        String token = LoginSingleton.getInstance(context).getLogin().getToken();
+        StringRequest request = new StringRequest(Request.Method.POST, UrlAPIPostConsumo + token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
@@ -392,16 +395,14 @@ public class SingletonGestor {
             ConsumoPost consumoPost = new ConsumoPost(id_pedido, id_product,quantidade);
             consumoArray.add(consumoPost);
         }
-        StringRequest request = new StringRequest(Request.Method.POST, UrlAPIPostConsumoCompleto, new Response.Listener<String>() {
+        String token = LoginSingleton.getInstance(context).getLogin().getToken();
+        StringRequest request = new StringRequest(Request.Method.POST, UrlAPIPostConsumoCompleto + token, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
-                System.out.println(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("aqui " + error.getMessage());
             }
         }
         ) {
@@ -410,7 +411,6 @@ public class SingletonGestor {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<String, String>();
-                System.out.println(consumoArray);
                 params.put("array", String.valueOf(consumoArray));
                 return params;
             }

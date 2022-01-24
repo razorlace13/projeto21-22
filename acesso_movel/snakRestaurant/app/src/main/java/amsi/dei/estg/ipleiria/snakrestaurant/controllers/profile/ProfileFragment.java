@@ -75,7 +75,7 @@ public class ProfileFragment extends Fragment implements UserListener {
         return view;
     }
     private void getUser(boolean resp) {
-        SingletonGestor.getInstance(getContext()).getUserAPI(getContext(),resp);
+        SingletonGestor.getInstance(getContext()).getUserAPI(getContext());
     }
 
     @Override

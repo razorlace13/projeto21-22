@@ -27,6 +27,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections;
 import amsi.dei.estg.ipleiria.snakrestaurant.R;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.shopping_cart.shopping_cart_Fragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.LoginSingleton;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Products;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Shopping_card;
 
@@ -125,13 +126,13 @@ public class ListaProductsAdaptador extends BaseAdapter {
                     } else {
 
                         Toast.makeText(view.getContext(), "Adicionado so carrinho de compras", Toast.LENGTH_SHORT).show();
-
+                        int id = LoginSingleton.getInstance(view.getContext()).getLogin().getId();
                         long id_product_shopping = listaProducts.get(position).getId_product();
                         String name_shopping = listaProducts.get(position).getName();
                         double price_shopping = listaProducts.get(position).getPrice();
                         int id_category_shopping = listaProducts.get(position).getId_category();
                         int quantidade_shopping = 1;
-                        int id_user_shopping = Connections.id;
+                        int id_user_shopping = id;
 
                         Shopping_card shopping_card = new Shopping_card(id_product_shopping, name_shopping, price_shopping, id_category_shopping, quantidade_shopping,id_user_shopping);
                         bdHelper.add_to_card(shopping_card);

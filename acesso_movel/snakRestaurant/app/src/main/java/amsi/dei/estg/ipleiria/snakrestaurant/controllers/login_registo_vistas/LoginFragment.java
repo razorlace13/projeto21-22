@@ -150,4 +150,9 @@ public class LoginFragment extends Fragment implements LoginListener {
             Toast.makeText(getContext(), "Username or password incorrect", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void onResume() {
+        bd = new BDHelper(getContext());
+        super.onResume();
+    }
 }

@@ -11,7 +11,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.id;
 
 public class BDHelper extends SQLiteOpenHelper {
 
@@ -355,7 +354,8 @@ public class BDHelper extends SQLiteOpenHelper {
         return basedados.delete(TABELA4, null, null) > 0;
     }
 
-    public List<Shopping_card> getAllCard() {
+    public List<Shopping_card> getAllCard(Context context) {
+        int id = LoginSingleton.getInstance(context).getLogin().getId();
         String sql = "select * from " + TABELA5 + " where id_user_shopping = "+id;
         basedados = this.getReadableDatabase();
         List<Shopping_card> store = new ArrayList<>();
@@ -450,18 +450,12 @@ public class BDHelper extends SQLiteOpenHelper {
     }
 
     public void remover(){
-
-        String sql3 = "DELETE FROM '" + BDHelper.TABELA2 + "'";
-        String sql5 = "DELETE FROM '" + BDHelper.TABELA4 + "'";
-
-        basedados = this.getWritableDatabase();
+        basedados.delete(TABELA, null, null);
+        basedados.delete(TABELA1, null, null);
         basedados.delete(TABELA2, null, null);
+        basedados.delete(TABELA3, null, null);
         basedados.delete(TABELA4, null, null);
-        basedados.rawQuery(sql3, null);
-        basedados.rawQuery(sql5, null);
-
-        //basedados.execSQL("DELETE TABLE IF EXISTS user");
-        //basedados.execSQL("DELETE TABLE IF EXISTS login");
+        basedados.delete(TABELA5, null, null);
     }
 
 }

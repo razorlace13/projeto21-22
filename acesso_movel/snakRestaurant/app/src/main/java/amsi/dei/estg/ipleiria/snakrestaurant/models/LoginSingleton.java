@@ -54,7 +54,7 @@ public class LoginSingleton {
         /** Inicializar variaveis **/
         database = new BDHelper(context);
         if (database.getUser().size() > 0) {
-            login = database.getUser().get(0);
+            login = database.getUser().getFirst();
         }
     }
 

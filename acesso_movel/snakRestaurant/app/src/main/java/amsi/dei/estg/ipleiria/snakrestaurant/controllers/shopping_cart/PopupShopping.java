@@ -91,9 +91,10 @@ public class PopupShopping extends Activity implements PurchasePayListener {
 
     }
     public void buy(String type){
+            int id = LoginSingleton.getInstance(getApplicationContext()).getLogin().getId();
             str_valor = this.price.getText().toString().trim();
             str_data = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-            str_id_user = String.valueOf(Connections.id);
+            str_id_user = String.valueOf(id);
             str_mesa = this.edit_Mesa.getText().toString().trim();
             SingletonGestor.getInstance(this).setPurchasePayListener(this);
             SingletonGestor.getInstance(getApplicationContext()).PostPurchase(getApplicationContext(), str_valor, str_data, str_id_user, str_mesa, type);
@@ -128,7 +129,7 @@ public class PopupShopping extends Activity implements PurchasePayListener {
             bdHelper.basedados.execSQL(str);
         }
         finish();
-        List<Shopping_card> shopping_card = bdHelper.getAllCard();
+        List<Shopping_card> shopping_card = bdHelper.getAllCard(getApplicationContext());
 
         if (shopping_card.size() > 0){
             RecyclerShoppingAdapter recyclerShoppingAdapter = new RecyclerShoppingAdapter(shopping_card, getApplicationContext());

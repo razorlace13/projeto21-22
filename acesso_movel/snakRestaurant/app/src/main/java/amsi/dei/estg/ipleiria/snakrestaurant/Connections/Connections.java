@@ -12,22 +12,21 @@ public class Connections {
     //10.80.226.82 do polo de Tv do tiago
         //10.80.226.92 do polo de Tv do Claudio
 
-    public static final String UrlBASEAPI = "http://10.80.226.82:1884/v1/";
+    public static final String UrlBASEAPI = "http://192.168.1.183:1884/v1/";
 
     private static Context contexto;
-    private static String token = LoginSingleton.getInstance(contexto).getLogin().getToken();
-    public static int id = LoginSingleton.getInstance(contexto).getLogin().getId();
-    public static final String AccessToken = "?access-token=" + token;
+
+    public static final String AccessToken = "?access-token=";
 
     public static final String UrlAPIProducts = UrlBASEAPI + "products" + AccessToken;
 
     public static final String UrlResgister = UrlBASEAPI + "signup/post";
 
-    public static final String UrlAPIUser = UrlBASEAPI + "user/"+ token + "/token" + AccessToken;
+    public static final String UrlAPIUser = UrlBASEAPI + "user/";
 
-    public static final String UrlAPIPurchases = UrlBASEAPI + "purchases" + "/purchasesuser/" + id + AccessToken;
+    public static final String UrlAPIPurchases = UrlBASEAPI + "purchases" + "/purchasesuser/" ;
 
-    public static final String UrlAPIUserPost = UrlBASEAPI + "user/" + "putsomefields/"  + id + AccessToken;
+    public static final String UrlAPIUserPost = UrlBASEAPI + "user/" + "putsomefields/"  ;
 
     public static final String UrlAPIConsumo = UrlBASEAPI + "consumo/consumopedido/";
 

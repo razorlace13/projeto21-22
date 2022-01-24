@@ -15,7 +15,7 @@ import java.util.List;
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "projeto21_22";
-    private static final int VERSAO_BD = 24;
+    private static final int VERSAO_BD = 26;
     //dados da tabela
     public static final String TABELA = "products", ID_PRODUCT = "id_product", NAME = "name ", PRICE = "price", ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo", ID_PEDIDO = "id_pedido ", QUANTIDADE = "quantidade";
@@ -162,7 +162,6 @@ public class BDHelper extends SQLiteOpenHelper {
 
     public ArrayList<Consumo> getAllConsumo(int id) {
         ArrayList<Consumo> lista = new ArrayList<>();
-
         Cursor cursor = this.basedados.query(TABELA1,
                 new String[]{ID_CONSUMO, ID_PEDIDO, NAME, QUANTIDADE},
                 ID_PEDIDO + "=" + id, null, null, null, null);
@@ -178,6 +177,7 @@ public class BDHelper extends SQLiteOpenHelper {
 
             } while (cursor.moveToNext());
         }
+
         return lista;
     }
 

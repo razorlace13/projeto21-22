@@ -325,6 +325,7 @@ public class SingletonGestor {
                 Toast.makeText(context, "Pagamento em Andamento", Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "Pago", Toast.LENGTH_SHORT).show();
                 purchasePayListener.onPayListener(type);
+                getAllPurchasesAPI(context, true);
             }
         }, new Response.ErrorListener() {
             @Override

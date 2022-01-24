@@ -73,7 +73,7 @@ public class ListaConsumoAdaptador extends BaseAdapter{
         }
 
         public void update(Consumo consumo) {
-            this.tv_product.setText(consumo.getProduct());
+            this.tv_product.setText(consumo.getProduct() + " x " + consumo.getQuantidade());
         }
 
     }

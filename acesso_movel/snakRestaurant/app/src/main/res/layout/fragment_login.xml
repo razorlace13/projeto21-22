@@ -69,7 +69,6 @@
                         android:drawableLeft="@drawable/ic_person"
                         android:drawablePadding="12dp"
                         android:hint="@string/hint_username"
-                        android:text="teste"
                         android:imeOptions="actionNext"
                         android:minWidth="320dp"
                         android:minHeight="50dp"
@@ -110,7 +109,6 @@
                         android:inputType="textPassword"
                         android:minWidth="320dp"
                         android:minHeight="50dp"
-                        android:text="password"
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.cardview.widget.CardView>

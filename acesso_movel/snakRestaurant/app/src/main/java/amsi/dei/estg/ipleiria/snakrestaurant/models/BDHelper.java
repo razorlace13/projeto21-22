@@ -11,19 +11,25 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import static amsi.dei.estg.ipleiria.snakrestaurant.Connections.Connections.id;
 
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "projeto21_22";
-    private static final int VERSAO_BD = 26;
+    private static final int VERSAO_BD = 27;
     //dados da tabela
     public static final String TABELA = "products", ID_PRODUCT = "id_product", NAME = "name ", PRICE = "price", ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo", ID_PEDIDO = "id_pedido ", QUANTIDADE = "quantidade";
-    private static final String TABELA2 = "user", NUMERO = "numero";
+    public static final String TABELA2 = "user";
+    private static final String NUMERO = "numero";
     private static final String TABELA3 = "purchases", ID_PURCHASES = "id_purchase", VALOR = "valor", DATA = "data", MESA = "mesa", ID_USER = "id_user";
-    private static final String TABELA4 = "login", ID = "id", TOKEN = "token", USERNAME = "username", EMAIL = "email";
-    public static final String TABELA5 = "shopping_cart", ID_SHOPPING = "id_shopping", ID_PRODUCT_SHOPPING = "id_product_shopping", NAME_SHOPPING = "name_shopping", PRICE_SHOPPING = "price_shopping", ID_CATEGORY_SHOPPING = "id_category_shopping", QUANTIDADE_SHOPPING = "quantidade_shopping";
-    public SQLiteDatabase basedados;
+    public static final String TABELA4 = "login";
+    private static final String ID = "id";
+    private static final String TOKEN = "token";
+    private static final String USERNAME = "username";
+    private static final String EMAIL = "email";
+    public static final String TABELA5 = "shopping_cart", ID_SHOPPING = "id_shopping", ID_PRODUCT_SHOPPING = "id_product_shopping", NAME_SHOPPING = "name_shopping", PRICE_SHOPPING = "price_shopping", ID_CATEGORY_SHOPPING = "id_category_shopping", QUANTIDADE_SHOPPING = "quantidade_shopping", ID_USER_SHOPPING = "id_user_shopping";
+    public static SQLiteDatabase basedados;
 
     public BDHelper(Context context) {
         super(context, NOME_BD, null, VERSAO_BD);
@@ -80,7 +86,8 @@ public class BDHelper extends SQLiteOpenHelper {
                 NAME_SHOPPING + " TEXT NOT NULL, " +
                 PRICE_SHOPPING + " DOUBLE NOT NULL, " +
                 ID_CATEGORY_SHOPPING + " INTEGER NOT NULL," +
-                QUANTIDADE_SHOPPING + " INTEGER NOT NULL)";
+                QUANTIDADE_SHOPPING + " INTEGER NOT NULL," +
+                ID_USER_SHOPPING + " INTEGER NOT NULL)";
 
         db.execSQL(sqlTabela);
     }
@@ -345,11 +352,11 @@ public class BDHelper extends SQLiteOpenHelper {
     }
 
     public boolean removerUserDB() {
-        return basedados.delete(TABELA4, null, null) == 1;
+        return basedados.delete(TABELA4, null, null) > 0;
     }
 
     public List<Shopping_card> getAllCard() {
-        String sql = "select * from " + TABELA5;
+        String sql = "select * from " + TABELA5 + " where id_user_shopping = "+id;
         basedados = this.getReadableDatabase();
         List<Shopping_card> store = new ArrayList<>();
 
@@ -362,8 +369,8 @@ public class BDHelper extends SQLiteOpenHelper {
                 double price_shopping = Double.parseDouble(String.valueOf(cursor.getDouble(3)));
                 int id_category_shopping = Integer.parseInt(String.valueOf(cursor.getInt(4)));
                 int quantidade_shopping = Integer.parseInt(String.valueOf(cursor.getInt(5)));
-
-                store.add(new Shopping_card(id_shopping, id_product_shopping, name_shopping, price_shopping, id_category_shopping, quantidade_shopping));
+                int id_user_shopping = Integer.parseInt(String.valueOf(cursor.getInt(6)));
+                store.add(new Shopping_card(id_shopping, id_product_shopping, name_shopping, price_shopping, id_category_shopping, quantidade_shopping,id_user_shopping));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -374,13 +381,13 @@ public class BDHelper extends SQLiteOpenHelper {
         ArrayList<Shopping_card> lista = new ArrayList<>();
 
         Cursor cursor = this.basedados.query(TABELA5,
-                new String[]{ID_SHOPPING, ID_PRODUCT_SHOPPING, NAME_SHOPPING, PRICE_SHOPPING,ID_CATEGORY_SHOPPING,QUANTIDADE_SHOPPING},
+                new String[]{ID_SHOPPING, ID_PRODUCT_SHOPPING, NAME_SHOPPING, PRICE_SHOPPING,ID_CATEGORY_SHOPPING,QUANTIDADE_SHOPPING,ID_USER_SHOPPING},
                 null, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
                 Shopping_card shopping_card = new Shopping_card(cursor.getInt(1), cursor.getString(2),
-                        cursor.getDouble(3), cursor.getInt(4), cursor.getInt(5));
+                        cursor.getDouble(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6));
 
                 lista.add(shopping_card);
 
@@ -397,6 +404,7 @@ public class BDHelper extends SQLiteOpenHelper {
         contentValues.put(BDHelper.PRICE_SHOPPING, shopping_card.getPrice_shopping());
         contentValues.put(BDHelper.ID_CATEGORY_SHOPPING, shopping_card.getId_category_shopping());
         contentValues.put(BDHelper.QUANTIDADE_SHOPPING, shopping_card.getQuantidade_shopping());
+        contentValues.put(BDHelper.ID_USER_SHOPPING, shopping_card.getId_user_shopping());
 
         basedados = this.getWritableDatabase();
         basedados.insert(BDHelper.TABELA5, null, contentValues);
@@ -440,4 +448,20 @@ public class BDHelper extends SQLiteOpenHelper {
 
         return preco_original;
     }
+
+    public void remover(){
+
+        String sql3 = "DELETE FROM '" + BDHelper.TABELA2 + "'";
+        String sql5 = "DELETE FROM '" + BDHelper.TABELA4 + "'";
+
+        basedados = this.getWritableDatabase();
+        basedados.delete(TABELA2, null, null);
+        basedados.delete(TABELA4, null, null);
+        basedados.rawQuery(sql3, null);
+        basedados.rawQuery(sql5, null);
+
+        //basedados.execSQL("DELETE TABLE IF EXISTS user");
+        //basedados.execSQL("DELETE TABLE IF EXISTS login");
+    }
+
 }

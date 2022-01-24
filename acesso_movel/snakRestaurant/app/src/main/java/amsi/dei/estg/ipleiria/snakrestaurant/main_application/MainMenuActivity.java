@@ -59,7 +59,9 @@ public class MainMenuActivity extends AppCompatActivity {
                         mostracarrinho();
                         break;
                     case R.id.logout:
-                        bd.removerUserDB();
+                        //bd.removerUserDB();
+                        bd.remover();
+
                         Intent login = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(login);
                         break;

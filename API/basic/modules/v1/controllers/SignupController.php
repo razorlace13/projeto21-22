@@ -37,6 +37,14 @@ class SignupController extends ActiveController
 
         $Usermodel -> save(false);
 
+        $permission="utilizador";
+        $newpermission = new \app\models\AuthAssignment();
+        $newpermission->user_id = $Usermodel->id;
+        $newpermission->item_name = $permission;
+        $newpermission->created_at = date('d-m-y');
+        $newpermission->save();
+
+
         if ($Usermodel -> save(false)){
             return 'Utilizador guardado';
         }

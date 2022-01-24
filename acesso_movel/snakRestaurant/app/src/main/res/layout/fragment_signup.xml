@@ -64,7 +64,6 @@
                         android:minWidth="320dp"
                         android:minHeight="45dp"
                         android:singleLine="true"
-                        android:text="123@gmail.com"
                         tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
                 </androidx.cardview.widget.CardView>
 
@@ -98,8 +97,7 @@
                             android:imeOptions="actionNext"
                             android:minWidth="320dp"
                             android:minHeight="45dp"
-                            android:singleLine="true"
-                            android:text="teste2" />
+                            android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -134,8 +132,7 @@
                             android:inputType="phone"
                             android:minWidth="320dp"
                             android:minHeight="45dp"
-                            android:singleLine="true"
-                            android:text="999000999" />
+                            android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -170,8 +167,7 @@
                             android:inputType="number"
                             android:minWidth="320dp"
                             android:minHeight="45dp"
-                            android:singleLine="true"
-                            android:text="999000999" />
+                            android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -206,8 +202,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="textPassword"
                             android:minWidth="320dp"
-                            android:minHeight="45dp"
-                            android:text="password" />
+                            android:minHeight="45dp" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -242,8 +237,7 @@
                             android:imeOptions="actionDone"
                             android:inputType="textPassword"
                             android:minWidth="320dp"
-                            android:minHeight="45dp"
-                            android:text="password" />/>
+                            android:minHeight="45dp" />/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
 

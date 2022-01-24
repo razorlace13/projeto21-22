@@ -68,7 +68,7 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
         holder.post_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String price = String.valueOf(shopping.get(position).getPrice_shopping());
+                String price = String.valueOf(Double.valueOf(shopping.get(position).getPrice_shopping()));
                 String quantidade = String.valueOf(shopping.get(position).getQuantidade_shopping());
                 String id_product = String.valueOf(shopping.get(position).getId_product_shopping());
                // context.startActivity(new Intent(view.getContext(), PopupShopping.class));

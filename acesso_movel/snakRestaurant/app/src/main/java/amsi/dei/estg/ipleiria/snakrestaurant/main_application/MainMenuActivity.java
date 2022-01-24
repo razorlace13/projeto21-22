@@ -70,7 +70,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void logout() {
         bd.remover();
-        this.deleteDatabase("projeto21_22");
+        //this.deleteDatabase("projeto21_22");
         this.finish();
     }
 

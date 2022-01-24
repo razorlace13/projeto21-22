@@ -455,7 +455,7 @@ public class BDHelper extends SQLiteOpenHelper {
         basedados.delete(TABELA2, null, null);
         basedados.delete(TABELA3, null, null);
         basedados.delete(TABELA4, null, null);
-        basedados.delete(TABELA5, null, null);
+        //basedados.delete(TABELA5, null, null);
     }
 
 }

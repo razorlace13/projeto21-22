@@ -69,14 +69,14 @@ public class PopupShopping extends Activity implements PurchasePayListener {
         String typeofbuy = getIntent().getStringExtra("type");
 
         if (typeofbuy.equals("0")) {
-            String price_from_fragment = getIntent().getStringExtra("price");
-            price.setText(price_from_fragment);
+            double price_from_fragment = Double.parseDouble(getIntent().getStringExtra("price"));
+            price.setText(""+price_from_fragment);
         }else {
             ArrayList<Shopping_card> shopping_cards = databaseHelper.getAllShopingCard();
             ArrayList<ConsumoPost> consumoArray= new ArrayList<>();
-            int priceall = 0;
+            double priceall = 0;
             for (int i=0;shopping_cards.size() != i; i++){
-                int temp = (int) shopping_cards.get(i).getPrice_shopping();
+                double temp = (double) shopping_cards.get(i).getPrice_shopping();
                 priceall = priceall + temp;
             }
             price.setText("" + priceall);

@@ -12,6 +12,7 @@ import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class PopupShopping extends Activity implements PurchasePayListener {
     // String para o consumo
     String str_id_pedido, str_id_product, str_quantidade,str_status;
     BDHelper databaseHelper;
+    private ImageView iv_close2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class PopupShopping extends Activity implements PurchasePayListener {
 
         getWindow().setLayout((int)(width*.7),(int)(height*.4));
         edit_Mesa = findViewById(R.id.edit_Mesa);
+        iv_close2 = findViewById(R.id.iv_close2);
         price = findViewById(R.id.txtPrice);
         String typeofbuy = getIntent().getStringExtra("type");
 
@@ -86,6 +89,12 @@ public class PopupShopping extends Activity implements PurchasePayListener {
             @Override
             public void onClick(View view) {
                 buy(typeofbuy);
+            }
+        });
+        iv_close2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

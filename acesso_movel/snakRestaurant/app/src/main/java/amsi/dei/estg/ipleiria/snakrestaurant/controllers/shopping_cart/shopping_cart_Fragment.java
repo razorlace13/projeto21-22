@@ -3,6 +3,7 @@ package amsi.dei.estg.ipleiria.snakrestaurant.controllers.shopping_cart;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -50,6 +52,8 @@ public class shopping_cart_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shopping_cart_, container, false);
+
+
 
         recyclerView = view.findViewById(R.id.Recycler_shopping_card);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

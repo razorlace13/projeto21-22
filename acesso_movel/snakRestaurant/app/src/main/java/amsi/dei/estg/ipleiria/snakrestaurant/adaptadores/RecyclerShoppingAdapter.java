@@ -11,10 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
@@ -24,6 +27,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.R;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.shopping_cart.PopupShopping;
 import amsi.dei.estg.ipleiria.snakrestaurant.controllers.shopping_cart.shopping_cart_Fragment;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.BDHelper;
+import amsi.dei.estg.ipleiria.snakrestaurant.models.Products;
 import amsi.dei.estg.ipleiria.snakrestaurant.models.Shopping_card;
 
 
@@ -64,8 +68,17 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
         holder.name_shopping.setText(shopping_card.getName_shopping());
         holder.price_shopping.setText(Double.toString(shopping_card.getPrice_shopping()));
         holder.quantidade_shopping.setText(Integer.toString(shopping_card.getQuantidade_shopping()));
-
-        holder.post_btn.setOnClickListener(new View.OnClickListener() {
+        int id_category = shopping_card.getId_category_shopping();
+        if (id_category == 1) {
+            holder.ivCapa2.setImageResource(R.drawable.comida);
+        }else 
+        if (id_category == 2) {
+            holder.ivCapa2.setImageResource(R.drawable.copo);
+        }
+        else {
+            holder.ivCapa2.setImageResource(R.drawable.new_final_logo);
+        }
+        holder.selecionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String price = String.valueOf(Double.valueOf(shopping.get(position).getPrice_shopping()));
@@ -174,9 +187,10 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
         TextView price_shopping;
         TextView id_category_shopping;
         TextView quantidade_shopping;
-        Button post_btn;
         ImageButton add_btn;
         ImageButton remove_btn;
+        ConstraintLayout selecionar;
+        ImageView ivCapa2;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -187,9 +201,10 @@ public class RecyclerShoppingAdapter extends RecyclerView.Adapter<RecyclerShoppi
             price_shopping = itemView.findViewById(R.id.edit_price_shopping);
             //id_category_shopping = itemView.findViewById(R.id.edit_id_category_shopping);
             quantidade_shopping = itemView.findViewById(R.id.edit_quantidade_shopping);
-            post_btn = itemView.findViewById(R.id.post_btn);
             add_btn = itemView.findViewById(R.id.add_btn);
             remove_btn = itemView.findViewById(R.id.remove_btn);
+            selecionar = itemView.findViewById(R.id.selecionar);
+            ivCapa2 = itemView.findViewById(R.id.ivCapa2);
         }
     }
 }

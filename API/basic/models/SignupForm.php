@@ -88,7 +88,7 @@ class SignupForm extends Model
             $newpermission = new AuthAssignment();
             $newpermission->user_id = $user->id;
             $newpermission->item_name = $permission;
-            $newpermission->created_at = date('d-m-y');
+            $newpermission->created_at = date('y-m-d');
             $newpermission->save();
 
             return $user;

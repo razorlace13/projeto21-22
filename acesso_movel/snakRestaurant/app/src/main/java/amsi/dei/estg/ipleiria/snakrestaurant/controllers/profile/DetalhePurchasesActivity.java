@@ -8,14 +8,18 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -41,6 +45,7 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
     private Dialog dialog;
     private Button bt_close;
     private ImageView iv_close;
+    private TextView compras;
     SwipeRefreshLayout swipeRefreshLayout;
     ProgressBar progressBar;
 
@@ -50,6 +55,19 @@ public class DetalhePurchasesActivity extends AppCompatActivity implements Purch
         setContentView(R.layout.activity_detalhe_purchases);
         getSupportActionBar().hide();
         Rv_purchases = findViewById(R.id.Rv_purchases);
+        compras = findViewById(R.id.txtPrice);
+
+        TextPaint paint = compras.getPaint();
+        float width = paint.measureText("Compras");
+
+        Shader textShader = new LinearGradient(0, 0, width, compras.getTextSize(),
+                new int[]{
+                        Color.parseColor("#eead5d"),
+                        Color.parseColor("#9a3a14"),
+                        Color.parseColor("#eead5d"),
+                }, null, Shader.TileMode.CLAMP);
+        compras.getPaint().setShader(textShader);
+
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.fragment_detalhes_purchases);
         lista_Consumo = dialog.findViewById(R.id.lista_consumo);

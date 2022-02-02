@@ -21,9 +21,6 @@
             android:name=".controllers.shopping_cart.PopupShopping"
             android:theme="@style/AppTheme.CustomTheme"/>
         <activity
-            android:name=".controllers.puchases.PurchasesActivity"
-            android:exported="false" />
-        <activity
             android:name=".controllers.Products.List_pagamentos"
             android:exported="true" />
         <activity

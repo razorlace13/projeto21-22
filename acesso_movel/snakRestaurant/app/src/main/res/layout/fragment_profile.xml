@@ -12,49 +12,6 @@
         android:background="@drawable/profile_img"
         tools:context=".controllers.profile.ProfileActivity">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/FAB_Reload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:clickable="true"
-            android:src="@drawable/ic_refresh"
-            android:tint="@color/md_white_1000"
-            app:backgroundTint="@color/white"
-            app:fabSize="auto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:maxImageSize="42dp" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/FAB_Change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            android:clickable="true"
-            android:src="@drawable/ic_baseline_save_24"
-            android:tint="@color/white"
-            app:backgroundTint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FAB_Reload"
-            app:maxImageSize="42dp" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/FAB_Compras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            android:clickable="true"
-            android:src="@drawable/ic_shop"
-            app:backgroundTint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FAB_Change"
-            app:maxImageSize="42dp"
-            tools:ignore="SpeakableTextPresentCheck" />
-
         <LinearLayout
             android:id="@+id/linearLayoutProfile2"
             android:layout_width="0dp"
@@ -184,10 +141,41 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
                 android:gravity="center"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/Iv_Bt_Compras"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/bt_shape2"
+                    android:src="@drawable/ic_shop"
+                    app:tint="@color/black"
+                    android:layout_marginRight="20dp"/>
+
+                <ImageView
+                    android:id="@+id/Iv_Bt_refresh"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_shape2"
+                    android:src="@drawable/ic_refresh"
+                    app:tint="@color/black"
+                    android:layout_marginRight="20dp"/>
+
+                <ImageView
+                    android:id="@+id/Iv_Bt_Save"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_shape2"
+                    android:src="@drawable/ic_baseline_save_24"
+                    app:tint="@color/black"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

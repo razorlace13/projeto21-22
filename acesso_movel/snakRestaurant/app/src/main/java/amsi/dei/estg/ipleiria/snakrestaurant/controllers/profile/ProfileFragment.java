@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ import amsi.dei.estg.ipleiria.snakrestaurant.models.User;
 public class ProfileFragment extends Fragment implements UserListener {
 
     public TextView username, email, numero;
-    private FloatingActionButton bt_alterar, bt_compras, bt_reload;
+    private ImageView bt_alterar, bt_compras, bt_reload;
     private long id;
 
     public ProfileFragment() {
@@ -49,7 +50,7 @@ public class ProfileFragment extends Fragment implements UserListener {
         email = (TextView) view.findViewById(R.id.tv_mail);
         numero = (TextView) view.findViewById(R.id.tv_numero);
         getUser(false);
-        bt_alterar = (FloatingActionButton)view.findViewById(R.id.FAB_Change);
+        bt_alterar = (ImageView)view.findViewById(R.id.Iv_Bt_Save);
         bt_alterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +58,7 @@ public class ProfileFragment extends Fragment implements UserListener {
                 SingletonGestor.getInstance(getActivity()).updateUserAPI(getActivity(), id, user);
             }
         });
-        bt_compras = (FloatingActionButton)view.findViewById(R.id.FAB_Compras);
+        bt_compras = (ImageView)view.findViewById(R.id.Iv_Bt_Compras);
         bt_compras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +66,7 @@ public class ProfileFragment extends Fragment implements UserListener {
                 startActivity(menu);
             }
         });
-        bt_reload = (FloatingActionButton)view.findViewById(R.id.FAB_Reload);
+        bt_reload = (ImageView)view.findViewById(R.id.Iv_Bt_refresh);
         bt_reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

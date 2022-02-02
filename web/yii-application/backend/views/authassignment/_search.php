@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'globalSearch')?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Pesquisar', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

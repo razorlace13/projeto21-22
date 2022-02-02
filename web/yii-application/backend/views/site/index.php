@@ -17,7 +17,7 @@ AppAsset::register($this);
         </header>
 
         <div class="body-content center">
-            <?= Html::a('Purchases', ['purchases/index'], ['class' => 'button-1']) ?>
+            <?= Html::a('Compras', ['purchases/index'], ['class' => 'button-1']) ?>
 
             <?= Html::a('Produtos', ['products/index'], ['class' => 'button-2']) ?>
         </div>

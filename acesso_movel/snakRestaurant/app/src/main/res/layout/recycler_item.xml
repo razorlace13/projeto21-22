@@ -7,9 +7,21 @@
     android:layout_height="wrap_content">
 
 
-    <LinearLayout
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="416dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:context=".vistas.DetalhesEstaticoActivity">
 
         <Space
@@ -19,9 +31,8 @@
 
         <ImageView
             android:id="@+id/ivCapa2"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="94dp"
+            android:layout_height="92dp"
             android:adjustViewBounds="true"
             android:cropToPadding="true"
             android:scaleType="fitCenter"
@@ -88,11 +99,19 @@
 
                 <TextView
                     android:id="@+id/edit_price_shopping"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="€"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 

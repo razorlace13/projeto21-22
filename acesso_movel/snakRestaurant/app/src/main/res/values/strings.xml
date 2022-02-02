@@ -3,26 +3,26 @@
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="hint_nif">Nif</string>
-    <string name="button_sign_in">Sign in</string>
-    <string name="button_sign_up">Sign up</string>
+    <string name="button_sign_in">Iniciar sess\ão</string>
+    <string name="button_sign_up">Registe-se</string>
     <string name="button_send">Send</string>
-    <string name="text_forgot_password">Forgot password?</string>
-    <string name="text_signin_message">Hello, sign in to your account</string>
+    <string name="text_forgot_password">Esqueceu a password?</string>
+    <string name="text_signin_message">inscreva-se na sua conta</string>
     <string name="text_signin_social_media">Or Sign in using social media</string>
     <string name="text_signup_social_media">Or Sign up using social media</string>
-    <string name="text_signin_signup">Don\'t have an account yet?<b>Register now</b></string>
-    <string name="text_signup_terms">By signing up, you agree to our <b>terms and conditions</b></string>
-    <string name="text_signup_message">Hello, let\'s set up your account</string>
+    <string name="text_signin_signup">Ainda não tem conta?<b>registar agora</b></string>
+    <string name="text_signup_terms">Ao inscrever-se, voc\ê concorda com o nosso <b>termos e condições</b></string>
+    <string name="text_signup_message">Ol\á, vamos configurar a sua conta</string>
 
     <string name="text_forgot_password_title">Forgot password? No worries</string>
     <string name="text_forgot_password_message">We will send you a link to reset your password</string>
 
     <string name="hint_email">Email</string>
-    <string name="hint_phone">Phone</string>
-    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_phone">Numero de telemovel</string>
+    <string name="hint_confirm_password">Confirmar Password</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-        <string name="txt_signin">Already have an account? Login</string>
+        <string name="txt_signin">Já possui uma conta? Faça Login</string>
 
     <string name="txt_name_detalhes">nome</string>
     <string name="txt_price_detalhes">preço</string>
@@ -45,14 +45,13 @@
     <string name="shopping_card">Carrinho</string>
     <string name="id_product_shopping">id_product:</string>
     <string name="id_shopping">id_shopping:  </string>
-    <string name="name_shopping">Name:  </string>
-    <string name="price_shopping">Price:  </string>
+    <string name="name_shopping">Nome:  </string>
+    <string name="price_shopping">Preço:  </string>
     <string name="id_categoria">id_categoria:  </string>
     <string name="quantidade_shopping">Quantidade:  </string>
 
     <string name="informacao">Informações do pedido:  </string>
     <string name="mesa">Insira a mesa:  </string>
     <string name="numero_conta">Numero conta:  </string>
-
 
 </resources>

@@ -46,11 +46,11 @@ class Consumo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_consumo' => 'Id Consumo',
-            'id_pedido' => 'Id Pedido',
-            'id_product' => 'Id Product',
+            'id_consumo' => 'Chave consumo',
+            'id_pedido' => 'Chave pedido',
+            'id_product' => 'Chave product',
             'quantidade' => 'Quantidade',
-            'status' => 'Status',
+            'status' => 'Estado',
         ];
     }
 

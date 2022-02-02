@@ -18,11 +18,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php Pjax::begin(['enablePushState' => false]); ?>
+    <p>
+        <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -50,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </p>*/
     ?>
-        <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success']) ?>
+
     </p>
 
 

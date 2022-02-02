@@ -15,33 +15,10 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'username') ?>
-
-    <?= $form->field($model, 'email') ?>
-
-    <?= $form->field($model, 'password_hash') ?>
-
-    <?= $form->field($model, 'password_reset_token') ?>
-
-    <?php // echo $form->field($model, 'auth_key') ?>
-
-    <?php // echo $form->field($model, 'status') ?>
-
-    <?php // echo $form->field($model, 'nif') ?>
-
-    <?php // echo $form->field($model, 'numero') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <?php // echo $form->field($model, 'verification_token') ?>
+    <?= $form->field($model, 'globalSearch')?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Pesquisar', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

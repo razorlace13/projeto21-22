@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\Models\AuthassignmentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Authassignments';
+$this->title = 'Conceder permissões';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="authassignment-index">

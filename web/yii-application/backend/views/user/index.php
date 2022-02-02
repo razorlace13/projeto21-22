@@ -9,14 +9,19 @@ use yii\helpers\Url;
 /* @var $searchModel backend\Models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Utilizadores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <p>  <?= Html::button('Adicionar Utilizador', ['value' => Url::to('http://backend.test/user/create') ,
+                'class' => 'btn btn-success','id' => 'modalButton' ]
+        ) ?>
+    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -41,22 +46,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <?php
-    Modal::begin([
-        'title' => '<h4>Adicionar utilizador</h4>',
-        'id' => 'modal',
-        'size' => 'modal-lg',
 
-    ]);
-    echo "<div id='modalContent'></div>";
-    Modal::end();
-    ?>
-
-
-    <p>
-        <?= Html::button('Adicionar Utilizador', ['value' => Url::to('http://backend.test/user/create') ,
-                'class' => 'btn btn-success','id' => 'modalButton' ]
-        ) ?>
-    </p>
 
 </div>

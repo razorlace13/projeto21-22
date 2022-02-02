@@ -53,15 +53,15 @@ class User extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => 'Chave do utlizador',
             'username' => 'Username',
             'email' => 'Email',
             'password_hash' => 'Password Hash',
             'password_reset_token' => 'Password Reset Token',
             'auth_key' => 'Auth Key',
-            'status' => 'Status',
+            'status' => 'Estado',
             'nif' => 'Nif',
-            'numero' => 'Numero',
+            'numero' => 'Numero de telefone',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'verification_token' => 'Verification Token',

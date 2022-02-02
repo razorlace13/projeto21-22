@@ -6,6 +6,11 @@ use yii\helpers\Html;
 
 $this->title = 'About - SnakRestaurant';
 //$this->params['breadcrumbs'][] = $this->title;
+
+$date = date('Y');
+$date2 = 1976;
+$data_final = $date - $date2;
+
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -26,7 +31,7 @@ $this->title = 'About - SnakRestaurant';
                             <div class="vk-about-border"></div>
                         </div>
                         <div class="vk-about-right-content">
-                            <p>O SnakRestaurant nasceu à 37 anos, 1976, foi fundado pelo senhor Manuel Henriques, pai da actual responsável pelo restaurante, Maria Luísa Henriques. </p>
+                            <p>O SnakRestaurant nasceu à <?php echo $data_final?> anos, 1976, foi fundado pelo senhor Manuel Henriques, pai da actual responsável pelo restaurante, Maria Luísa Henriques. </p>
                             <p>Inicialmente começou por ser uma pequena adega onde eram servidos pequenos petiscos acompanhados ao som do bom fado português. Com o decorrer do anos o restaurante foi crescendo e actualmente conta com 5 salas, cada sala têm uma decoração ligada à arte da tauromaquia.</p>
                             <p>Neste restaurante os nossos clientes são recebidos com enorme simpatia, e acabam assim por se sentir como se fossem da casa, envolvendo se neste ambiente acolhedor transmitido por esta equipa.</p>
                             <p><b>Fechamos à Quarta- Feira, excepto feriados.</b></p>

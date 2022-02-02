@@ -24,7 +24,7 @@ $fieldOptions2 = [
         <div class="login-box">
             <div class="col-md-12 box box-radius">
                 <h1><?= Html::encode($this->title) ?></h1>
-                <p>Backoffice only for authorized persons</p>
+                <p>Backoffice apenas para pessoas autorizadas</p>
 
                 <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
 
@@ -39,7 +39,7 @@ $fieldOptions2 = [
                     ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton('Iniciar sessão', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
                 <br>
 

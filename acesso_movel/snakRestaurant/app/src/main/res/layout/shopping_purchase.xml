@@ -109,9 +109,10 @@
 
                     <Button
                         android:id="@+id/buy_btn"
-                        android:layout_width="141dp"
-                        android:layout_height="56dp"
-                        android:backgroundTint="#318819"
+                        style="@style/Button1"
+                        android:layout_width="157dp"
+                        android:layout_height="42dp"
+                        android:backgroundTint="@color/md_blue_grey_600"
                         android:text="comprar"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

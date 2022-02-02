@@ -51,31 +51,31 @@ use yii\helpers\Url;
                         'icon' => 'fa fa-caret-square-o-down',
                     ],
                     [
-                        'label' => 'Users Options',
+                        'label' => 'Opções do utilizador',
                         'url' => '',
                         'icon' => 'fa fa-user',
                         'items' => [
                             [
-                                'label' => 'Users',
+                                'label' => 'Utilizadores',
                                 'url' => ['/user'],
                                 'icon' => 'fa fa-users',
                                 'active' => $this->context->route == 'user/index'
                             ],
                             [
-                                'label' => 'Create permissions',
+                                'label' => 'Criar permissão',
                                 'icon' => 'fa fa-database',
                                 'url' => ['/authitem'],
                                 'active' => $this->context->route == 'authitem/index'
                             ],
                             [
-                                'label' => 'grant permissions',
+                                'label' => 'Conceder permissões',
                                 'icon' => 'fa fa-database',
                                 'url' => '/authassignment',
                                 'active' => $this->context->route == 'authassignment/index'
                             ]
                         ]
                     ],
-                    ['label' => 'Purchases',
+                    ['label' => 'Compras',
                         'url' => ['/purchases'], 'active' => $this->context->route == 'purchases/index',
                         'icon' => 'fa fa-money',
                     ],

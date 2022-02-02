@@ -5,7 +5,6 @@
       <map>
         <entry key="..\:/Users/Asus/AndroidStudioProjects/snakRestaurant/app/src/main/res/layout/content_main.xml" value="0.1766304347826087" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable-v24/bg.xml" value="0.2703125" />
-        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable-v24/bt_shape2.xml" value="0.1" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable-v24/button1_bg.xml" value="0.14375" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable-v24/ic_back.xml" value="0.14322916666666666" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/drawable-v24/ic_baseline_home_24.xml" value="0.2703125" />
@@ -48,8 +47,8 @@
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_products.xml" value="0.264" />
-        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_profile.xml" value="0.3333333333333333" />
-        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_shopping_cart_.xml" value="0.25" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
+        <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_shopping_cart_.xml" value="0.1" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/fragment_signup.xml" value="0.25416666666666665" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/item_lista_consumo.xml" value="0.23809523809523808" />
         <entry key="..\:/xampp/htdocs/projeto21-22/acesso_movel/snakRestaurant/app/src/main/res/layout/item_lista_products.xml" value="0.264" />

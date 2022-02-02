@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\AuthitemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Auth Items';
+$this->title = 'Criar permissão';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="authitem-index">

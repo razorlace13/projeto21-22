@@ -73,7 +73,8 @@
                         android:minWidth="320dp"
                         android:minHeight="50dp"
                         android:singleLine="true"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/md_blue_grey_400" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.cardview.widget.CardView>
 
@@ -109,17 +110,19 @@
                         android:inputType="textPassword"
                         android:minWidth="320dp"
                         android:minHeight="50dp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/md_blue_grey_400" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.cardview.widget.CardView>
 
             <Button
                 android:id="@+id/button_signin"
-                style="@style/Button1"
                 android:layout_width="342dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/button1_bg"
+                android:backgroundTint="@color/colorPrimary"
                 android:onClick="onClick"
                 android:text="@string/button_sign_in" />
 

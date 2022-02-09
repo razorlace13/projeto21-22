@@ -12,7 +12,7 @@ public class Connections {
     //10.80.226.82 do polo de Tv do tiago
         //10.80.226.92 do polo de Tv do Claudio
 
-    public static final String UrlBASEAPI = "http://192.168.1.185:1884/v1/";
+    public static final String UrlBASEAPI = "http://192.168.1.203:1884/v1/";
 
     private static Context contexto;
 

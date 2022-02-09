@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context="amsi.dei.estg.ipleiria.snakrestaurant.main_application.MainMenuActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

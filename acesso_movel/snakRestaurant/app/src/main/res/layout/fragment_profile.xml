@@ -75,6 +75,7 @@
                         android:hint="Username"
                         android:minHeight="48dp"
                         android:textColor="@color/black"
+                        android:textColorHint="@color/md_blue_grey_300"
                         android:textSize="34sp" />
                 </androidx.cardview.widget.CardView>
 
@@ -105,6 +106,7 @@
                         android:gravity="center"
                         android:hint="Numero"
                         android:textColor="@color/black"
+                        android:textColorHint="@color/md_blue_grey_300"
                         android:textSize="34sp" />
                 </androidx.cardview.widget.CardView>
 
@@ -136,6 +138,7 @@
                         android:hint="Email"
                         android:singleLine="false"
                         android:textColor="@color/black"
+                        android:textColorHint="@color/md_blue_grey_300"
                         android:textSize="25sp" />
                 </androidx.cardview.widget.CardView>
             </LinearLayout>

@@ -16,8 +16,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="416dp"
-        android:layout_height="123dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,10 +49,6 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="24dp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -67,7 +63,7 @@
                     android:textSize="20sp" />
 
                 <Space
-                    android:layout_width="27dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="24dp" />
 
                 <TextView
@@ -94,7 +90,7 @@
                     android:textSize="20sp" />
 
                 <Space
-                    android:layout_width="32dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="24dp" />
 
                 <TextView
@@ -130,12 +126,24 @@
 
                 <TextView
                     android:id="@+id/edit_quantidade_shopping"
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="11dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/remove_btn"
@@ -150,11 +158,6 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_add_circle_24"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-                <Space
-                    android:layout_width="11dp"
-                    android:layout_height="match_parent" />
-
             </LinearLayout>
 
 

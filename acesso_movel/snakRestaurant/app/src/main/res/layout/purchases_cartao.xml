@@ -45,7 +45,7 @@
                     android:gravity="center"
                     android:text="@string/id_purchases"
                     android:textAlignment="viewEnd"
-                    android:textColor="#eead5d"
+                    android:textColor="@color/md_amber_600"
                     android:textSize="16sp" />
 
                 <TextView
@@ -55,7 +55,7 @@
                     android:layout_weight="1"
                     android:text="0"
                     android:textAlignment="viewStart"
-                    android:textColor="#eead5d"
+                    android:textColor="@color/md_amber_600"
                     android:textSize="24sp" />
             </LinearLayout>
 
@@ -99,7 +99,7 @@
                     android:gravity="center"
                     android:text="@string/data_purchases"
                     android:textAlignment="viewEnd"
-                    android:textColor="#eead5d"
+                    android:textColor="@color/md_amber_600"
                     android:textSize="16sp" />
 
                 <TextView
@@ -109,7 +109,7 @@
                     android:layout_weight="1"
                     android:text="--/--/----"
                     android:textAlignment="viewStart"
-                    android:textColor="#eead5d"
+                    android:textColor="@color/md_amber_600"
                     android:textSize="24sp" />
             </LinearLayout>
 

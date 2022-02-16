@@ -15,7 +15,7 @@ import java.util.List;
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "projeto21_22";
-    private static final int VERSAO_BD = 27;
+    private static final int VERSAO_BD = 28;
     //dados da tabela
     public static final String TABELA = "products", ID_PRODUCT = "id_product", NAME = "name ", PRICE = "price", ID_CATEGORY = "id_category";
     private static final String TABELA1 = "consumo", ID_CONSUMO = "id_consumo", ID_PEDIDO = "id_pedido ", QUANTIDADE = "quantidade";

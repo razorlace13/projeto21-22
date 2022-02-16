@@ -26,7 +26,10 @@ class ConsumoTest extends \Codeception\Test\Unit
         $model->setid_pedido(0);
         $this->assertFalse($model->validate(['id_pedido']));
 
-        $model->setid_pedido(3);
+        // se for verdadeiro pode-se trocar o id para o id que estiver na bd
+        // o mesmo serve para os outros id's
+
+        $model->setid_pedido(61);
         $this->assertTrue($model->validate(['id_pedido']));
 
         $model->setid_product(0);

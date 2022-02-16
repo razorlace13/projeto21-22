@@ -3,7 +3,7 @@ actor: FunctionalTester
 modules:
     enabled:
         - Yii2:
-              dsn: 'mysql:host=localhost;dbname=projeto21_22'
+              dsn: 'mysql:host=localhost;dbname=projeto21_22_teste'
               user: 'root'
               password: ''
               populate: false

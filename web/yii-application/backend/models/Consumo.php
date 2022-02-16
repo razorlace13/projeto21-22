@@ -73,4 +73,19 @@ class Consumo extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Products::className(), ['id_product' => 'id_product']);
     }
+
+    // nomes para os testes
+    public function setid_pedido($id_pedido)
+    {
+        $this->id_pedido=$id_pedido;
+    }
+    public function setid_product($id_product)
+    {
+        $this->id_product=$id_product;
+    }
+    public function setquantidade($quantidade)
+    {
+        $this->quantidade=$quantidade;
+    }
+
 }

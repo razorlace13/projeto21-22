@@ -11,7 +11,7 @@ codecept g:cest functional MyNewScenarioCest
 codecept run functional ExampleTest
 
 
-Claudio Martins
+
 
 
 vendor\bin\codecept run functional LoginCest:loginUser -c backend

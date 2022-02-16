@@ -49,6 +49,9 @@ class ProductsTest extends \Codeception\Test\Unit
         $model->setprice(1);
         $this->assertTrue($model->validate(['price']));
 
+        // se for verdadeiro pode-se trocar o id para o id que estiver na bd
+        // o mesmo serve para os outros id's
+
         $model->setid_category(1);
         $this->assertTrue($model->validate(['id_category']));
 

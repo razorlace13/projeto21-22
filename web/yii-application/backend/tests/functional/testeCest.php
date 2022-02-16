@@ -13,16 +13,14 @@ class testeCest
     public function test1(FunctionalTester $I)
     {
         $I-> amOnPage('/site/login');
-        $I->see("Backoffice only for authorized persons");
+        $I->see("Backoffice apenas para pessoas autorizadas");
         $I->fillField('username', 'teste');
         $I->fillField('password', 'password');
         $I->click('login-button');
         $I->amOnPage('/products/create');
         $I->seeCurrentUrlEquals('/products/create');
-        $I->fillField('name', 'teste');
-        $I->fillField('price', '2');
-        $I->fillField('id_category', '1');
-        $I->click('product-button');
+        $I->fillField('Nome', 'teste');
+        $I->fillField('Preço', '2');
 
     }
 
@@ -32,7 +30,7 @@ class testeCest
     public function test2(FunctionalTester $I)
     {
         $I-> amOnPage('/site/login');
-        $I->see("Backoffice only for authorized persons");
+        $I->see("Backoffice apenas para pessoas autorizadas");
         $I->fillField('username', 'teste');
         $I->fillField('password', 'password');
         $I->click('login-button');

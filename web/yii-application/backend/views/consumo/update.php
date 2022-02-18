@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\Models\Consumo */
 
-$this->title = 'Update Consumo: ' . $model->id_consumo;
+$this->title = 'Editar dados do consumo: ' . $model->id_consumo;
 $this->params['breadcrumbs'][] = ['label' => 'Consumos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_consumo, 'url' => ['view', 'id_consumo' => $model->id_consumo]];
 $this->params['breadcrumbs'][] = 'Update';

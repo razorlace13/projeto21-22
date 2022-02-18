@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\Models\Purchases */
 
-$this->title = 'Update Purchases: ' . $model->id_purchase;
+$this->title = 'Editar dados das compras: ' . $model->id_purchase;
 $this->params['breadcrumbs'][] = ['label' => 'Purchases', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_purchase, 'url' => ['view', 'id' => $model->id_purchase]];
 $this->params['breadcrumbs'][] = 'Update';

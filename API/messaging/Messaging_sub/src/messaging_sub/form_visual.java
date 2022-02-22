@@ -187,7 +187,7 @@ public class form_visual extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_ligarMouseClicked
 
     private void getProducts(int id_purchase) throws MalformedURLException, IOException {
-                    String url = "http://10.80.226.92:1884/v1/consumo/consumopedido/" + id_purchase + "?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi";
+                    String url = "http://192.168.1.209:1884/v1/consumo/consumopedido/" + id_purchase + "?access-token=F_Fu2do9PM8hdn0LCX4_YPpTtDgsJIZi";
                     URL obj = new URL(url);
                     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
                     con.setRequestMethod("GET");

@@ -165,7 +165,7 @@ public class ListaProductsAdaptador extends BaseAdapter {
 
         public void update(Products products) {
             this.tvName.setText(products.getName());
-            this.tvPrice.setText(""+products.getPrice());
+            this.tvPrice.setText(""+products.getPrice()+"€");
             int id_category = products.getId_category();
             if (id_category == 1){
                 this.ivCapa.setImageResource(R.drawable.comida);

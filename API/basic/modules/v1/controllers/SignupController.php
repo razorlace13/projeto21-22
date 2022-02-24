@@ -41,7 +41,7 @@ class SignupController extends ActiveController
         $newpermission = new \app\models\AuthAssignment();
         $newpermission->user_id = $Usermodel->id;
         $newpermission->item_name = $permission;
-        $newpermission->created_at = date('d-m-y');
+        $newpermission->created_at = date('y-m-d');
         $newpermission->save();
 
 

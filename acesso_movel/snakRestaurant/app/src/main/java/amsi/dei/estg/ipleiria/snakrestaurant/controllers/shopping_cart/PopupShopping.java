@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -23,6 +24,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import java.net.CacheResponse;
 import java.sql.Connection;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -82,13 +84,18 @@ public class PopupShopping extends Activity implements PurchasePayListener {
                 double temp = (double) shopping_cards.get(i).getPrice_shopping();
                 priceall = priceall + temp;
             }
-            price.setText("" + priceall);
+
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            priceall = Double.valueOf(decimalFormat.format(priceall));
+            price.setText("" + priceall );
         }
         buy_btn = findViewById(R.id.buy_btn);
         buy_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buy(typeofbuy);
+
+                    buy(typeofbuy);
+
             }
         });
         iv_close2.setOnClickListener(new View.OnClickListener() {
@@ -100,14 +107,18 @@ public class PopupShopping extends Activity implements PurchasePayListener {
 
     }
     public void buy(String type){
+
             int id = LoginSingleton.getInstance(getApplicationContext()).getLogin().getId();
             str_valor = this.price.getText().toString().trim();
             str_data = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
             str_id_user = String.valueOf(id);
             str_mesa = this.edit_Mesa.getText().toString().trim();
+        if(str_mesa.trim().equals("")) {
+            Toast.makeText(this, "digite numero da mesa", Toast.LENGTH_SHORT).show();
+        }else {
             SingletonGestor.getInstance(this).setPurchasePayListener(this);
             SingletonGestor.getInstance(getApplicationContext()).PostPurchase(getApplicationContext(), str_valor, str_data, str_id_user, str_mesa, type);
-
+        }
     }
 
 
